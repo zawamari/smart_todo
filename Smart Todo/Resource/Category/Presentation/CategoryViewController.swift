@@ -13,6 +13,8 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var categorycollectionView: UICollectionView!
     
+    let testModel = ["Work", "Buy", "2019 year Goal", "Hawaii", "Nursery school", "Hobby", "Team", "Personal", "Family", "Change" ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,8 @@ class CategoryViewController: UIViewController {
         layout.minimumInteritemSpacing = 20
         
         categorycollectionView.collectionViewLayout = layout
+        
+        categorycollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
     }
 }
 
@@ -38,8 +42,17 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
+        
+        if let cell = cell as? CategoryCollectionViewCell {
+            cell.setupCell(name: testModel[indexPath.row], tasks: indexPath.row)
+        }
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("******\(indexPath)")
     }
 }
 
