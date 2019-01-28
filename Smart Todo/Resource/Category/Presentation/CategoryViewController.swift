@@ -15,10 +15,22 @@ class CategoryViewController: UIViewController {
     
     let testModel = ["Work", "Buy", "2019 year Goal", "Hawaii", "Nursery school", "Hobby", "Team", "Personal", "Family", "Change" ]
     
+    var window: UIWindow?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // NavigationBar Setting
+        self.title = "Category"
+        
+        let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
+        
+        self.navigationItem.setRightBarButtonItems([createButton], animated: true)
+
+        // Comment Setting
         testLabel.text = "Hi! Marie!"
+        
+        // CollectionView Setting
         categorycollectionView.dataSource = self
         categorycollectionView.delegate = self
         
@@ -33,6 +45,24 @@ class CategoryViewController: UIViewController {
         categorycollectionView.collectionViewLayout = layout
         
         categorycollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+    }
+    
+    /// Create New Category
+    @objc func clickCreateCategoryButton(){
+        let alert: UIAlertController = UIAlertController(title: "Category Create?", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("OK")
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("Cancel")
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

@@ -39,10 +39,20 @@
                                     <outlet property="delegate" destination="Cvw-r2-PJ8" id="ewv-2g-zg4"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plw-fc-goi">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="kts-wV-pGF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="plw-fc-goi" firstAttribute="leading" secondItem="8bX-iF-0Bd" secondAttribute="leading" id="7Zl-qk-fn1"/>
                             <constraint firstItem="wUU-72-dWd" firstAttribute="bottom" secondItem="8bX-iF-0Bd" secondAttribute="bottom" id="Dad-wh-mMm"/>
+                            <constraint firstItem="plw-fc-goi" firstAttribute="bottom" secondItem="8bX-iF-0Bd" secondAttribute="bottom" id="E11-FB-28m"/>
+                            <constraint firstItem="plw-fc-goi" firstAttribute="trailing" secondItem="8bX-iF-0Bd" secondAttribute="trailing" id="PEg-P7-XVg"/>
                             <constraint firstItem="Ije-if-625" firstAttribute="top" secondItem="8bX-iF-0Bd" secondAttribute="top" constant="30" id="VmQ-Eq-Qk8"/>
                             <constraint firstItem="wUU-72-dWd" firstAttribute="trailing" secondItem="8bX-iF-0Bd" secondAttribute="trailing" constant="-20" id="bDB-BT-Rqg"/>
                             <constraint firstItem="wUU-72-dWd" firstAttribute="top" secondItem="Ije-if-625" secondAttribute="bottom" constant="30" id="f1c-g8-SJV"/>
