@@ -82,7 +82,12 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("******\(indexPath)")
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = UIColor.white
+        let viewController = TodoListTableViewController.make()
+        let naviCon: UINavigationController = UINavigationController(rootViewController:viewController)
+        window?.rootViewController = naviCon
+        window?.makeKeyAndVisible()
     }
 }
 
