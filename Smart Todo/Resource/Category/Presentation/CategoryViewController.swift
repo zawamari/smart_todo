@@ -12,7 +12,7 @@ import RealmSwift
 class CategoryViewController: UIViewController {
 
     private var realm: Realm!
-    private var todoList: Results<CategoryItem>!
+    private var categoryList: Results<CategoryItem>!
     private var token: NotificationToken!
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var categorycollectionView: UICollectionView!
@@ -24,8 +24,8 @@ class CategoryViewController: UIViewController {
         // RealmのTodoリストを取得し，更新を監視
         realm = try! Realm()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        todoList = realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: false)
-        token = todoList.observe { [weak self] _ in
+        categoryList = realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+        token = categoryList.observe { [weak self] _ in
             self?.reload()
         }
     }
@@ -87,7 +87,7 @@ class CategoryViewController: UIViewController {
                 self.addCategoryItem(title: t)
             }
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             print("Cancel")
@@ -100,14 +100,14 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return todoList.count
+        return categoryList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
         
         if let cell = cell as? CategoryCollectionViewCell {
-            if let title = todoList?[indexPath.row].categoryTitle {
+            if let title = categoryList?[indexPath.row].categoryTitle {
                 cell.setupCell(name: title, tasks: indexPath.row)
             }
         }
@@ -117,6 +117,8 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TodoListTableViewController()
+        vc.navigationTitle = ""
+        vc.categoryId = 0
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -137,7 +139,7 @@ private extension CategoryViewController {
     
     func deleteCategoryItem(at index: Int) {
         try! realm.write {
-            realm.delete(todoList[index])
+            realm.delete(categoryList[index])
         }
     }
     
