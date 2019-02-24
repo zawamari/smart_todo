@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1F7534221C47C100461A10 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1F7533221C47C100461A10 /* CategoryModel.swift */; };
 		0C32485E21FCA31900D26EDC /* TodoList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C32485D21FCA31900D26EDC /* TodoList.storyboard */; };
 		0C32486021FCA57F00D26EDC /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32485F21FCA57F00D26EDC /* TodoListTableViewController.swift */; };
+		0C3248622201EF0E00D26EDC /* UIBarButtonItem+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3248612201EF0E00D26EDC /* UIBarButtonItem+extension.swift */; };
+		0C3248642205F11500D26EDC /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3248632205F11500D26EDC /* TodoTableViewCell.swift */; };
 		0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */; };
 		0CDDE0FD21ECC9CD002AFE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */; };
 		0CDDE10021ECC9CD002AFE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FE21ECC9CD002AFE68 /* LaunchScreen.storyboard */; };
@@ -42,8 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C1F7533221C47C100461A10 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		0C32485D21FCA31900D26EDC /* TodoList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoList.storyboard; sourceTree = "<group>"; };
 		0C32485F21FCA57F00D26EDC /* TodoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewController.swift; sourceTree = "<group>"; };
+		0C3248612201EF0E00D26EDC /* UIBarButtonItem+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+extension.swift"; sourceTree = "<group>"; };
+		0C3248632205F11500D26EDC /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		0CDDE0F221ECC9CB002AFE68 /* Smart Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 			children = (
 				0C32485D21FCA31900D26EDC /* TodoList.storyboard */,
 				0C32485F21FCA57F00D26EDC /* TodoListTableViewController.swift */,
+				0C3248632205F11500D26EDC /* TodoTableViewCell.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -188,6 +195,7 @@
 		0CDDE12521ECCD57002AFE68 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				0C3248612201EF0E00D26EDC /* UIBarButtonItem+extension.swift */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -220,6 +228,7 @@
 		0CDDE12921ECCDF7002AFE68 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0C1F7533221C47C100461A10 /* CategoryModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -482,10 +491,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3248642205F11500D26EDC /* TodoTableViewCell.swift in Sources */,
 				0CDDE13921ECE7AD002AFE68 /* CategoryViewController.swift in Sources */,
 				0CDDE13621ECDB3D002AFE68 /* CategoryCollectionViewCell.swift in Sources */,
 				0C32486021FCA57F00D26EDC /* TodoListTableViewController.swift in Sources */,
 				0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */,
+				0C1F7534221C47C100461A10 /* CategoryModel.swift in Sources */,
+				0C3248622201EF0E00D26EDC /* UIBarButtonItem+extension.swift in Sources */,
 				0CDDE13D21ECEE33002AFE68 /* mCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         sleep(1)
+        
+        let userDefault = UserDefaults.standard
+        // "firstLaunch"をキーに、Bool型の値を保持する
+        let dict = ["firstLaunch": true]
+        userDefault.register(defaults: dict)
+        
+        if userDefault.bool(forKey: "firstLaunch") {
+            userDefault.set(false, forKey: "firstLaunch")
+            defaultCategoryRegist()
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
@@ -46,6 +57,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    private func defaultCategoryRegist() {
+        let realm = try! Realm()
+
+        try! realm.write {
+            let category = CategoryItem()
+            category.categoryTitle = "All"
+            category.canDeleteFlg = true
+            category.priority = true
+            
+            realm.add(category)
+            
+//            realm.add(CategoryItem(value: ["categoryTitle": "All"])) //こういう書き方もある
+        }
     }
 
 

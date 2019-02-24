@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CategoryViewController: UIViewController {
 
+    private var realm: Realm!
+    private var todoList: Results<CategoryItem>!
+    private var token: NotificationToken!
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var categorycollectionView: UICollectionView!
     
-    let testModel = ["Work", "Buy", "2019 year Goal", "Hawaii", "Nursery school", "Hobby", "Team", "Personal", "Family", "Change" ]
-    
     var window: UIWindow?
+    
+    override func awakeFromNib() {//  todo listから戻ってきたときにtask数が更新されてるか？viewWillAppearの方が良い？
+        super.awakeFromNib()
+        // RealmのTodoリストを取得し，更新を監視
+        realm = try! Realm()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        todoList = realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: false)
+        token = todoList.observe { [weak self] _ in
+            self?.reload()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +63,29 @@ class CategoryViewController: UIViewController {
         categorycollectionView.collectionViewLayout = layout
         
         categorycollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        
+        // collectionview cellに長押しのアクションを追加する
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
+        longPressRecognizer.allowableMovement = 10
+        longPressRecognizer.minimumPressDuration = 0.5
+        categorycollectionView.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    func reload() {
+        categorycollectionView.reloadData()
     }
     
     /// Create New Category
     @objc func clickCreateCategoryButton(){
-        let alert: UIAlertController = UIAlertController(title: "Category Create?", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
+        let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: nil)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             print("OK")
+            if let t = alert.textFields![0].text, !t.isEmpty {
+                self.addCategoryItem(title: t)
+            }
         })
         let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
@@ -68,26 +100,24 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return todoList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
         
         if let cell = cell as? CategoryCollectionViewCell {
-            cell.setupCell(name: testModel[indexPath.row], tasks: indexPath.row)
+            if let title = todoList?[indexPath.row].categoryTitle {
+                cell.setupCell(name: title, tasks: indexPath.row)
+            }
         }
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = UIColor.white
-        let viewController = TodoListTableViewController.make()
-        let naviCon: UINavigationController = UINavigationController(rootViewController:viewController)
-        window?.rootViewController = naviCon
-        window?.makeKeyAndVisible()
+        let vc = TodoListTableViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -95,5 +125,35 @@ extension CategoryViewController {
     static func make() -> CategoryViewController {
         let storyboard = UIStoryboard(name: "Category", bundle: nil)
         return storyboard.instantiateInitialViewController() as! CategoryViewController
+    }
+}
+
+private extension CategoryViewController {
+    func addCategoryItem(title: String) {
+        try! realm.write {
+            realm.add(CategoryItem(value: ["categoryTitle": title]))
+        }
+    }
+    
+    func deleteCategoryItem(at index: Int) {
+        try! realm.write {
+            realm.delete(todoList[index])
+        }
+    }
+    
+    @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
+        let point: CGPoint = sender.location(in: self.categorycollectionView)
+        let indexPath = self.categorycollectionView.indexPathForItem(at: point)
+        
+        if let indexPath = indexPath {
+            switch sender.state {
+            case .began:
+                break
+            case .ended:
+                deleteCategoryItem(at: indexPath.item)
+            default:
+                break
+            }
+        }
     }
 }
