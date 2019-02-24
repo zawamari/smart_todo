@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TodoListTableViewController: UITableViewController {
     
-    let todo = ["check list","send mail","create new project"]
+    var navigationTitle: String? = nil
+    var categoryId: Int?
+    
+    private var realm: Realm!
+    private var todoList: Results<TodoItem>!
+    private var token: NotificationToken!
     
     @objc func back(){
         self.navigationController?.popViewController(animated: true)
@@ -18,13 +24,16 @@ class TodoListTableViewController: UITableViewController {
     
     /// Create New Category
     @objc func clickCreateCategoryButton(){
-        let alert: UIAlertController = UIAlertController(title: "Category Create?", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
+        let alert: UIAlertController = UIAlertController(title: "todo Create", message: "What is new todo name?", preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: nil)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("OK")
+            if let t = alert.textFields![0].text, !t.isEmpty {
+                self.addTodoItem(title: t)
+            }
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             print("Cancel")
@@ -36,9 +45,17 @@ class TodoListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // RealmのTodoリストを取得し，更新を監視
+        realm = try! Realm()
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+        token = todoList.observe { [weak self] _ in
+            self?.reload()
+        }
 
         // NavigationBar Setting
-        self.title = "Work Todo List"
+        self.title = navigationTitle
         
         let button: UIBarButtonItem = UIBarButtonItem(barButtonHiddenItem: .Back, target: self, action: #selector(back))
         self.navigationItem.setLeftBarButtonItems([button], animated: true)
@@ -51,14 +68,16 @@ class TodoListTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todo.count
+        if let list = todoList {
+            return list.count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,5 +111,24 @@ class TodoListTableViewController: UITableViewController {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
+    
+    func reload() {
+        tableView.reloadData()
+    }
 
+}
+
+private extension TodoListTableViewController {
+    func addTodoItem(title: String) {
+        try! realm.write {
+            realm.add(TodoItem(value: ["todoTitle": title]))
+        }
+    }
+    
+    func deleteCategoryItem(at index: Int) {
+        try! realm.write {
+            realm.delete(todoList[index])
+        }
+    }
+    
 }

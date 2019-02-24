@@ -22,7 +22,7 @@ class CategoryItem: Object {
 }
 
 class TodoItem: Object {
-    @objc dynamic var todoTitle: String = ""
+    @objc dynamic var todoTitle = ""
     @objc dynamic var priority = false
     @objc dynamic var createdAt: Double = 0
     @objc dynamic var url: String = ""
