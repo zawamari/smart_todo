@@ -1,0 +1,6 @@
+framework module Pods_Smart_TodoUITests {
+  umbrella header "Pods-Smart TodoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
