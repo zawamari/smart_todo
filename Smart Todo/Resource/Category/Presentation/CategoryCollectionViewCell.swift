@@ -41,9 +41,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 }
 
 extension CategoryCollectionViewCell {
-    func setupCell(name: String, tasks: Int ) {
+    func setupCell(name: String, tasks: Int? ) {
         categoryNameLabel.text = name
-        tasksLabel.text = String(tasks) + " tasks"
-        taskColorView.layer.backgroundColor = colors[tasks].cgColor
+        if let count = tasks {
+            tasksLabel.text = String(count) + " tasks"
+            taskColorView.layer.backgroundColor = colors[count].cgColor
+        }
     }
 }

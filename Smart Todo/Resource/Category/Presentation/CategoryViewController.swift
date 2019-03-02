@@ -14,6 +14,10 @@ class CategoryViewController: UIViewController {
     private var realm: Realm!
     private var categoryList: Results<CategoryItem>!
     private var token: NotificationToken!
+    
+    private var todoList: Results<TodoItem>!
+    private var todoToken: NotificationToken!
+    
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var categorycollectionView: UICollectionView!
     
@@ -74,28 +78,6 @@ class CategoryViewController: UIViewController {
     func reload() {
         categorycollectionView.reloadData()
     }
-    
-    /// Create New Category
-    @objc func clickCreateCategoryButton(){
-        let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
-        alert.addTextField(configurationHandler: nil)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("OK")
-            if let t = alert.textFields![0].text, !t.isEmpty {
-                self.addCategoryItem(title: t)
-            }
-        })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("Cancel")
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(defaultAction)
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -108,7 +90,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         
         if let cell = cell as? CategoryCollectionViewCell {
             if let title = categoryList?[indexPath.row].categoryTitle {
-                cell.setupCell(name: title, tasks: indexPath.row)
+                cell.setupCell(name: title, tasks: categoryList?[indexPath.row].todo.count)
             }
         }
 
@@ -131,18 +113,29 @@ extension CategoryViewController {
 }
 
 private extension CategoryViewController {
-    func addCategoryItem(title: String) {
-        try! realm.write {
-            realm.add(CategoryItem(value: ["categoryTitle": title]))
-        }
+    /// Create New Category Action
+    @objc func clickCreateCategoryButton(){
+        let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: nil)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("OK")
+            if let t = alert.textFields![0].text, !t.isEmpty {
+                self.addCategoryItem(title: t)
+            }
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("Cancel")
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
     
-    func deleteCategoryItem(at index: Int) {
-        try! realm.write {
-            realm.delete(categoryList[index])
-        }
-    }
-    
+    // Delete Category Action
     @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
         let point: CGPoint = sender.location(in: self.categorycollectionView)
         let indexPath = self.categorycollectionView.indexPathForItem(at: point)
@@ -156,6 +149,21 @@ private extension CategoryViewController {
             default:
                 break
             }
+        }
+    }
+}
+
+/// RealmSwift
+private extension CategoryViewController {
+    func addCategoryItem(title: String) {
+        try! realm.write {
+            realm.add(CategoryItem(value: ["categoryTitle": title]))
+        }
+    }
+    
+    func deleteCategoryItem(at index: Int) {
+        try! realm.write {
+            realm.delete(categoryList[index])
         }
     }
 }

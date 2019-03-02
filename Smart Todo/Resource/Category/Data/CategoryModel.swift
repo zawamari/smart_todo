@@ -26,4 +26,6 @@ class TodoItem: Object {
     @objc dynamic var createdAt = Date()
     @objc dynamic var url: String = ""
     @objc dynamic var memo: String = ""
+    
+    let category = LinkingObjects(fromType: CategoryItem.self, property: "todo")
 }
