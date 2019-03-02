@@ -17,14 +17,13 @@ class CategoryItem: Object {
     @objc dynamic var createdAt = Date()
     @objc dynamic var priority = false
     
-    let dogs = List<TodoItem>()
-    
+    let todo = List<TodoItem>()
 }
 
 class TodoItem: Object {
     @objc dynamic var todoTitle = ""
     @objc dynamic var priority = false
-    @objc dynamic var createdAt: Double = 0
+    @objc dynamic var createdAt = Date()
     @objc dynamic var url: String = ""
     @objc dynamic var memo: String = ""
 }

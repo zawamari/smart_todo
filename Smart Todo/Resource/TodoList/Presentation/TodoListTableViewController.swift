@@ -48,7 +48,6 @@ class TodoListTableViewController: UITableViewController {
         
         // RealmのTodoリストを取得し，更新を監視
         realm = try! Realm()
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
         token = todoList.observe { [weak self] _ in
             self?.reload()
@@ -82,21 +81,23 @@ class TodoListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
+        
+        if let title = todoList?[indexPath.row].todoTitle {
+            cell.textLabel?.text = title
+        }
 
-        cell.textLabel?.text = "This cell is " + String(indexPath.row)
         return cell
     }
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            deleteCategoryItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -120,15 +121,36 @@ class TodoListTableViewController: UITableViewController {
 
 private extension TodoListTableViewController {
     func addTodoItem(title: String) {
-        try! realm.write {
-            realm.add(TodoItem(value: ["todoTitle": title]))
+        
+        if let category = navigationTitle {
+            let realm = try! Realm()
+
+            // titleから登録したい親カテゴリを抽出
+            let dept = realm.objects(CategoryItem.self).filter("categoryTitle == '\(category)'").first
+            
+            // todolistのセット
+            let emp = TodoItem()
+            emp.todoTitle = title
+            emp.priority = true
+            
+            // 登録
+            try! realm.write {
+                dept?.todo.append(emp)
+            }
         }
+
     }
     
     func deleteCategoryItem(at index: Int) {
-        try! realm.write {
-            realm.delete(todoList[index])
+            // 子データの削除
+        if let category = navigationTitle {
+            let realm = try! Realm()
+            let dept = realm.objects(CategoryItem.self).filter("categoryTitle == '\(category)'").first
+            let emp = dept?.todo.filter("todoTitle == '\(todoList[index].todoTitle)'").first
+            
+            try! realm.write {
+                realm.delete(emp!)
+            }
         }
     }
-    
 }
