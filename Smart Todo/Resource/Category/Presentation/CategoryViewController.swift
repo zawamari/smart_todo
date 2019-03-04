@@ -48,7 +48,7 @@ class CategoryViewController: UIViewController {
         self.title = "Category"
         
         let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
-        
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
 
         // Comment Setting
