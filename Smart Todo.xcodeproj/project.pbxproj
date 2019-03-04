@@ -14,6 +14,9 @@
 		0C3248642205F11500D26EDC /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3248632205F11500D26EDC /* TodoTableViewCell.swift */; };
 		0C851A5F222D78C20095EBFF /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C851A5D222D78C20095EBFF /* TodoListTableViewCell.swift */; };
 		0C851A60222D78C20095EBFF /* TodoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A5E222D78C20095EBFF /* TodoListTableViewCell.xib */; };
+		0C851A62222D7EE20095EBFF /* icons8-stopwatch-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A61222D7EE10095EBFF /* icons8-stopwatch-24.png */; };
+		0C851A66222D81710095EBFF /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A64222D81710095EBFF /* check.png */; };
+		0C851A67222D81710095EBFF /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A65222D81710095EBFF /* done.png */; };
 		0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */; };
 		0CDDE0FD21ECC9CD002AFE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */; };
 		0CDDE10021ECC9CD002AFE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FE21ECC9CD002AFE68 /* LaunchScreen.storyboard */; };
@@ -54,6 +57,9 @@
 		0C3248632205F11500D26EDC /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		0C851A5D222D78C20095EBFF /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
 		0C851A5E222D78C20095EBFF /* TodoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListTableViewCell.xib; sourceTree = "<group>"; };
+		0C851A61222D7EE10095EBFF /* icons8-stopwatch-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-stopwatch-24.png"; sourceTree = "<group>"; };
+		0C851A64222D81710095EBFF /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		0C851A65222D81710095EBFF /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
 		0CDDE0F221ECC9CB002AFE68 /* Smart Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,6 +148,16 @@
 			path = TableCell;
 			sourceTree = "<group>";
 		};
+		0C851A63222D7FA60095EBFF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0C851A64222D81710095EBFF /* check.png */,
+				0C851A65222D81710095EBFF /* done.png */,
+				0C851A61222D7EE10095EBFF /* icons8-stopwatch-24.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		0CDDE0E921ECC9CB002AFE68 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +183,7 @@
 		0CDDE0F421ECC9CB002AFE68 /* Smart Todo */ = {
 			isa = PBXGroup;
 			children = (
+				0C851A63222D7FA60095EBFF /* Assets */,
 				0CDDE12521ECCD57002AFE68 /* Src */,
 				0CDDE12421ECCD4E002AFE68 /* Resource */,
 				0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */,
@@ -385,7 +402,10 @@
 			files = (
 				0CDDE13B21ECE80F002AFE68 /* Category.storyboard in Resources */,
 				0CDDE13721ECDB3D002AFE68 /* CategoryCollectionViewCell.xib in Resources */,
+				0C851A67222D81710095EBFF /* done.png in Resources */,
+				0C851A66222D81710095EBFF /* check.png in Resources */,
 				0CDDE10021ECC9CD002AFE68 /* LaunchScreen.storyboard in Resources */,
+				0C851A62222D7EE20095EBFF /* icons8-stopwatch-24.png in Resources */,
 				0C851A60222D78C20095EBFF /* TodoListTableViewCell.xib in Resources */,
 				0C32485E21FCA31900D26EDC /* TodoList.storyboard in Resources */,
 				0CDDE0FD21ECC9CD002AFE68 /* Assets.xcassets in Resources */,
