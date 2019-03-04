@@ -35,6 +35,7 @@ class TodoListTableViewController: UITableViewController {
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
+        tableView.separatorColor = .none
     }
 
     // MARK: - Table view data source
@@ -52,11 +53,8 @@ class TodoListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
-        
-        if let title = todoList?[indexPath.row].todoTitle {
-            cell.textLabel?.text = title
-        }
-
+        cell.setItem(todoItem: todoList?[indexPath.row])
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         return cell
     }
 
