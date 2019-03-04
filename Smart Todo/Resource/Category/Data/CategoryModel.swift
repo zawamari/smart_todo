@@ -22,7 +22,7 @@ class CategoryItem: Object {
     }
     let todo = List<TodoItem>()
     
-    private func incrementId() -> Int{
+    private func incrementId() -> Int {
         let realm = try! Realm()
         if let retNext = realm.objects(CategoryItem.self).sorted(byKeyPath: "id").last?.id {
             return retNext + 1
@@ -58,7 +58,7 @@ class TodoItem: Object {
         return "id"
     }
     
-    func incrementId() -> Int{
+    func incrementId() -> Int {
         let realm = try! Realm()
         if let retNext = realm.objects(TodoItem.self).sorted(byKeyPath: "id").last?.id {
             return retNext + 1
