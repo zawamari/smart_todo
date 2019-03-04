@@ -90,7 +90,17 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
         
-        if let cell = cell as? CategoryCollectionViewCell {
+        if let cell = cell as? CategoryCollectionViewCell { //todo nest
+            
+            var count = 0
+            if indexPath.row == 0 {
+                for i in 0..<self.categoryCount {
+                    count += (categoryList?[i].todo.count)! // Todo force unwrap
+                }
+                cell.setupCell(name: "ALL", tasks: count)
+                return cell
+            }
+            
             if let title = categoryList?[indexPath.row].categoryTitle {
                 cell.setupCell(name: title, tasks: categoryList?[indexPath.row].todo.count)
             }
