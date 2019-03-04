@@ -14,6 +14,7 @@ class CategoryViewController: UIViewController {
     private var realm: Realm!
     private var categoryList: Results<CategoryItem>!
     private var token: NotificationToken!
+    private var categoryCount: Int = 0
     
     private var todoList: Results<TodoItem>!
     private var todoToken: NotificationToken!
@@ -32,6 +33,7 @@ class CategoryViewController: UIViewController {
         token = categoryList.observe { [weak self] _ in
             self?.reload()
         }
+        categoryCount = categoryList.count
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,9 +158,8 @@ private extension CategoryViewController {
 /// RealmSwift
 private extension CategoryViewController {
     func addCategoryItem(title: String) {
-        try! realm.write {
-            realm.add(CategoryItem(value: ["categoryTitle": title]))
-        }
+        let category = CategoryItem()
+        category.register(title: title, priority: false)
     }
     
     func deleteCategoryItem(at index: Int) {
