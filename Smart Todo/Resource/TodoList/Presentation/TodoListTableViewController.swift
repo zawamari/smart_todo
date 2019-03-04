@@ -34,7 +34,7 @@ class TodoListTableViewController: UITableViewController {
         
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
-        tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "test")
+        tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
     }
 
     // MARK: - Table view data source
@@ -51,7 +51,7 @@ class TodoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
         
         if let title = todoList?[indexPath.row].todoTitle {
             cell.textLabel?.text = title
