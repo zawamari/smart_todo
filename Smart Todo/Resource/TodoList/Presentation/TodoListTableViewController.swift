@@ -12,7 +12,7 @@ import RealmSwift
 class TodoListTableViewController: UITableViewController {
     
     var navigationTitle: String? = nil
-    var categoryId: Int?
+    var categoryId: Int = 0
     
     private var realm: Realm!
     private var category: Results<CategoryItem>!
@@ -119,15 +119,9 @@ private extension TodoListTableViewController {
 private extension TodoListTableViewController {
     
     func initRealm() {
-        guard let title = navigationTitle else { return }
         // RealmのTodoリストを取得し，更新を監視
         realm = try! Realm()
-        category = realm.objects(CategoryItem.self).filter("categoryTitle = '\(title)'").sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
-        
-        //old
-        // RealmのTodoリストを取得し，更新を監視
-        realm = try! Realm()
-        todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+        todoList = realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
         token = todoList.observe { [weak self] _ in
             self?.reload()
         }
@@ -145,6 +139,8 @@ private extension TodoListTableViewController {
             let emp = TodoItem()
             emp.todoTitle = title
             emp.priority = true
+            emp.categoryId = self.categoryId
+            emp.id = emp.incrementId()
             
             // 登録
             try! realm.write {

@@ -102,7 +102,9 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TodoListTableViewController()
         vc.navigationTitle = categoryList?[indexPath.row].categoryTitle
-        vc.categoryId = 0
+        if let cid = categoryList?[indexPath.row].id {
+            vc.categoryId = cid
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
