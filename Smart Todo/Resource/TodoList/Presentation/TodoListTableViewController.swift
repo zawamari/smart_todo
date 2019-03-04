@@ -15,43 +15,14 @@ class TodoListTableViewController: UITableViewController {
     var categoryId: Int?
     
     private var realm: Realm!
+    private var category: Results<CategoryItem>!
     private var todoList: Results<TodoItem>!
     private var token: NotificationToken!
-    
-    @objc func back(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    /// Create New Category
-    @objc func clickCreateCategoryButton(){
-        let alert: UIAlertController = UIAlertController(title: "todo Create", message: "What is new todo name?", preferredStyle:  UIAlertController.Style.alert)
-        alert.addTextField(configurationHandler: nil)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            if let t = alert.textFields![0].text, !t.isEmpty {
-                self.addTodoItem(title: t)
-            }
-        })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("Cancel")
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(defaultAction)
-        present(alert, animated: true, completion: nil)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // RealmのTodoリストを取得し，更新を監視
-        realm = try! Realm()
-        todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
-        token = todoList.observe { [weak self] _ in
-            self?.reload()
-        }
+        initRealm()
 
         // NavigationBar Setting
         self.title = navigationTitle
@@ -118,6 +89,50 @@ class TodoListTableViewController: UITableViewController {
 }
 
 private extension TodoListTableViewController {
+    @objc func back(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    /// Create New Category
+    @objc func clickCreateCategoryButton(){
+        let alert: UIAlertController = UIAlertController(title: "todo Create", message: "What is new todo name?", preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: nil)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            if let t = alert.textFields![0].text, !t.isEmpty {
+                self.addTodoItem(title: t)
+            }
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("Cancel")
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+/// RealmSwift
+private extension TodoListTableViewController {
+    
+    func initRealm() {
+        guard let title = navigationTitle else { return }
+        // RealmのTodoリストを取得し，更新を監視
+        realm = try! Realm()
+        category = realm.objects(CategoryItem.self).filter("categoryTitle = '\(title)'").sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+        
+        //old
+        // RealmのTodoリストを取得し，更新を監視
+        realm = try! Realm()
+        todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+        token = todoList.observe { [weak self] _ in
+            self?.reload()
+        }
+    }
+    
     func addTodoItem(title: String) {
         
         if let category = navigationTitle {
