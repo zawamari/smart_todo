@@ -17,6 +17,8 @@
 		0C851A62222D7EE20095EBFF /* icons8-stopwatch-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A61222D7EE10095EBFF /* icons8-stopwatch-24.png */; };
 		0C851A66222D81710095EBFF /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A64222D81710095EBFF /* check.png */; };
 		0C851A67222D81710095EBFF /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A65222D81710095EBFF /* done.png */; };
+		0C947616222ECA3C00461E94 /* TodoRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C947615222ECA3C00461E94 /* TodoRegistrationViewController.swift */; };
+		0C947618222ECA4A00461E94 /* TodoRegistration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C947617222ECA4A00461E94 /* TodoRegistration.storyboard */; };
 		0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */; };
 		0CDDE0FD21ECC9CD002AFE68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */; };
 		0CDDE10021ECC9CD002AFE68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDDE0FE21ECC9CD002AFE68 /* LaunchScreen.storyboard */; };
@@ -60,6 +62,8 @@
 		0C851A61222D7EE10095EBFF /* icons8-stopwatch-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-stopwatch-24.png"; sourceTree = "<group>"; };
 		0C851A64222D81710095EBFF /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		0C851A65222D81710095EBFF /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
+		0C947615222ECA3C00461E94 /* TodoRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRegistrationViewController.swift; sourceTree = "<group>"; };
+		0C947617222ECA4A00461E94 /* TodoRegistration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoRegistration.storyboard; sourceTree = "<group>"; };
 		0CDDE0F221ECC9CB002AFE68 /* Smart Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDDE0FC21ECC9CD002AFE68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -158,6 +162,23 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		0C94760F222EC91700461E94 /* TodoRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				0C947610222EC92900461E94 /* Presentation */,
+			);
+			path = TodoRegistration;
+			sourceTree = "<group>";
+		};
+		0C947610222EC92900461E94 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0C947615222ECA3C00461E94 /* TodoRegistrationViewController.swift */,
+				0C947617222ECA4A00461E94 /* TodoRegistration.storyboard */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		0CDDE0E921ECC9CB002AFE68 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +236,7 @@
 		0CDDE12421ECCD4E002AFE68 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0C94760F222EC91700461E94 /* TodoRegistration */,
 				0CDDE12821ECCDAC002AFE68 /* TodoList */,
 				0CDDE12721ECCD86002AFE68 /* Others */,
 				0CDDE12621ECCD78002AFE68 /* Category */,
@@ -404,6 +426,7 @@
 				0CDDE13721ECDB3D002AFE68 /* CategoryCollectionViewCell.xib in Resources */,
 				0C851A67222D81710095EBFF /* done.png in Resources */,
 				0C851A66222D81710095EBFF /* check.png in Resources */,
+				0C947618222ECA4A00461E94 /* TodoRegistration.storyboard in Resources */,
 				0CDDE10021ECC9CD002AFE68 /* LaunchScreen.storyboard in Resources */,
 				0C851A62222D7EE20095EBFF /* icons8-stopwatch-24.png in Resources */,
 				0C851A60222D78C20095EBFF /* TodoListTableViewCell.xib in Resources */,
@@ -535,6 +558,7 @@
 				0C3248622201EF0E00D26EDC /* UIBarButtonItem+extension.swift in Sources */,
 				0CDDE13D21ECEE33002AFE68 /* mCell.swift in Sources */,
 				0C851A5F222D78C20095EBFF /* TodoListTableViewCell.swift in Sources */,
+				0C947616222ECA3C00461E94 /* TodoRegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
