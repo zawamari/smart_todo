@@ -93,23 +93,34 @@ private extension TodoListTableViewController {
     
     /// Create New Category
     @objc func clickCreateCategoryButton(){
-        let alert: UIAlertController = UIAlertController(title: "todo Create", message: "What is new todo name?", preferredStyle:  UIAlertController.Style.alert)
-        alert.addTextField(configurationHandler: nil)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            if let t = alert.textFields![0].text, !t.isEmpty {
-                self.addTodoItem(title: t)
-            }
-        })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("Cancel")
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(defaultAction)
-        present(alert, animated: true, completion: nil)
+        
+        
+        
+        let todoRegistrationController = TodoRegistrationViewController.make()
+        
+        let nav = UINavigationController(rootViewController: todoRegistrationController)
+        nav.modalTransitionStyle = .crossDissolve
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+        
+        
+//        let alert: UIAlertController = UIAlertController(title: "todo Create", message: "What is new todo name?", preferredStyle:  UIAlertController.Style.alert)
+//        alert.addTextField(configurationHandler: nil)
+//        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+//            // ボタンが押された時の処理を書く（クロージャ実装）
+//            (action: UIAlertAction!) -> Void in
+//            if let t = alert.textFields![0].text, !t.isEmpty {
+//                self.addTodoItem(title: t)
+//            }
+//        })
+//        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+//            // ボタンが押された時の処理を書く（クロージャ実装）
+//            (action: UIAlertAction!) -> Void in
+//            print("Cancel")
+//        })
+//        alert.addAction(cancelAction)
+//        alert.addAction(defaultAction)
+//        present(alert, animated: true, completion: nil)
     }
 }
 
