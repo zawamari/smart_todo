@@ -96,9 +96,9 @@ private extension TodoListTableViewController {
         
         
         
-        let todoRegistrationController = TodoRegistrationViewController.make()
+        let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
         
-        let nav = UINavigationController(rootViewController: todoRegistrationController)
+        let nav = UINavigationController(rootViewController: todoRegistrationPopupViewController)
         nav.modalTransitionStyle = .crossDissolve
         nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
