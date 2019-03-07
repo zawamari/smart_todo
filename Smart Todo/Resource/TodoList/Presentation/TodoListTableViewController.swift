@@ -40,7 +40,6 @@ class TodoListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -57,26 +56,25 @@ class TodoListTableViewController: UITableViewController {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // todo itemの詳細がみれるようにする
+    }
 
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteCategoryItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
-    // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
         return true
     }
     
@@ -117,29 +115,6 @@ private extension TodoListTableViewController {
         token = todoList.observe { [weak self] _ in
             self?.reload()
         }
-    }
-    
-    func addTodoItem(title: String) {
-        
-        if let category = navigationTitle {
-            let realm = try! Realm()
-
-            // titleから登録したい親カテゴリを抽出
-            let dept = realm.objects(CategoryItem.self).filter("categoryTitle == '\(category)'").first
-            
-            // todolistのセット
-            let emp = TodoItem()
-            emp.todoTitle = title
-            emp.priority = true
-            emp.categoryId = self.categoryId
-            emp.id = emp.incrementId()
-            
-            // 登録
-            try! realm.write {
-                dept?.todo.append(emp)
-            }
-        }
-
     }
     
     func deleteCategoryItem(at index: Int) {
