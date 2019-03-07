@@ -22,7 +22,7 @@
                                 <rect key="frame" x="40" y="103.5" width="295" height="480"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQP-VF-HUJ">
-                                        <rect key="frame" x="90" y="415" width="115" height="45"/>
+                                        <rect key="frame" x="87.5" y="415" width="120" height="45"/>
                                         <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="0.14554794520547945" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Cb4-kV-KCz"/>
@@ -32,10 +32,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ea-oi-hCE">
-                                        <rect key="frame" x="120" y="415" width="55" height="45"/>
+                                        <rect key="frame" x="87.5" y="415" width="120" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="IQH-BS-EKP"/>
+                                            <constraint firstAttribute="width" constant="120" id="vax-oN-vyd"/>
+                                        </constraints>
                                         <state key="normal" title="Create!!">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapCreateButton:" destination="Rea-1P-TZU" eventType="touchUpInside" id="Y6o-1j-jcQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,9 +50,9 @@
                                     <constraint firstAttribute="bottom" secondItem="1ea-oi-hCE" secondAttribute="bottom" constant="20" id="E7N-lK-dz9"/>
                                     <constraint firstItem="1ea-oi-hCE" firstAttribute="centerX" secondItem="SAt-hQ-jt5" secondAttribute="centerX" id="JyK-fS-hmM"/>
                                     <constraint firstItem="1ea-oi-hCE" firstAttribute="bottom" secondItem="jQP-VF-HUJ" secondAttribute="bottom" id="KaV-dZ-Rw7"/>
-                                    <constraint firstItem="1ea-oi-hCE" firstAttribute="leading" secondItem="jQP-VF-HUJ" secondAttribute="leading" constant="30" id="jv0-Rf-mMH"/>
+                                    <constraint firstItem="1ea-oi-hCE" firstAttribute="leading" secondItem="jQP-VF-HUJ" secondAttribute="leading" id="jv0-Rf-mMH"/>
                                     <constraint firstItem="1ea-oi-hCE" firstAttribute="top" secondItem="jQP-VF-HUJ" secondAttribute="top" id="tIF-AI-s8U"/>
-                                    <constraint firstItem="1ea-oi-hCE" firstAttribute="trailing" secondItem="jQP-VF-HUJ" secondAttribute="trailing" constant="-30" id="tv5-bR-4lK"/>
+                                    <constraint firstItem="1ea-oi-hCE" firstAttribute="trailing" secondItem="jQP-VF-HUJ" secondAttribute="trailing" id="tv5-bR-4lK"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-3W-aZa">

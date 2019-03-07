@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TodoRegistrationPopupViewController: UIViewController {
     @IBOutlet weak var outsideAreaView: UIView!
@@ -27,6 +28,7 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBOutlet weak var deadlineSwitch: UISwitch!
     @IBOutlet weak var closeImageView: UIImageView!
     
+    var categoryId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +82,66 @@ class TodoRegistrationPopupViewController: UIViewController {
             self.registerStackView.layoutIfNeeded()
         }
     }
+    
+    @IBAction func tapCreateButton(_ sender: Any) {
+        register()
+    }
 }
 
 extension TodoRegistrationPopupViewController {
     static func make() -> TodoRegistrationPopupViewController {
         let storyboard = UIStoryboard(name: "TodoRegistrationPopup", bundle: nil)
         return storyboard.instantiateInitialViewController() as! TodoRegistrationPopupViewController
+    }
+}
+
+extension TodoRegistrationPopupViewController {
+    private func register() {
+        guard let _ = validation() else {
+            // できればアラート出す
+            return
+        }
+        
+        guard let title = titleTextField.text else {
+            showAlert(desc: "title is nothing")
+            return
+        }
+        
+        if title.isEmpty {
+            showAlert(desc: "title is nothing")
+            return
+        }
+        
+        let realm = try! Realm()
+        
+        // titleから登録したい親カテゴリを抽出
+        let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
+        
+        // todolistのセット
+        let emp = TodoItem()
+        emp.todoTitle = title
+        emp.priority = true
+        emp.categoryId = self.categoryId
+        emp.id = emp.incrementId()
+        
+        // 登録
+        try! realm.write {
+            category?.todo.append(emp)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func validation() -> Bool? {
+        // 同じtitleないか
+        return true
+    }
+}
+
+extension TodoRegistrationPopupViewController {
+    private func showAlert(desc: String) {
+        let alert: UIAlertController = UIAlertController(title: "Error!", message: desc, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
 }
