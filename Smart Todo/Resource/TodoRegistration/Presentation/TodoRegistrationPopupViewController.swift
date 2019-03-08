@@ -40,6 +40,9 @@ class TodoRegistrationPopupViewController: UIViewController {
         createBackgroundLabel.layer.cornerRadius = 6.0
         createBackgroundLabel.clipsToBounds = true
         
+        // キーボード表示させる
+        titleTextField.becomeFirstResponder()
+        
         addGesture()
         initializedHiddenSetting()
     }
@@ -47,6 +50,13 @@ class TodoRegistrationPopupViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    /// textfield以外をタップしたらキーボードを閉じる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleTextField.resignFirstResponder()
+        memoTextField.resignFirstResponder()
+        urlTextField.resignFirstResponder()
     }
     
     func initializedHiddenSetting() {
