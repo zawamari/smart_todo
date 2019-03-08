@@ -98,6 +98,24 @@ class TodoItem: Object {
         }
     }
     
+    /// todoItemの各データを修正する
+    public func updateItem(beforeItem: TodoItem) {
+        let realm = try! Realm()
+        let item = TodoItem()
+        item.id = beforeItem.id
+        item.doneFlg = beforeItem.doneFlg
+        item.categoryId = beforeItem.categoryId
+        item.todoTitle = beforeItem.todoTitle
+        item.priority = beforeItem.priority
+        item.createdAt = beforeItem.createdAt
+        item.url = beforeItem.url
+        item.memo = beforeItem.memo
+        
+        try! realm.write {
+            realm.add(item, update: true)
+        }
+    }
+    
     /// todoItemの削除
     func deleteItem(categoryId: Int, todoId: Int) {
         let realm = try! Realm()
@@ -108,4 +126,6 @@ class TodoItem: Object {
             realm.delete(item!)
         }
     }
+    
+    /// Category内の全てのItemを削除
 }
