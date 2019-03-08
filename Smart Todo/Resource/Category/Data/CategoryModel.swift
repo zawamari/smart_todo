@@ -66,4 +66,22 @@ class TodoItem: Object {
             return 1
         }
     }
+    
+    public func changeDoneFlg(beforeItem: TodoItem, flg: Bool) {
+        let realm = try! Realm()
+        let item = TodoItem()
+        item.id = beforeItem.id
+        item.doneFlg = flg
+        
+        item.categoryId = beforeItem.categoryId
+        item.todoTitle = beforeItem.todoTitle
+        item.priority = beforeItem.priority
+        item.createdAt = beforeItem.createdAt
+        item.url = beforeItem.url
+        item.memo = beforeItem.memo
+        
+        try! realm.write {
+            realm.add(item, update: true)
+        }
+    }
 }

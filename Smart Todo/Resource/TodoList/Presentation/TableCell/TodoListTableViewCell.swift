@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 protocol TodoListTableViewCellDelegate {
-    func tapCheckImage()
+    func tapCheckImage(item: TodoItem, flg: Bool )
 }
 
 class TodoListTableViewCell: UITableViewCell {
@@ -20,7 +20,7 @@ class TodoListTableViewCell: UITableViewCell {
     @IBOutlet weak var deallineLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
     
-    private var todoItem: TodoItem = TodoItem()
+    private var todoItem: TodoItem?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,8 +35,6 @@ class TodoListTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func setItem(todoItem: TodoItem?) {
@@ -48,6 +46,7 @@ class TodoListTableViewCell: UITableViewCell {
         } else {
             checkImageView.image = UIImage(named:"check.png")
         }
+        self.todoItem = item
         
         // 締め日が近ければ赤文字にする
         // 優先度高のものをマークする
@@ -56,10 +55,13 @@ class TodoListTableViewCell: UITableViewCell {
     }
     
     @IBAction func tapCheck(_: UIGestureRecognizer) {
-        if todoItem.doneFlg {
+        guard let item = self.todoItem else { return }
+        if item.doneFlg {
             checkImageView.image = UIImage(named:"check.png")
+            self.tapCheckImage(item: item, flg: false)
         } else {
             checkImageView.image = UIImage(named:"done.png")
+            self.tapCheckImage(item: item, flg: true)
         }
         
     }

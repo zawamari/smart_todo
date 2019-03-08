@@ -102,6 +102,12 @@ private extension TodoListTableViewController {
     }
 }
 
+extension TodoListTableViewCell: TodoListTableViewCellDelegate {
+    func tapCheckImage(item: TodoItem, flg: Bool) {
+        TodoItem().changeDoneFlg(beforeItem: item, flg: flg)
+    }
+}
+
 /// RealmSwift
 private extension TodoListTableViewController {
     
