@@ -51,6 +51,7 @@ class TodoListTableViewCell: UITableViewCell {
         // 締め日が近ければ赤文字にする
         // 優先度高のものをマークする
         // チェックしたら最後尾に移動する、画像を切り替える
+          // もしくは文字に取り消し線をつける
         
     }
     
