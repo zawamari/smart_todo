@@ -66,9 +66,3 @@ class TodoListTableViewCell: UITableViewCell {
         
     }
 }
-
-extension TodoListTableViewCell {
-    func setItem(item: TodoItem) {
-        self.todoItem = item
-    }
-}
