@@ -67,6 +67,19 @@ class TodoItem: Object {
         }
     }
     
+    /// 全てのtodoItemsを取得する
+    func allTodoItems() -> Results<TodoItem> {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true)
+    }
+    
+    /// categoryを指定してtodoItemを取得する
+    func todoItems(categoryId: Int) -> Results<TodoItem> {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: true)
+    }
+    
+    /// todoItemの完了フラグを更新する
     public func changeDoneFlg(beforeItem: TodoItem, flg: Bool) {
         let realm = try! Realm()
         let item = TodoItem()

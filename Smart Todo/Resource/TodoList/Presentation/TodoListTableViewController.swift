@@ -115,9 +115,9 @@ private extension TodoListTableViewController {
         // RealmのTodoリストを取得し，更新を監視
         realm = try! Realm()
         if categoryId == 0 {
-            todoList = realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+            todoList = TodoItem().allTodoItems()
         } else {
-            todoList = realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+            todoList = TodoItem().todoItems(categoryId: categoryId)
         }
         token = todoList.observe { [weak self] _ in
             self?.reload()
