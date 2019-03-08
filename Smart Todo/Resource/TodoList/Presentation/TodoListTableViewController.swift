@@ -125,15 +125,6 @@ private extension TodoListTableViewController {
     }
     
     func deleteCategoryItem(at index: Int) {
-            // 子データの削除
-        if let category = navigationTitle {
-            let realm = try! Realm()
-            let dept = realm.objects(CategoryItem.self).filter("categoryTitle == '\(category)'").first
-            let emp = dept?.todo.filter("todoTitle == '\(todoList[index].todoTitle)'").first
-            
-            try! realm.write {
-                realm.delete(emp!)
-            }
-        }
+        TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
     }
 }

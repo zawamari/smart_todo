@@ -97,4 +97,15 @@ class TodoItem: Object {
             realm.add(item, update: true)
         }
     }
+    
+    /// todoItemの削除
+    func deleteItem(categoryId: Int, todoId: Int) {
+        let realm = try! Realm()
+        let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
+        let item = category?.todo.filter("id = %@", todoId).first
+        
+        try! realm.write {
+            realm.delete(item!)
+        }
+    }
 }
