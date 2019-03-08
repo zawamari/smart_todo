@@ -9,12 +9,18 @@
 import UIKit
 import RealmSwift
 
+protocol TodoListTableViewCellDelegate {
+    func tapCheckImage()
+}
+
 class TodoListTableViewCell: UITableViewCell {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var deadlineImageView: UIImageView!
     @IBOutlet weak var deallineLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
+    
+    private var todoItem: TodoItem = TodoItem()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +29,8 @@ class TodoListTableViewCell: UITableViewCell {
         backView.layer.cornerRadius = 6.0
         backView.clipsToBounds = true
         
+        let check = UITapGestureRecognizer(target: self, action: #selector(tapCheck(_:)))
+        checkImageView.addGestureRecognizer(check)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,10 +43,30 @@ class TodoListTableViewCell: UITableViewCell {
         guard let item = todoItem else { return }
         titleLabel.text = item.todoTitle
         
+        if item.doneFlg {
+            checkImageView.image = UIImage(named:"done.png")
+        } else {
+            checkImageView.image = UIImage(named:"check.png")
+        }
+        
         // 締め日が近ければ赤文字にする
         // 優先度高のものをマークする
         // チェックしたら最後尾に移動する、画像を切り替える
         
     }
     
+    @IBAction func tapCheck(_: UIGestureRecognizer) {
+        if todoItem.doneFlg {
+            checkImageView.image = UIImage(named:"check.png")
+        } else {
+            checkImageView.image = UIImage(named:"done.png")
+        }
+        
+    }
+}
+
+extension TodoListTableViewCell {
+    func setItem(item: TodoItem) {
+        self.todoItem = item
+    }
 }

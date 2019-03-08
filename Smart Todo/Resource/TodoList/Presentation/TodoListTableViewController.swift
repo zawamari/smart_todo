@@ -54,6 +54,7 @@ class TodoListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
         cell.setItem(todoItem: todoList?[indexPath.row])
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        cell.selectionStyle = .none
         return cell
     }
     
