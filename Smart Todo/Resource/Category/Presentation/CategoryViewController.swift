@@ -12,6 +12,7 @@ import RealmSwift
 class CategoryViewController: UIViewController {
 
     private var realm: Realm!
+    private let category: CategoryItem = CategoryItem()
     private var categoryList: Results<CategoryItem>!
     private var token: NotificationToken!
     private var categoryCount: Int = 0
@@ -24,21 +25,9 @@ class CategoryViewController: UIViewController {
     
     var window: UIWindow?
     
-    override func awakeFromNib() {//  todo listから戻ってきたときにtask数が更新されてるか？viewWillAppearの方が良い？
-        super.awakeFromNib()
-        // RealmのTodoリストを取得し，更新を監視
-        realm = try! Realm()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        categoryList = realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
-        token = categoryList.observe { [weak self] _ in
-            self?.reload()
-        }
-        categoryCount = categoryList.count
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        allCategory()
     }
     
     override func viewDidLoad() {
@@ -91,18 +80,14 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
         
         if let cell = cell as? CategoryCollectionViewCell { //todo nest
-            
-            var count = 0
             if indexPath.row == 0 {
-                for i in 0..<self.categoryCount {
-                    count += (categoryList?[i].todo.count)! // Todo force unwrap
-                }
-                cell.setupCell(name: "ALL", tasks: count)
+                cell.setupCell(name: "ALL", tasks: TodoItem().allCount())
                 return cell
             }
-            
-            if let title = categoryList?[indexPath.row].categoryTitle {
-                cell.setupCell(name: title, tasks: categoryList?[indexPath.row].todo.count)
+
+            if let title = categoryList?[indexPath.row].categoryTitle ,
+                let categoryId = categoryList?[indexPath.row].id {
+                cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
             }
         }
 
@@ -169,14 +154,20 @@ private extension CategoryViewController {
 
 /// RealmSwift
 private extension CategoryViewController {
+    func allCategory() {
+        // RealmのTodoリストを取得し，更新を監視
+        categoryList = category.categories()
+        token = categoryList.observe { [weak self] _ in
+            self?.reload()
+        }
+        categoryCount = categoryList.count
+    }
+    
     func addCategoryItem(title: String) {
-        let category = CategoryItem()
         category.register(title: title, priority: false)
     }
     
     func deleteCategoryItem(at index: Int) {
-        try! realm.write {
-            realm.delete(categoryList[index])
-        }
+        category.delete(category: categoryList[index])
     }
 }
