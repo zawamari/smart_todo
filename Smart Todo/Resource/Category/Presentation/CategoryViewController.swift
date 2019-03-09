@@ -160,6 +160,7 @@ private extension CategoryViewController {
         
         let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
             (action: UIAlertAction!) in
+            self.categoryEdit(index: index)
         })
         let action2 = UIAlertAction(title: "DELETE", style: UIAlertAction.Style.destructive, handler: {
             (action: UIAlertAction!) -> Void in
@@ -174,6 +175,36 @@ private extension CategoryViewController {
         alertSheet.addAction(action3)
         
         self.present(alertSheet, animated: true, completion: nil)
+    }
+
+    func categoryEdit(index: Int) {
+        let categoryId = self.categoryList[index].id
+        let title = self.categoryList[index].categoryTitle
+        
+        showEditAlert(id: categoryId, title: title, beforeItem: self.categoryList[index])
+    }
+    
+    func showEditAlert(id: Int, title: String, beforeItem: CategoryItem) {
+        let alert: UIAlertController = UIAlertController(title: "Category Edit", message: nil, preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: { (textField:UITextField) -> Void in
+            textField.text = title
+        })
+        
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            if let t = alert.textFields![0].text, !t.isEmpty {
+                self.category.edit(id: id, title: t, beforeItem: beforeItem)
+            }
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+
     }
 
     /// deleteを選んだら、itemが0だったらそのまま削除して、itemがあればアラートを表示して全て消えるけど削除するか聞く

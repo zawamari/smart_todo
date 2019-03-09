@@ -48,6 +48,21 @@ class CategoryItem: Object {
         }
     }
     
+    func edit(id: Int, title: String, beforeItem: CategoryItem) {
+        let realm = try! Realm()
+        let item = CategoryItem()
+        item.id = id
+        item.categoryTitle = title
+        item.canDeleteFlg = beforeItem.canDeleteFlg
+        item.createdAt = beforeItem.createdAt
+        item.priority = beforeItem.priority
+        item.createdAt = beforeItem.createdAt
+        
+        try! realm.write {
+            realm.add(item, update: true)
+        }
+    }
+    
     func delete(category: CategoryItem) {
         let realm = try! Realm()
         try! realm.write {
