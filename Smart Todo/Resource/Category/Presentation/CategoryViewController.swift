@@ -41,7 +41,7 @@ class CategoryViewController: UIViewController {
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
 
         // Comment Setting
-        testLabel.text = "Hi! Marie!"
+        testLabel.text = "Let's clean up the task"
         
         // CollectionView Setting
         categorycollectionView.dataSource = self

@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class CategoryCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var categoryIconImageView: UIImageView!
     @IBOutlet weak var categoryNameLabel: UILabel!
     @IBOutlet weak var tasksLabel: UILabel!
-    @IBOutlet weak var taskColorView: UIView!
     
     let colors = [UIColor(red: 211/255, green: 212/255, blue: 155/255, alpha: 1.0), //淡い黄色
                   UIColor(red: 223/255, green: 188/255, blue: 159/255, alpha: 1.0), //洗柿
@@ -44,8 +45,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         
         categoryNameLabel.textColor = UIColor.black
         tasksLabel.textColor = UIColor.lightGray
-        
-        taskColorView.layer.cornerRadius = taskColorView.bounds.width / 2
     }
 }
 
@@ -54,7 +53,7 @@ extension CategoryCollectionViewCell {
         categoryNameLabel.text = name
         if let count = tasks {
             tasksLabel.text = String(count) + " tasks"
-            taskColorView.layer.backgroundColor = colors[count].cgColor
+            categoryIconImageView.image = UIImage.fontAwesomeIcon(name: .circle, style: .solid, textColor: colors[count], size: CGSize(width: 20, height: 20))
         }
     }
 }
