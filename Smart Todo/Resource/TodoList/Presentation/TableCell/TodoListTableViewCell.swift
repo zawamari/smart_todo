@@ -19,6 +19,7 @@ class TodoListTableViewCell: UITableViewCell {
 //    @IBOutlet weak var deadlineImageView: UIImageView!
 //    @IBOutlet weak var deadlineLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
+    @IBOutlet weak var tapView: UIView!
     
     private var todoItem: TodoItem?
     
@@ -30,7 +31,7 @@ class TodoListTableViewCell: UITableViewCell {
         backView.clipsToBounds = true
         
         let check = UITapGestureRecognizer(target: self, action: #selector(tapCheck(_:)))
-        checkImageView.addGestureRecognizer(check)
+        tapView.addGestureRecognizer(check)
         
 //        deadlineImageView.isHidden = true
 //        deadlineLabel.isHidden = true

@@ -36,6 +36,13 @@
                             <constraint firstAttribute="width" constant="24" id="vja-8e-4ej"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLX-En-tOl">
+                        <rect key="frame" x="220" y="0.0" width="100" height="113"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="GQq-id-L8L"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -52,10 +59,16 @@
                     <constraint firstAttribute="trailing" secondItem="lkn-hq-UZm" secondAttribute="trailing" constant="20" id="yFo-Ti-cx5"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="VLX-En-tOl" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" id="b10-Bf-ZY0"/>
+                <constraint firstItem="VLX-En-tOl" firstAttribute="bottom" secondItem="njF-e1-oar" secondAttribute="bottom" id="hGa-UG-cSG"/>
+                <constraint firstItem="VLX-En-tOl" firstAttribute="trailing" secondItem="njF-e1-oar" secondAttribute="trailing" id="qVh-vJ-O4O"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="backView" destination="lkn-hq-UZm" id="RgV-CG-e9Y"/>
                 <outlet property="checkImageView" destination="0xE-5f-Nyp" id="TFQ-rK-cYJ"/>
+                <outlet property="tapView" destination="VLX-En-tOl" id="xlA-Vf-D4f"/>
                 <outlet property="titleLabel" destination="l4i-gQ-vaG" id="iIk-lg-tS5"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="160.56971514242881"/>
