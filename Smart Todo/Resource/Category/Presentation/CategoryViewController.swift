@@ -144,12 +144,63 @@ private extension CategoryViewController {
             case .began:
                 break
             case .ended:
-                deleteCategoryItem(at: indexPath.item)
+                showMenu(index: indexPath.item)
             default:
                 break
             }
         }
     }
+}
+
+private extension CategoryViewController {
+    
+    func showMenu(index: Int) {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+        })
+        let action2 = UIAlertAction(title: "DELETE", style: UIAlertAction.Style.destructive, handler: {
+            (action: UIAlertAction!) -> Void in
+            self.categoryDelete(index: index)
+        })
+        let action3 = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel, handler: {
+            (action: UIAlertAction!) in
+        })
+        
+        alertSheet.addAction(action1)
+        alertSheet.addAction(action2)
+        alertSheet.addAction(action3)
+        
+        self.present(alertSheet, animated: true, completion: nil)
+    }
+
+    /// deleteを選んだら、itemが0だったらそのまま削除して、itemがあればアラートを表示して全て消えるけど削除するか聞く
+    func categoryDelete(index: Int) {
+        if 0 < TodoItem().categoryItemCount(categoryId: categoryList[index].id) {
+            showAttentionAlert(index: index)
+        } else {
+            category.delete(category: categoryList[index])
+        }
+    }
+
+    func showAttentionAlert(index: Int) {
+        let alert: UIAlertController = UIAlertController(title: "Are you allright?", message: "This category have some items.", preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            TodoItem().deleteItemInCategory(categoryId: self.categoryList[index].id)
+            self.category.delete(category: self.categoryList[index])
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 /// RealmSwift

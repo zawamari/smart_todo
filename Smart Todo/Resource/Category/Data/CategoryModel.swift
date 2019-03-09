@@ -155,4 +155,15 @@ class TodoItem: Object {
     }
     
     /// Category内の全てのItemを削除
+    func deleteItemInCategory(categoryId: Int) {
+        let realm = try! Realm()
+        let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
+        let item = category?.todo.filter("categoryId = %@", categoryId)
+        
+        if let deleteItem = item {
+            try! realm.write {
+                realm.delete(deleteItem)
+            }
+        }
+    }
 }
