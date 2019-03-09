@@ -16,8 +16,8 @@ protocol TodoListTableViewCellDelegate {
 class TodoListTableViewCell: UITableViewCell {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var deadlineImageView: UIImageView!
-    @IBOutlet weak var deallineLabel: UILabel!
+//    @IBOutlet weak var deadlineImageView: UIImageView!
+//    @IBOutlet weak var deadlineLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
     
     private var todoItem: TodoItem?
@@ -31,6 +31,9 @@ class TodoListTableViewCell: UITableViewCell {
         
         let check = UITapGestureRecognizer(target: self, action: #selector(tapCheck(_:)))
         checkImageView.addGestureRecognizer(check)
+        
+//        deadlineImageView.isHidden = true
+//        deadlineLabel.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
