@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-// Todoアイテム
+// Category
 class CategoryItem: Object {
     @objc dynamic var id = 0
     @objc dynamic var categoryTitle = ""
@@ -31,6 +31,13 @@ class CategoryItem: Object {
         }
     }
     
+    /// カテゴリを全て取得する
+    func categories() -> Results<CategoryItem> {
+        let realm = try! Realm()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        return realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
+    }
+    
     func register(title: String, priority: Bool) {// Todo: 後でBoolを返却しても良いかも
         let realm = try! Realm()
         try! realm.write {
@@ -38,6 +45,13 @@ class CategoryItem: Object {
             realm.add(CategoryItem(value: ["id": id,
                                            "categoryTitle": title,
                                            "priority": priority]))
+        }
+    }
+    
+    func delete(category: CategoryItem) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(category)
         }
     }
 }
@@ -71,6 +85,17 @@ class TodoItem: Object {
     func allTodoItems() -> Results<TodoItem> {
         let realm = try! Realm()
         return realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true)
+    }
+    
+    /// 全てのtodoItemsのカウントを取得する
+    func allCount() -> Int {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).count
+    }
+    
+    func categoryItemCount(categoryId: Int) -> Int {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).count
     }
     
     /// categoryを指定してtodoItemを取得する
@@ -122,8 +147,10 @@ class TodoItem: Object {
         let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
         let item = category?.todo.filter("id = %@", todoId).first
         
-        try! realm.write {
-            realm.delete(item!)
+        if let deleteItem = item {
+            try! realm.write {
+                realm.delete(deleteItem)
+            }
         }
     }
     
