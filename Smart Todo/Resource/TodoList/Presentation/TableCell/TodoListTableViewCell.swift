@@ -46,6 +46,7 @@ class TodoListTableViewCell: UITableViewCell {
         } else {
             checkImageView.image = UIImage(named:"check.png")
         }
+        titleLabelDecorate(doneFlg: item.doneFlg)
         self.todoItem = item
         
         // 締め日が近ければ赤文字にする
@@ -64,6 +65,16 @@ class TodoListTableViewCell: UITableViewCell {
             checkImageView.image = UIImage(named:"done.png")
             self.tapCheckImage(item: item, flg: true)
         }
-        
+        self.titleLabelDecorate(doneFlg: item.doneFlg)
+    }
+    
+    func titleLabelDecorate(doneFlg: Bool) {
+        guard let titleText = titleLabel.text else { return }
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: titleText)
+
+        if doneFlg {
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        }
+        self.titleLabel.attributedText = attributeString
     }
 }
