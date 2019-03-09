@@ -155,6 +155,7 @@ private extension CategoryViewController {
 private extension CategoryViewController {
     
     func showMenu(index: Int) {
+        if index == 0 { return } /// allCategoryは操作できない
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         
         let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
