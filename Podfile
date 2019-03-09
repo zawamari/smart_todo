@@ -7,6 +7,7 @@ target 'Smart Todo' do
 
   # Pods for Smart Todo
   pod 'RealmSwift'
+  pod 'FontAwesome.swift'
 
   target 'Smart TodoTests' do
     inherit! :search_paths

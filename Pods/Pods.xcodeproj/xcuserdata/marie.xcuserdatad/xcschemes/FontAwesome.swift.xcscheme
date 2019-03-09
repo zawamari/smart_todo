@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "725E0DA2AFE352112B7CF4299B6D4794"
-               BuildableName = "Pods_Smart_Todo.framework"
-               BlueprintName = "Pods-Smart Todo"
+               BlueprintIdentifier = "ADD9F3DD47C12F0136E3ED7EE7141BA4"
+               BuildableName = "FontAwesome_swift.framework"
+               BlueprintName = "FontAwesome.swift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "725E0DA2AFE352112B7CF4299B6D4794"
-            BuildableName = "Pods_Smart_Todo.framework"
-            BlueprintName = "Pods-Smart Todo"
+            BlueprintIdentifier = "ADD9F3DD47C12F0136E3ED7EE7141BA4"
+            BuildableName = "FontAwesome_swift.framework"
+            BlueprintName = "FontAwesome.swift"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
