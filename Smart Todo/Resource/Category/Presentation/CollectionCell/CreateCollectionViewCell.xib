@@ -19,14 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="172" height="171"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chb-1w-c6E">
-                        <rect key="frame" x="61" y="60.5" width="50" height="50"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="FZA-wU-IfF"/>
-                            <constraint firstAttribute="height" constant="50" id="Q3k-1N-v19"/>
-                        </constraints>
-                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n1t-1a-Eia">
                         <rect key="frame" x="71" y="70.5" width="30" height="30"/>
                         <constraints>
@@ -38,14 +30,11 @@
             </view>
             <constraints>
                 <constraint firstItem="n1t-1a-Eia" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="P4H-Lx-Hqf"/>
-                <constraint firstItem="chb-1w-c6E" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="gcV-e3-3QK"/>
-                <constraint firstItem="chb-1w-c6E" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="w6s-Ca-Oyu"/>
                 <constraint firstItem="n1t-1a-Eia" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="zOc-Ea-CxD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="172" height="171"/>
             <connections>
-                <outlet property="backView" destination="chb-1w-c6E" id="sFU-xj-UPg"/>
                 <outlet property="createImageView" destination="n1t-1a-Eia" id="a7f-YL-RsP"/>
             </connections>
             <point key="canvasLocation" x="42" y="106"/>

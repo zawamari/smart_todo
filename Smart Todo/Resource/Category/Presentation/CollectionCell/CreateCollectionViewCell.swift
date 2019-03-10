@@ -21,11 +21,6 @@ class CreateCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 6.0
         contentView.clipsToBounds = true
         
-        backView.layer.borderWidth = 0.5
-        backView.layer.borderColor = UIColor.gray.cgColor
-        backView.layer.cornerRadius = backView.frame.width / 2
-        backView.clipsToBounds = true
-        
         createImageView.image = UIImage.fontAwesomeIcon(name: .plus, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
     }
 
