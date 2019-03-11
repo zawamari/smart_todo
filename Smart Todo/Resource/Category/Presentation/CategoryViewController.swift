@@ -114,6 +114,15 @@ extension CategoryViewController {
 private extension CategoryViewController {
     /// Create New Category Action
     @objc func clickCreateCategoryButton(){
+
+        // popupで登録するときは以下のコメントを実行する
+//        let categoryCreatePopupViewController = CategoryCreatePopupViewController.make()
+//
+//        let nav = UINavigationController(rootViewController: categoryCreatePopupViewController)
+//        nav.modalTransitionStyle = .crossDissolve
+//        nav.modalPresentationStyle = .overFullScreen
+//        self.present(nav, animated: true, completion: nil)
+        
         let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: nil)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
