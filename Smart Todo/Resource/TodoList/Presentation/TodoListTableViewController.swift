@@ -35,6 +35,7 @@ class TodoListTableViewController: UITableViewController {
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
+        tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
         tableView.separatorStyle = .none
     }
 
@@ -44,17 +45,25 @@ class TodoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let list = todoList {
+        if let list = todoList, list.count > 0 {
             return list.count
         }
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
-        cell.setItem(todoItem: todoList?[indexPath.row])
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        
+        if let list = todoList, list.count > 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
+
+            cell.setItem(todoItem: list[indexPath.row])
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            cell.selectionStyle = .none
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTableViewCell", for: indexPath) as! CreateTableViewCell
         cell.selectionStyle = .none
+        
         return cell
     }
     
