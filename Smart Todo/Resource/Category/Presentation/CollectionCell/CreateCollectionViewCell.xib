@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="172" height="171"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOl-cq-9eA">
+                        <rect key="frame" x="0.0" y="0.0" width="172" height="171"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n1t-1a-Eia">
                         <rect key="frame" x="71" y="70.5" width="30" height="30"/>
                         <constraints>
@@ -30,6 +34,10 @@
             </view>
             <constraints>
                 <constraint firstItem="n1t-1a-Eia" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="P4H-Lx-Hqf"/>
+                <constraint firstItem="BOl-cq-9eA" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="R4n-8K-Cga"/>
+                <constraint firstItem="BOl-cq-9eA" firstAttribute="bottom" secondItem="ZTg-uK-7eu" secondAttribute="bottom" id="WNZ-Ps-quL"/>
+                <constraint firstItem="BOl-cq-9eA" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="XOb-Ow-ltj"/>
+                <constraint firstItem="BOl-cq-9eA" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" id="a9Y-Wf-49a"/>
                 <constraint firstItem="n1t-1a-Eia" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="zOc-Ea-CxD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
