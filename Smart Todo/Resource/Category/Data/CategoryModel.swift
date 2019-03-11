@@ -99,7 +99,7 @@ class TodoItem: Object {
     /// 全てのtodoItemsを取得する
     func allTodoItems() -> Results<TodoItem> {
         let realm = try! Realm()
-        return realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: true)
+        return realm.objects(TodoItem.self).sorted(byKeyPath: "createdAt", ascending: false)
     }
     
     /// 全てのtodoItemsのカウントを取得する
@@ -116,7 +116,7 @@ class TodoItem: Object {
     /// categoryを指定してtodoItemを取得する
     func todoItems(categoryId: Int) -> Results<TodoItem> {
         let realm = try! Realm()
-        return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: true)
+        return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: false)
     }
     
     /// todoItemの完了フラグを更新する
