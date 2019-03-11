@@ -177,7 +177,7 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cross2.png" translatesAutoresizingMaskIntoConstraints="NO" id="faX-Wg-3vF">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faX-Wg-3vF">
                                 <rect key="frame" x="20" y="83.5" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8YB-2N-kGc"/>
@@ -225,7 +225,4 @@
             <point key="canvasLocation" x="48.799999999999997" y="95.802098950524751"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="cross2.png" width="50" height="50"/>
-    </resources>
 </document>
