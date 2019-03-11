@@ -82,12 +82,11 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         if let cell = cell as? CategoryCollectionViewCell { //todo nest
             if indexPath.row == 0 {
                 cell.setupCell(name: "ALL", tasks: TodoItem().allCount())
-                return cell
-            }
-
-            if let title = categoryList?[indexPath.row].categoryTitle ,
-                let categoryId = categoryList?[indexPath.row].id {
-                cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
+            } else {
+                if let title = categoryList?[indexPath.row].categoryTitle ,
+                    let categoryId = categoryList?[indexPath.row].id {
+                    cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
+                }
             }
         }
         // 影をつける
