@@ -30,6 +30,13 @@ class TodoListTableViewCell: UITableViewCell {
         backView.layer.cornerRadius = 6.0
         backView.clipsToBounds = true
         
+        // 影をつける
+        backView.layer.masksToBounds = false
+        backView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        backView.layer.shadowOpacity = 1.0
+        backView.layer.shadowRadius = 2.0
+        backView.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+        
         let check = UITapGestureRecognizer(target: self, action: #selector(tapCheck(_:)))
         tapView.addGestureRecognizer(check)
         

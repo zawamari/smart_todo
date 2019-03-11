@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="170" height="221"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPy-8z-7ep">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="221"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o3v-MY-m80">
                         <rect key="frame" x="130" y="20" width="20" height="20"/>
                         <constraints>
@@ -43,8 +47,12 @@
             <constraints>
                 <constraint firstItem="o3v-MY-m80" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="20" id="4BF-nO-1rj"/>
                 <constraint firstItem="Yyb-4f-buh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="4dW-bY-mrH"/>
+                <constraint firstItem="FPy-8z-7ep" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="F0u-vX-nKb"/>
+                <constraint firstAttribute="bottom" secondItem="FPy-8z-7ep" secondAttribute="bottom" id="HGJ-78-wDN"/>
                 <constraint firstAttribute="bottom" secondItem="Yyb-4f-buh" secondAttribute="bottom" constant="20" id="MdI-gq-d5t"/>
+                <constraint firstAttribute="trailing" secondItem="FPy-8z-7ep" secondAttribute="trailing" id="P0y-hg-BDc"/>
                 <constraint firstItem="o3v-MY-m80" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" constant="-20" id="lhv-GN-CoG"/>
+                <constraint firstItem="FPy-8z-7ep" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rBp-5J-GAf"/>
                 <constraint firstItem="S4u-bb-BMr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="url-ua-2js"/>
                 <constraint firstAttribute="trailing" secondItem="S4u-bb-BMr" secondAttribute="trailing" constant="20" id="yhH-vT-3wn"/>
                 <constraint firstItem="Yyb-4f-buh" firstAttribute="top" secondItem="S4u-bb-BMr" secondAttribute="bottom" constant="10" id="znT-As-aPI"/>

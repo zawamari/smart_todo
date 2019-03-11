@@ -90,6 +90,13 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
             }
         }
+        // 影をつける
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.shadowRadius = 2.0
+        cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+        cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
 
         return cell
     }
