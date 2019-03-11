@@ -35,7 +35,7 @@ class TodoListTableViewController: UITableViewController {
         self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
-        tableView.separatorColor = .none
+        tableView.separatorStyle = .none
     }
 
     // MARK: - Table view data source
