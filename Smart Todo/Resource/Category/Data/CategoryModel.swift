@@ -159,16 +159,19 @@ class TodoItem: Object {
     }
     
     /// todoItemの削除
-    func deleteItem(categoryId: Int, todoId: Int) {
+    func deleteItem(categoryId: Int, todoId: Int)  -> Results<TodoItem>  {
         let realm = try! Realm()
-        let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
-        let item = category?.todo.filter("id = %@", todoId).first
+        let categoryResults = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
+        let item = categoryResults?.todo.filter("id = %@", todoId).first
         
+        let todoResults = realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: false)
+
         if let deleteItem = item {
             try! realm.write {
                 realm.delete(deleteItem)
             }
         }
+        return todoResults
     }
     
     /// Category内の全てのItemを削除
