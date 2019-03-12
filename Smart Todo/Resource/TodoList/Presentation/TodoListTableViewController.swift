@@ -83,9 +83,15 @@ class TodoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            deleteCategoryItem(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)//fade かけたいけどクラッシュする
+        let cellType = tableViewData.cellType(index: indexPath)
+        switch cellType {
+        case .todo:
+            if editingStyle == .delete {
+                deleteCategoryItem(at: indexPath.row)
+  //            tableView.deleteRows(at: [indexPath], with: .fade)//fade かけたいけどクラッシュする
+            }
+        case .create:
+            break
         }
     }
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

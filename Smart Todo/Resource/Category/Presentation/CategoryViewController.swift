@@ -184,7 +184,7 @@ private extension CategoryViewController {
             case .began:
                 break
             case .ended:
-                showMenu(index: indexPath.item)
+                showMenu(index: indexPath)
             default:
                 break
             }
@@ -194,27 +194,33 @@ private extension CategoryViewController {
 
 private extension CategoryViewController {
     
-    func showMenu(index: Int) {
-        if index == 0 { return } /// allCategoryは操作できない
-        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        
-        let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
-            (action: UIAlertAction!) in
-            self.categoryEdit(index: index)
-        })
-        let action2 = UIAlertAction(title: "DELETE", style: UIAlertAction.Style.destructive, handler: {
-            (action: UIAlertAction!) -> Void in
-            self.categoryDelete(index: index)
-        })
-        let action3 = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel, handler: {
-            (action: UIAlertAction!) in
-        })
-        
-        alertSheet.addAction(action1)
-        alertSheet.addAction(action2)
-        alertSheet.addAction(action3)
-        
-        self.present(alertSheet, animated: true, completion: nil)
+    func showMenu(index: IndexPath) {
+        let cellType = tableViewData.cellType(index: index)
+        switch cellType {
+        case .create:
+            break
+        case .category:
+            if index.row == 0 { return } // ALLは操作できない
+            let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+            
+            let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
+                (action: UIAlertAction!) in
+                self.categoryEdit(index: index.row)
+            })
+            let action2 = UIAlertAction(title: "DELETE", style: UIAlertAction.Style.destructive, handler: {
+                (action: UIAlertAction!) -> Void in
+                self.categoryDelete(index: index.row)
+            })
+            let action3 = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel, handler: {
+                (action: UIAlertAction!) in
+            })
+            
+            alertSheet.addAction(action1)
+            alertSheet.addAction(action2)
+            alertSheet.addAction(action3)
+            
+            self.present(alertSheet, animated: true, completion: nil)
+        }
     }
 
     func categoryEdit(index: Int) {
