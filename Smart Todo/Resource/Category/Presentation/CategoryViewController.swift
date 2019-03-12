@@ -38,6 +38,7 @@ class CategoryViewController: UIViewController {
         // NavigationBar Setting
         self.title = "Category"
 
+        self.navigationController?.navigationBar.tintColor = .black
         // Comment Setting
         testLabel.text = "Let's clean up the task"
         
