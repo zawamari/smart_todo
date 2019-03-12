@@ -149,8 +149,11 @@ private extension CategoryViewController {
         //        nav.modalPresentationStyle = .overFullScreen
         //        self.present(nav, animated: true, completion: nil)
         
-        let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
-        alert.addTextField(configurationHandler: nil)
+        let alert: UIAlertController = UIAlertController(title: "Create category", message: nil, preferredStyle:  UIAlertController.Style.alert)
+        alert.addTextField(configurationHandler: { (textField:UITextField) -> Void in
+            textField.placeholder = "new category name"
+            })
+
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
@@ -221,7 +224,7 @@ private extension CategoryViewController {
     }
     
     func showEditAlert(id: Int, title: String, beforeItem: CategoryItem) {
-        let alert: UIAlertController = UIAlertController(title: "Category Edit", message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let alert: UIAlertController = UIAlertController(title: "Edit category", message: nil, preferredStyle:  UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: { (textField:UITextField) -> Void in
             textField.text = title
         })
