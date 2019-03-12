@@ -31,6 +31,8 @@ class TodoListTableViewController: UITableViewController {
         
         let button: UIBarButtonItem = UIBarButtonItem(barButtonHiddenItem: .Back, target: self, action: #selector(back))
         self.navigationItem.setLeftBarButtonItems([button], animated: true)
+        let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
+        self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
         tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
@@ -72,7 +74,7 @@ class TodoListTableViewController: UITableViewController {
             // そのうち詳細モーダルを出したい
             break
         case .create:
-            clickCreateCategoryButton()
+            createNewTodo()
         }
     }
 
@@ -105,7 +107,11 @@ private extension TodoListTableViewController {
     }
     
     /// Create New todo item
-    func clickCreateCategoryButton(){
+    @objc func clickCreateCategoryButton(){
+        createNewTodo()
+    }
+    
+    func createNewTodo() {
         let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
         todoRegistrationPopupViewController.categoryId = self.categoryId
 
@@ -113,6 +119,7 @@ private extension TodoListTableViewController {
         nav.modalTransitionStyle = .crossDissolve
         nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
+
     }
 }
 
