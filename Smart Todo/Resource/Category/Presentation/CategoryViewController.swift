@@ -252,7 +252,7 @@ private extension CategoryViewController {
         if 0 < TodoItem().categoryItemCount(categoryId: categoryList[index].id) {
             showAttentionAlert(index: index)
         } else {
-            category.delete(category: categoryList[index])
+            deleteCategoryItem(at: index)
         }
     }
 
@@ -262,7 +262,7 @@ private extension CategoryViewController {
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             TodoItem().deleteItemInCategory(categoryId: self.categoryList[index].id)
-            self.category.delete(category: self.categoryList[index])
+            self.deleteCategoryItem(at: index)
         })
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
@@ -293,6 +293,7 @@ private extension CategoryViewController {
     }
     
     func deleteCategoryItem(at index: Int) {
-        category.delete(category: categoryList[index])
+        categoryList = category.delete(category: categoryList[index])
+        categoryCount = categoryList.count
     }
 }

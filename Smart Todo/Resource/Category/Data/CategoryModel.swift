@@ -63,11 +63,13 @@ class CategoryItem: Object {
         }
     }
     
-    func delete(category: CategoryItem) {
+    func delete(category: CategoryItem) -> Results<CategoryItem>  {
         let realm = try! Realm()
+        let result = realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true)
         try! realm.write {
             realm.delete(category)
         }
+        return result
     }
 }
 
