@@ -37,10 +37,6 @@ class CategoryViewController: UIViewController {
         
         // NavigationBar Setting
         self.title = "Category"
-        
-        let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.setRightBarButtonItems([createButton], animated: true)
 
         // Comment Setting
         testLabel.text = "Let's clean up the task"
@@ -49,16 +45,14 @@ class CategoryViewController: UIViewController {
         categorycollectionView.dataSource = self
         categorycollectionView.delegate = self
         
-        let itemSize = UIScreen.main.bounds.width / 2 - 30
+        let itemSize = UIScreen.main.bounds.width / 2 - 40
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
-        
         layout.minimumLineSpacing = 30
         layout.minimumInteritemSpacing = 20
-        
         categorycollectionView.collectionViewLayout = layout
-        
+
         categorycollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
         categorycollectionView.register(UINib(nibName: "CreateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CreateCollectionViewCell")
         
@@ -97,33 +91,39 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
             }
             // 影をつける
+            cell.layer.cornerRadius = 10.0
             cell.layer.masksToBounds = false
-            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.shadowRadius = 2.0
-            cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
-            cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOpacity = 0.25
+            cell.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            cell.layer.shadowRadius = 3
             return cell
         case .create:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateCollectionViewCell", for: indexPath)
             // 影をつける
+            cell.layer.cornerRadius = 10.0
             cell.layer.masksToBounds = false
-            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.shadowRadius = 2.0
-            cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
-            cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOpacity = 0.25
+            cell.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            cell.layer.shadowRadius = 3
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = TodoListTableViewController()
-        vc.navigationTitle = categoryList?[indexPath.row].categoryTitle
-        if let cid = categoryList?[indexPath.row].id {
-            vc.categoryId = cid
+        let cellType = tableViewData.cellType(index: indexPath)
+        switch cellType {
+        case .category:
+            let vc = TodoListTableViewController()
+            vc.navigationTitle = categoryList?[indexPath.row].categoryTitle
+            if let cid = categoryList?[indexPath.row].id {
+                vc.categoryId = cid
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .create:
+            newCategory()
         }
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -137,14 +137,17 @@ extension CategoryViewController {
 private extension CategoryViewController {
     /// Create New Category Action
     @objc func clickCreateCategoryButton(){
-
+        newCategory()
+    }
+    
+    private func newCategory() {
         // popupで登録するときは以下のコメントを実行する
-//        let categoryCreatePopupViewController = CategoryCreatePopupViewController.make()
-//
-//        let nav = UINavigationController(rootViewController: categoryCreatePopupViewController)
-//        nav.modalTransitionStyle = .crossDissolve
-//        nav.modalPresentationStyle = .overFullScreen
-//        self.present(nav, animated: true, completion: nil)
+        //        let categoryCreatePopupViewController = CategoryCreatePopupViewController.make()
+        //
+        //        let nav = UINavigationController(rootViewController: categoryCreatePopupViewController)
+        //        nav.modalTransitionStyle = .crossDissolve
+        //        nav.modalPresentationStyle = .overFullScreen
+        //        self.present(nav, animated: true, completion: nil)
         
         let alert: UIAlertController = UIAlertController(title: "Category Create", message: "What is new category name?", preferredStyle:  UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: nil)
@@ -164,6 +167,7 @@ private extension CategoryViewController {
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)
         present(alert, animated: true, completion: nil)
+
     }
     
     // Delete Category Action

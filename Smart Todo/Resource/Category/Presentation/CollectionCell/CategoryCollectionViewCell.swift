@@ -18,8 +18,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layer.borderWidth = 0.5
-        contentView.layer.borderColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
         contentView.layer.cornerRadius = 6.0
         contentView.clipsToBounds = true
         categoryIconImageView.layer.masksToBounds = true

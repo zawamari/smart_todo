@@ -14,10 +14,7 @@ class CreateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var createImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        contentView.layer.borderWidth = 0.5
-        contentView.layer.borderColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+
         contentView.layer.cornerRadius = 6.0
         contentView.clipsToBounds = true
         
