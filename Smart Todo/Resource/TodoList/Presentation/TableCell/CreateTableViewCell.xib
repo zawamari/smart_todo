@@ -15,18 +15,18 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="KGk-i7-Jjw" customClass="CreateTableViewCell" customModule="Smart_Todo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="93.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1W-RP-Z60">
-                        <rect key="frame" x="20" y="20" width="280" height="53.5"/>
+                        <rect key="frame" x="20" y="20" width="280" height="53"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcu-a2-AeA">
-                                <rect key="frame" x="125" y="12" width="30" height="30"/>
+                                <rect key="frame" x="130" y="16.5" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="mcC-lC-mwP"/>
-                                    <constraint firstAttribute="height" constant="30" id="sBx-ez-0nu"/>
+                                    <constraint firstAttribute="width" constant="20" id="mcC-lC-mwP"/>
+                                    <constraint firstAttribute="height" constant="20" id="sBx-ez-0nu"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -34,6 +34,7 @@
                         <constraints>
                             <constraint firstItem="qcu-a2-AeA" firstAttribute="centerY" secondItem="o1W-RP-Z60" secondAttribute="centerY" id="6NP-8d-GtX"/>
                             <constraint firstItem="qcu-a2-AeA" firstAttribute="centerX" secondItem="o1W-RP-Z60" secondAttribute="centerX" id="WMP-3U-MvP"/>
+                            <constraint firstAttribute="height" constant="53" id="mlL-oh-w4l"/>
                         </constraints>
                     </view>
                 </subviews>

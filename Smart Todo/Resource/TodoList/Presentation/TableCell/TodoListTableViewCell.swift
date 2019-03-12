@@ -25,8 +25,7 @@ class TodoListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backView.layer.borderColor = UIColor.gray.cgColor
-        backView.layer.borderWidth = 0.5
+
         backView.layer.cornerRadius = 6.0
         backView.clipsToBounds = true
         

@@ -15,19 +15,18 @@ class CreateTableViewCell: UITableViewCell {
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        addImageView.image = UIImage.fontAwesomeIcon(name: .plus, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
-        addImageView.clipsToBounds = false
+        addImageView.image = UIImage.fontAwesomeIcon(name: .plus, style: .solid, textColor: .gray, size: CGSize(width: 20, height: 20))
+        addImageView.clipsToBounds = true
         
-        backView.layer.borderColor = UIColor.gray.cgColor
-        backView.layer.borderWidth = 0.5
         backView.layer.cornerRadius = 6.0
         backView.clipsToBounds = true
         // 影をつける
+        backView.layer.cornerRadius = 10.0
         backView.layer.masksToBounds = false
-        backView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        backView.layer.shadowOpacity = 1.0
-        backView.layer.shadowRadius = 2.0
-        backView.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+        backView.layer.shadowColor = UIColor.black.cgColor
+        backView.layer.shadowOpacity = 0.25
+        backView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        backView.layer.shadowRadius = 3
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
