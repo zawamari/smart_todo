@@ -18,6 +18,8 @@ class TodoListTableViewController: UITableViewController {
     private var category: Results<CategoryItem>!
     private var todoList: Results<TodoItem>!
     private var token: NotificationToken!
+    
+    private var tableViewData: TodoListTableViewData = TodoListTableViewData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +31,6 @@ class TodoListTableViewController: UITableViewController {
         
         let button: UIBarButtonItem = UIBarButtonItem(barButtonHiddenItem: .Back, target: self, action: #selector(back))
         self.navigationItem.setLeftBarButtonItems([button], animated: true)
-
-        let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
-        
-        self.navigationItem.setRightBarButtonItems([createButton], animated: true)
         
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
         tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
@@ -45,30 +43,37 @@ class TodoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let list = todoList, list.count > 0 {
-            return list.count
-        }
-        return 1
+        return tableViewData.rowCount(section: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let list = todoList, list.count > 0 {
+        let cellType = tableViewData.cellType(index: indexPath)
+        switch cellType {
+        case .todo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
-
-            cell.setItem(todoItem: list[indexPath.row])
+            
+            cell.setItem(todoItem: todoList[indexPath.row])
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
             cell.selectionStyle = .none
             return cell
+        case .create:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTableViewCell", for: indexPath) as! CreateTableViewCell
+            cell.selectionStyle = .none
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTableViewCell", for: indexPath) as! CreateTableViewCell
-        cell.selectionStyle = .none
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // todo itemの詳細がみれるようにする
+        let cellType = tableViewData.cellType(index: indexPath)
+        switch cellType {
+        case .todo:
+            // そのうち詳細モーダルを出したい
+            break
+        case .create:
+            clickCreateCategoryButton()
+        }
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -99,8 +104,8 @@ private extension TodoListTableViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    /// Create New Category
-    @objc func clickCreateCategoryButton(){
+    /// Create New todo item
+    func clickCreateCategoryButton(){
         let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
         todoRegistrationPopupViewController.categoryId = self.categoryId
 
@@ -129,6 +134,7 @@ private extension TodoListTableViewController {
             todoList = TodoItem().todoItems(categoryId: categoryId)
         }
         token = todoList.observe { [weak self] _ in
+            self?.tableViewData.refresh(model: self?.todoList.count)
             self?.reload()
         }
     }
