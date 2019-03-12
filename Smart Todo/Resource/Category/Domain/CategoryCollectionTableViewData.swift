@@ -18,10 +18,7 @@ final class CategoryCollectionTableViewData {
             for _ in 0..<count {
                 cellTypes.append(.category)
             }
-        } else {
-            cellTypes.append(.category)
         }
-
         cellTypes.append(.create)
     }
 }

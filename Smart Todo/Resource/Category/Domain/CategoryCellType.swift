@@ -16,9 +16,9 @@ enum CategoryCellType: TableDataType {
     func cacheKey() -> String {
         switch self {
         case .category:
-            return "CollectionLabelListHeader"
+            return "categoryCell"
         case .create:
-            return "Empty"
+            return "create"
         }
     }
     
