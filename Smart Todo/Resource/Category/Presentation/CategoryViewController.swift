@@ -20,6 +20,8 @@ class CategoryViewController: UIViewController {
     private var todoList: Results<TodoItem>!
     private var todoToken: NotificationToken!
     
+    private var tableViewData: CategoryCollectionTableViewData = CategoryCollectionTableViewData()
+    
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var categorycollectionView: UICollectionView!
     
@@ -58,6 +60,7 @@ class CategoryViewController: UIViewController {
         categorycollectionView.collectionViewLayout = layout
         
         categorycollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        categorycollectionView.register(UINib(nibName: "CreateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CreateCollectionViewCell")
         
         // collectionview cellに長押しのアクションを追加する
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
@@ -73,31 +76,45 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryList.count
+        return tableViewData.rowCount(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
-        
-        if let cell = cell as? CategoryCollectionViewCell { //todo nest
-            if indexPath.row == 0 {
-                cell.setupCell(name: "ALL", tasks: TodoItem().allCount())
-            } else {
-                if let title = categoryList?[indexPath.row].categoryTitle ,
-                    let categoryId = categoryList?[indexPath.row].id {
-                    cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
+       
+        let cellType = tableViewData.cellType(index: indexPath)
+        switch cellType {
+        case .category:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
+            
+            if let cell = cell as? CategoryCollectionViewCell { //todo nest
+                if indexPath.row == 0 {
+                    cell.setupCell(name: "ALL", tasks: TodoItem().allCount())
+                } else {
+                    if let title = categoryList?[indexPath.row].categoryTitle ,
+                        let categoryId = categoryList?[indexPath.row].id {
+                        cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
+                    }
                 }
             }
+            // 影をつける
+            cell.layer.masksToBounds = false
+            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            cell.layer.shadowOpacity = 1.0
+            cell.layer.shadowRadius = 2.0
+            cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+            cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+            return cell
+        case .create:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateCollectionViewCell", for: indexPath)
+            // 影をつける
+            cell.layer.masksToBounds = false
+            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            cell.layer.shadowOpacity = 1.0
+            cell.layer.shadowRadius = 2.0
+            cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
+            cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+            return cell
         }
-        // 影をつける
-        cell.layer.masksToBounds = false
-        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.shadowRadius = 2.0
-        cell.layer.shadowColor = UIColor(red: 188/255, green: 189/255, blue: 194/255, alpha: 1.0).cgColor
-        cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
-
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -255,14 +272,16 @@ private extension CategoryViewController {
     func allCategory() {
         // RealmのTodoリストを取得し，更新を監視
         categoryList = category.categories()
+        categoryCount = categoryList.count
         token = categoryList.observe { [weak self] _ in
+            self?.tableViewData.refresh(model: self?.categoryCount)
             self?.reload()
         }
-        categoryCount = categoryList.count
     }
     
     func addCategoryItem(title: String) {
         category.register(title: title, priority: false)
+        allCategory()//苦肉の策　これがないと、カテゴリ追加しても反映されない
     }
     
     func deleteCategoryItem(at index: Int) {

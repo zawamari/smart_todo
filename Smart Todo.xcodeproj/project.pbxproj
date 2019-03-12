@@ -14,6 +14,10 @@
 		0C3248642205F11500D26EDC /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3248632205F11500D26EDC /* TodoTableViewCell.swift */; };
 		0C54A3CE223697FD00805627 /* CreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C54A3CC223697FD00805627 /* CreateTableViewCell.swift */; };
 		0C54A3CF223697FD00805627 /* CreateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C54A3CD223697FD00805627 /* CreateTableViewCell.xib */; };
+		0C54A3D32237735000805627 /* CategoryCollectionTableViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C54A3D22237735000805627 /* CategoryCollectionTableViewData.swift */; };
+		0C54A3D52237739D00805627 /* CategoryCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C54A3D42237739D00805627 /* CategoryCellType.swift */; };
+		0C54A3D72237742400805627 /* TableDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C54A3D62237742400805627 /* TableDataType.swift */; };
+		0C54A3D9223774BF00805627 /* TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C54A3D8223774BF00805627 /* TableDataSource.swift */; };
 		0C63C69C2234D98B002C21A2 /* CreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C63C69A2234D98B002C21A2 /* CreateCollectionViewCell.swift */; };
 		0C63C69D2234D98B002C21A2 /* CreateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C63C69B2234D98B002C21A2 /* CreateCollectionViewCell.xib */; };
 		0C63C6A22234E195002C21A2 /* CategoryCreatePopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C63C6A12234E195002C21A2 /* CategoryCreatePopup.storyboard */; };
@@ -67,6 +71,10 @@
 		0C3248632205F11500D26EDC /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		0C54A3CC223697FD00805627 /* CreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableViewCell.swift; sourceTree = "<group>"; };
 		0C54A3CD223697FD00805627 /* CreateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateTableViewCell.xib; sourceTree = "<group>"; };
+		0C54A3D22237735000805627 /* CategoryCollectionTableViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionTableViewData.swift; sourceTree = "<group>"; };
+		0C54A3D42237739D00805627 /* CategoryCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellType.swift; sourceTree = "<group>"; };
+		0C54A3D62237742400805627 /* TableDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataType.swift; sourceTree = "<group>"; };
+		0C54A3D8223774BF00805627 /* TableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSource.swift; sourceTree = "<group>"; };
 		0C63C69A2234D98B002C21A2 /* CreateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C63C69B2234D98B002C21A2 /* CreateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollectionViewCell.xib; sourceTree = "<group>"; };
 		0C63C6A12234E195002C21A2 /* CategoryCreatePopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryCreatePopup.storyboard; sourceTree = "<group>"; };
@@ -339,6 +347,10 @@
 		0CDDE12A21ECCE09002AFE68 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0C54A3D22237735000805627 /* CategoryCollectionTableViewData.swift */,
+				0C54A3D42237739D00805627 /* CategoryCellType.swift */,
+				0C54A3D62237742400805627 /* TableDataType.swift */,
+				0C54A3D8223774BF00805627 /* TableDataSource.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -614,9 +626,13 @@
 			files = (
 				0C3248642205F11500D26EDC /* TodoTableViewCell.swift in Sources */,
 				0CDDE13921ECE7AD002AFE68 /* CategoryViewController.swift in Sources */,
+				0C54A3D72237742400805627 /* TableDataType.swift in Sources */,
 				0CDDE13621ECDB3D002AFE68 /* CategoryCollectionViewCell.swift in Sources */,
 				0C54A3CE223697FD00805627 /* CreateTableViewCell.swift in Sources */,
+				0C54A3D9223774BF00805627 /* TableDataSource.swift in Sources */,
 				0C32486021FCA57F00D26EDC /* TodoListTableViewController.swift in Sources */,
+				0C54A3D32237735000805627 /* CategoryCollectionTableViewData.swift in Sources */,
+				0C54A3D52237739D00805627 /* CategoryCellType.swift in Sources */,
 				0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */,
 				0C1F7534221C47C100461A10 /* CategoryModel.swift in Sources */,
 				0C3248622201EF0E00D26EDC /* UIBarButtonItem+extension.swift in Sources */,
