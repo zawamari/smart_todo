@@ -32,7 +32,7 @@ extension CategoryCollectionViewCell {
         categoryNameLabel.text = name
         if let count = tasks {
             tasksLabel.text = String(count) + " tasks"
-            categoryIconImageView.image = UIImage.fontAwesomeIcon(name: .circle, style: .solid, textColor: skygray, size: CGSize(width: 20, height: 20))
+//            categoryIconImageView.image = UIImage.fontAwesomeIcon(name: .circle, style: .solid, textColor: skygray, size: CGSize(width: 20, height: 20)) // いまは一旦消しとく
         }
     }
 }
