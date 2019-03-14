@@ -83,11 +83,11 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if let cell = cell as? CategoryCollectionViewCell { //todo nest
                 if indexPath.row == 0 {
-                    cell.setupCell(name: "ALL", tasks: allCategoryItemCount(), doneTasks: 0 )
+                    cell.setupCell(name: "ALL", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
                 } else {
                     if let title = categoryList?[indexPath.row].categoryTitle ,
                         let categoryId = categoryList?[indexPath.row].id {
-                        cell.setupCell(name: title, tasks: categoryItemCount(categoryId: categoryId), doneTasks: 0)
+                        cell.setupCell(name: title, tasks: categoryItemCount(categoryId: categoryId), doneTasks: categoryDoneItemCount(categoryId: categoryId))
                     }
                 }
             }
@@ -307,7 +307,15 @@ private extension CategoryViewController {
         return TodoItem().allCount()
     }
     
+    func allCategoryDoneItemCount() -> Int {
+        return TodoItem().allCheckCount()
+    }
+    
     func categoryItemCount(categoryId: Int) -> Int {
         return TodoItem().categoryItemCount(categoryId: categoryId)
+    }
+    
+    func categoryDoneItemCount(categoryId: Int) -> Int {
+        return TodoItem().checkCount(categoryId: categoryId)
     }
 }

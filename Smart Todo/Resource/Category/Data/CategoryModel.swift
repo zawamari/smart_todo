@@ -110,9 +110,23 @@ class TodoItem: Object {
         return realm.objects(TodoItem.self).count
     }
     
+    /// 完了済みitemを全て取得する
+    func allCheckCount() -> Int {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).filter("doneFlg = %@", true).count
+    }
+    
+    /// categoryの持つitem数を取得する
     func categoryItemCount(categoryId: Int) -> Int {
         let realm = try! Realm()
         return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).count
+    }
+    
+    /// 完了済みitemを取得する
+    func checkCount(categoryId: Int) -> Int {
+        let realm = try! Realm()
+        let item = realm.objects(TodoItem.self).filter("categoryId = %@", categoryId)
+        return item.filter("doneFlg = %@", true).count
     }
     
     /// categoryを指定してtodoItemを取得する
