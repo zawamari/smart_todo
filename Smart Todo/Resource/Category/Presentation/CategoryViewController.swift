@@ -12,7 +12,7 @@ import RealmSwift
 class CategoryViewController: UIViewController {
 
     private var realm: Realm!
-    private let category: CategoryItem = CategoryItem()
+    private let categoryItem: CategoryItem = CategoryItem()
     private var categoryList: Results<CategoryItem>!
     private var token: NotificationToken!
     private var categoryCount: Int = 0
@@ -240,7 +240,7 @@ private extension CategoryViewController {
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             if let t = alert.textFields![0].text, !t.isEmpty {
-                self.category.edit(id: id, title: t, beforeItem: beforeItem)
+                self.categoryItem.edit(id: id, title: t, beforeItem: beforeItem)
             }
         })
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
@@ -285,7 +285,7 @@ private extension CategoryViewController {
 private extension CategoryViewController {
     func allCategory() {
         // RealmのTodoリストを取得し，更新を監視
-        categoryList = category.categories()
+        categoryList = categoryItem.categories()
         categoryCount = categoryList.count
         token = categoryList.observe { [weak self] _ in
             self?.tableViewData.refresh(model: self?.categoryCount)
@@ -294,12 +294,12 @@ private extension CategoryViewController {
     }
     
     func addCategoryItem(title: String) {
-        category.register(title: title, priority: false)
+        categoryItem.register(title: title, priority: false)
         allCategory()//苦肉の策　これがないと、カテゴリ追加しても反映されない
     }
     
     func deleteCategoryItem(at index: Int) {
-        categoryList = category.delete(category: categoryList[index])
+        categoryList = categoryItem.delete(category: categoryList[index])
         categoryCount = categoryList.count
     }
 }
