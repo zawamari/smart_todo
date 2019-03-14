@@ -29,6 +29,7 @@
 		0C851A67222D81710095EBFF /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C851A65222D81710095EBFF /* done.png */; };
 		0C947616222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C947615222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift */; };
 		0C947618222ECA4A00461E94 /* TodoRegistrationPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C947617222ECA4A00461E94 /* TodoRegistrationPopup.storyboard */; };
+		0CAA01F1223A903700721F5E /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CAA01F0223A903700721F5E /* close.png */; };
 		0CC42A6322315829002B27DC /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC42A6222315829002B27DC /* cross.png */; };
 		0CC42A6522315958002B27DC /* cross2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC42A6422315958002B27DC /* cross2.png */; };
 		0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */; };
@@ -89,6 +90,7 @@
 		0C851A65222D81710095EBFF /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
 		0C947615222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRegistrationPopupViewController.swift; sourceTree = "<group>"; };
 		0C947617222ECA4A00461E94 /* TodoRegistrationPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoRegistrationPopup.storyboard; sourceTree = "<group>"; };
+		0CAA01F0223A903700721F5E /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		0CC42A6222315829002B27DC /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		0CC42A6422315958002B27DC /* cross2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross2.png; sourceTree = "<group>"; };
 		0CDDE0F221ECC9CB002AFE68 /* Smart Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +217,7 @@
 		0C851A63222D7FA60095EBFF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0CAA01F0223A903700721F5E /* close.png */,
 				0CC42A6222315829002B27DC /* cross.png */,
 				0C851A64222D81710095EBFF /* check.png */,
 				0CC42A6422315958002B27DC /* cross2.png */,
@@ -514,6 +517,7 @@
 				0C851A60222D78C20095EBFF /* TodoListTableViewCell.xib in Resources */,
 				0C32485E21FCA31900D26EDC /* TodoList.storyboard in Resources */,
 				0CC42A6322315829002B27DC /* cross.png in Resources */,
+				0CAA01F1223A903700721F5E /* close.png in Resources */,
 				0CDDE0FD21ECC9CD002AFE68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
