@@ -60,6 +60,8 @@ class TodoRegistrationPopupViewController: UIViewController {
     }
     
     func initializedHiddenSetting() {
+        detailLabel.isHidden = true
+        
         priorityView.isHidden = true
         memoLabel.isHidden = true
         memoTextField.isHidden = true
