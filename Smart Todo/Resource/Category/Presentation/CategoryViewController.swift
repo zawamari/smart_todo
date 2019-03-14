@@ -83,18 +83,18 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if let cell = cell as? CategoryCollectionViewCell { //todo nest
                 if indexPath.row == 0 {
-                    cell.setupCell(name: "ALL", tasks: TodoItem().allCount())
+                    cell.setupCell(name: "ALL", tasks: allCategoryItemCount(), doneTasks: 0 )
                 } else {
                     if let title = categoryList?[indexPath.row].categoryTitle ,
                         let categoryId = categoryList?[indexPath.row].id {
-                        cell.setupCell(name: title, tasks: TodoItem().categoryItemCount(categoryId: categoryId))
+                        cell.setupCell(name: title, tasks: categoryItemCount(categoryId: categoryId), doneTasks: 0)
                     }
                 }
             }
             // 影をつける
             cell.layer.cornerRadius = 10.0
             cell.layer.masksToBounds = false
-            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowColor = UIColor(red: 40/255, green: 34/255, blue: 42/255, alpha: 1.0).cgColor
             cell.layer.shadowOpacity = 0.25
             cell.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
             cell.layer.shadowRadius = 3
@@ -104,7 +104,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             // 影をつける
             cell.layer.cornerRadius = 10.0
             cell.layer.masksToBounds = false
-            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowColor = UIColor(red: 40/255, green: 34/255, blue: 42/255, alpha: 1.0).cgColor
             cell.layer.shadowOpacity = 0.25
             cell.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
             cell.layer.shadowRadius = 3
@@ -301,5 +301,13 @@ private extension CategoryViewController {
     func deleteCategoryItem(at index: Int) {
         categoryList = categoryItem.delete(category: categoryList[index])
         categoryCount = categoryList.count
+    }
+    
+    func allCategoryItemCount()-> Int {
+        return TodoItem().allCount()
+    }
+    
+    func categoryItemCount(categoryId: Int) -> Int {
+        return TodoItem().categoryItemCount(categoryId: categoryId)
     }
 }

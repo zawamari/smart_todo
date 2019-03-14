@@ -36,8 +36,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyb-4f-buh">
-                        <rect key="frame" x="113.5" y="189" width="36.5" height="12"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eaa-EP-56r">
+                        <rect key="frame" x="41.5" y="191" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="IhH-xa-fPZ"/>
+                            <constraint firstAttribute="height" constant="10" id="rqx-uT-NlY"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1P-ab-9mL">
+                        <rect key="frame" x="56.5" y="190" width="35" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xHh-3J-uHR">
+                        <rect key="frame" x="101.5" y="191" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="OAb-I4-ouf"/>
+                            <constraint firstAttribute="width" constant="10" id="Xch-yJ-9Hb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyb-4f-buh">
+                        <rect key="frame" x="116.5" y="191" width="33.5" height="10"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -45,12 +65,19 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="P1P-ab-9mL" firstAttribute="centerY" secondItem="Yyb-4f-buh" secondAttribute="centerY" id="1ea-IT-tuQ"/>
                 <constraint firstItem="o3v-MY-m80" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="20" id="4BF-nO-1rj"/>
                 <constraint firstItem="Yyb-4f-buh" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" constant="-20" id="4dW-bY-mrH"/>
+                <constraint firstItem="eaa-EP-56r" firstAttribute="trailing" secondItem="P1P-ab-9mL" secondAttribute="leading" constant="-5" id="9SC-E0-ylN"/>
                 <constraint firstItem="FPy-8z-7ep" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="F0u-vX-nKb"/>
                 <constraint firstAttribute="bottom" secondItem="FPy-8z-7ep" secondAttribute="bottom" id="HGJ-78-wDN"/>
+                <constraint firstItem="xHh-3J-uHR" firstAttribute="trailing" secondItem="Yyb-4f-buh" secondAttribute="leading" constant="-5" id="M5d-Z2-PKg"/>
                 <constraint firstAttribute="bottom" secondItem="Yyb-4f-buh" secondAttribute="bottom" constant="20" id="MdI-gq-d5t"/>
                 <constraint firstAttribute="trailing" secondItem="FPy-8z-7ep" secondAttribute="trailing" id="P0y-hg-BDc"/>
+                <constraint firstItem="xHh-3J-uHR" firstAttribute="centerY" secondItem="Yyb-4f-buh" secondAttribute="centerY" id="P6a-50-8L8"/>
+                <constraint firstItem="eaa-EP-56r" firstAttribute="centerY" secondItem="Yyb-4f-buh" secondAttribute="centerY" id="RQe-OK-y9q"/>
+                <constraint firstItem="eaa-EP-56r" firstAttribute="bottom" secondItem="FPy-8z-7ep" secondAttribute="bottom" constant="-20" id="d0A-B4-8dY"/>
+                <constraint firstItem="P1P-ab-9mL" firstAttribute="trailing" secondItem="xHh-3J-uHR" secondAttribute="leading" constant="-10" id="ij3-VB-V6q"/>
                 <constraint firstItem="o3v-MY-m80" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" constant="-20" id="lhv-GN-CoG"/>
                 <constraint firstItem="FPy-8z-7ep" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rBp-5J-GAf"/>
                 <constraint firstItem="S4u-bb-BMr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="url-ua-2js"/>
@@ -60,9 +87,12 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="170" height="221"/>
             <connections>
+                <outlet property="allTasksCountLabel" destination="P1P-ab-9mL" id="bd0-b3-WXu"/>
+                <outlet property="allTasksImageView" destination="eaa-EP-56r" id="uMm-gs-Whs"/>
                 <outlet property="categoryIconImageView" destination="o3v-MY-m80" id="PDp-XV-VEm"/>
                 <outlet property="categoryNameLabel" destination="S4u-bb-BMr" id="ycn-Ky-pm5"/>
-                <outlet property="tasksLabel" destination="Yyb-4f-buh" id="W3F-c1-IZW"/>
+                <outlet property="doneTasksImageView" destination="xHh-3J-uHR" id="qtO-AR-w3P"/>
+                <outlet property="doneTasksLabel" destination="Yyb-4f-buh" id="yMf-D3-pQY"/>
             </connections>
             <point key="canvasLocation" x="-3" y="65"/>
         </collectionViewCell>
