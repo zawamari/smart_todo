@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import StoreKit
 
 class CategoryViewController: UIViewController {
 
@@ -62,6 +63,28 @@ class CategoryViewController: UIViewController {
         longPressRecognizer.allowableMovement = 10
         longPressRecognizer.minimumPressDuration = 0.5
         categorycollectionView.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super .viewDidAppear(true)
+        if showReview() {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
+    private func showReview() -> Bool {
+        let userDefault = UserDefaults.standard
+        // 表示済みだったら戻る
+        if userDefault.bool(forKey: "shown") {
+            return false
+        }
+        
+        let count = userDefault.integer(forKey: "lunchCount")
+        if count > 10 {
+            userDefault.set(true, forKey: "shown")
+            return true
+        }
+        return false
     }
     
     func reload() {

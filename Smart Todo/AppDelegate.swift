@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(1)
         
         firstLunchSetting()
+        lunchCountUp()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
@@ -54,6 +55,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDefault.set(false, forKey: "firstLaunch")
             defaultCategoryRegist()
         }
+    }
+    
+    private func lunchCountUp() {
+        let userDefault = UserDefaults.standard
+        if !userDefault.bool(forKey: "lunchCount") {
+            let userDefault = UserDefaults.standard
+            let dict = ["lunchCount": 0]
+            userDefault.register(defaults: dict)
+            
+            let dict2 = ["shown": false]
+            userDefault.register(defaults: dict2)
+        }
+
+        // 表示済みだったらカウントしない
+        if userDefault.bool(forKey: "shown") {
+            return
+        }
+        var count = userDefault.integer(forKey: "lunchCount")
+        count = count + 1
+        userDefault.set(count, forKey: "lunchCount")
     }
     
     private func defaultCategoryRegist() {
