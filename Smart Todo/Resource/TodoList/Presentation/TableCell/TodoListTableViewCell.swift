@@ -25,19 +25,7 @@ class TodoListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backView.layer.borderColor = UIColor.gray.cgColor
-        backView.layer.borderWidth = 0.5
-        backView.layer.cornerRadius = 6.0
-        backView.clipsToBounds = true
-        
-        // 影をつける
-//        backView.layer.cornerRadius = 10.0
-//        backView.layer.masksToBounds = false
-//        backView.layer.shadowColor = UIColor.black.cgColor
-//        backView.layer.shadowOpacity = 0.25
-//        backView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-//        backView.layer.shadowRadius = 3
-        
+
         let check = UITapGestureRecognizer(target: self, action: #selector(tapCheck(_:)))
         tapView.addGestureRecognizer(check)
         
@@ -54,9 +42,9 @@ class TodoListTableViewCell: UITableViewCell {
         titleLabel.text = item.todoTitle
         
         if item.doneFlg {
-            checkImageView.image = UIImage(named:"done.png")
+            setDoneDesign()
         } else {
-            checkImageView.image = UIImage(named:"check.png")
+            setCheckDesign()
         }
         titleLabelDecorate(doneFlg: item.doneFlg)
         self.todoItem = item
@@ -71,13 +59,23 @@ class TodoListTableViewCell: UITableViewCell {
     @IBAction func tapCheck(_: UIGestureRecognizer) {
         guard let item = self.todoItem else { return }
         if item.doneFlg {
-            checkImageView.image = UIImage(named:"check.png")
+            self.setCheckDesign()
             self.tapCheckImage(item: item, flg: false)
         } else {
-            checkImageView.image = UIImage(named:"done.png")
+            self.setDoneDesign()
             self.tapCheckImage(item: item, flg: true)
         }
         self.titleLabelDecorate(doneFlg: item.doneFlg)
+    }
+    
+    func setDoneDesign() {
+        checkImageView.image = UIImage(named:"done.png")
+        titleLabel.textColor = UIColor.lightGray
+    }
+    
+    func setCheckDesign() {
+        titleLabel.textColor = UIColor.black
+        checkImageView.image = UIImage(named:"check.png")
     }
     
     func titleLabelDecorate(doneFlg: Bool) {
