@@ -824,7 +824,8 @@
 			baseConfigurationReference = F701DF93A6EFAFBF7272EDC4 /* Pods-Smart Todo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2KLTJC3963;
 				INFOPLIST_FILE = "Smart Todo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -834,6 +835,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mimirudo.Smart-Todo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Develop Smart-Todo";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -844,7 +846,8 @@
 			baseConfigurationReference = C44535BB1FE57F5EB78642ED /* Pods-Smart Todo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2KLTJC3963;
 				INFOPLIST_FILE = "Smart Todo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -854,6 +857,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mimirudo.Smart-Todo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "AdHoc Smart-Todo";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

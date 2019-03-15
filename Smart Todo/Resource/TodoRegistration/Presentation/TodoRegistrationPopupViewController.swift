@@ -132,7 +132,7 @@ extension TodoRegistrationPopupViewController {
         // todolistのセット
         let emp = TodoItem()
         emp.todoTitle = title
-        emp.priority = true
+        emp.priority = 3
         emp.categoryId = self.categoryId
         emp.id = emp.incrementId()
         

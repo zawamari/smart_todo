@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let category = CategoryItem()
             category.categoryTitle = "All"
             category.canDeleteFlg = true
-            category.priority = true
+            category.priority = 3
             
             realm.add(category)
         }

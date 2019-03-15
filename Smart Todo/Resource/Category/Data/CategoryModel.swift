@@ -15,7 +15,7 @@ class CategoryItem: Object {
     @objc dynamic var categoryTitle = ""
     @objc dynamic var canDeleteFlg = false
     @objc dynamic var createdAt = Date()
-    @objc dynamic var priority = false
+    @objc dynamic var priority: Int = 3
     
     override static func primaryKey() -> String? {
         return "id"
@@ -38,7 +38,7 @@ class CategoryItem: Object {
         return realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
     }
     
-    func register(title: String, priority: Bool) {// Todo: 後でBoolを返却しても良いかも
+    func register(title: String, priority: Int) {// Todo: 後でBoolを返却しても良いかも
         let realm = try! Realm()
         try! realm.write {
             let id = self.incrementId()
@@ -77,8 +77,9 @@ class TodoItem: Object {
     @objc dynamic var id = 0
     @objc dynamic var categoryId = 0
     @objc dynamic var todoTitle = ""
-    @objc dynamic var priority = false
+    @objc dynamic var priority: Int = 3
     @objc dynamic var createdAt = Date()
+    @objc dynamic var deadlineDate: Data? = nil
     @objc dynamic var url: String = ""
     @objc dynamic var memo: String = ""
     @objc dynamic var doneFlg: Bool = false

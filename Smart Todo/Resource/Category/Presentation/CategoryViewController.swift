@@ -317,7 +317,7 @@ private extension CategoryViewController {
     }
     
     func addCategoryItem(title: String) {
-        categoryItem.register(title: title, priority: false)
+        categoryItem.register(title: title, priority: 3)
         allCategory()//苦肉の策　これがないと、カテゴリ追加しても反映されない
     }
     
