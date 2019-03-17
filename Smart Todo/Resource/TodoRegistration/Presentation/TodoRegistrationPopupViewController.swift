@@ -105,6 +105,7 @@ class TodoRegistrationPopupViewController: UIViewController {
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.locale = Locale.current
         return formatter.string(from: now as Date)
     }
     
@@ -129,7 +130,7 @@ class TodoRegistrationPopupViewController: UIViewController {
         
         let datePickerView:UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePicker.Mode.date
-        datePickerView.timeZone = NSTimeZone.local
+        datePickerView.timeZone = TimeZone.current
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
         
@@ -210,18 +211,33 @@ extension TodoRegistrationPopupViewController {
         // titleから登録したい親カテゴリを抽出
         let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
         
-        // todolistのセット
-        let emp = TodoItem()
-        emp.todoTitle = title
-        emp.priority = 3
-        emp.categoryId = self.categoryId
-        emp.id = emp.incrementId()
-        
+        // todolistのセット 必須項目
+        let item = TodoItem()
+        item.todoTitle = title
+        item.categoryId = self.categoryId
+        item.id = item.incrementId()
+        // 任意項目
+        item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
+        item.deadlineDate = toDate(dateString: deadlineTextField.text)
+        item.memo = memoTextField.text ?? ""
+        item.url = urlTextField.text ?? ""
+
         // 登録
         try! realm.write {
-            category?.todo.append(emp)
+            category?.todo.append(item)
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func toDate(dateString: String?)-> Date? {
+        guard let dateString = dateString else { return nil }
+        let dateFormater = DateFormatter()
+        dateFormater.timeZone = TimeZone.current
+        dateFormater.locale = Locale.current
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let date = dateFormater.date(from: dateString)
+        // http://tm-b.hatenablog.com/entry/2019/02/12/234518 9時間ずれる問題
+        return date
     }
     
     private func validation() -> Bool? {
