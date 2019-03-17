@@ -23,8 +23,7 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var deadlineView: UIView!
-    @IBOutlet weak var deadlineDateLabel: UILabel!
-    @IBOutlet weak var deadlineSwitch: UISwitch!
+    @IBOutlet weak var deadlineTextField: UITextField!
     @IBOutlet weak var closeImageView: UIImageView!
     
     let wakaba = UIColor(red: 167/255, green: 219/255, blue: 162/255, alpha: 1.0)
@@ -32,20 +31,13 @@ class TodoRegistrationPopupViewController: UIViewController {
     let shinbashi = UIColor(red: 116/255, green: 169/255, blue: 214/255, alpha: 1.0)
     
     var categoryId: Int = 0
+    var datePicker: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        modalBackgroundView.layer.cornerRadius = 6.0
-        modalBackgroundView.clipsToBounds = true
-        
-        createBackgroundLabel.layer.cornerRadius = 6.0
-        createBackgroundLabel.clipsToBounds = true
-        
-        // キーボード表示させる
-        titleTextField.becomeFirstResponder()
-        
+
+        initialized()
         addGesture()
         sliderView()
         initializedHiddenSetting()
@@ -61,6 +53,32 @@ class TodoRegistrationPopupViewController: UIViewController {
         titleTextField.resignFirstResponder()
         memoTextField.resignFirstResponder()
         urlTextField.resignFirstResponder()
+        deadlineTextField.resignFirstResponder()
+    }
+    
+    func initialized() {
+        modalBackgroundView.layer.cornerRadius = 6.0
+        modalBackgroundView.clipsToBounds = true
+        
+        createBackgroundLabel.layer.cornerRadius = 6.0
+        createBackgroundLabel.clipsToBounds = true
+        
+        // キーボード表示させる
+        titleTextField.becomeFirstResponder()
+        
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "todo title", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        memoTextField.attributedPlaceholder = NSAttributedString(string: "memo", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        
+        deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
+    }
+    
+    func getToday(format:String = "yyyy/MM/dd") -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: now as Date)
     }
     
     func initializedHiddenSetting() {
@@ -103,6 +121,42 @@ class TodoRegistrationPopupViewController: UIViewController {
     @objc func sliderChange(sender: UISlider){
         priorityLabelSetting(level: Int(sender.value))
         priorityLevelLabel.text = String(Int(sender.value))
+    }
+    
+    //テキストフィールドが選択されたらdatepickerを表示
+    @IBAction func textFieldEditing(sender: UITextField) {
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePicker.Mode.date
+        datePickerView.timeZone = NSTimeZone.local
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
+        
+        //datepicker上のtoolbarのdoneボタン
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let clearlItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearBtn))
+        let toolBarBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtn))
+        toolBar.items = [clearlItem, toolBarBtn]
+        deadlineTextField.inputAccessoryView = toolBar
+    }
+    
+    //datepickerが選択されたらtextfieldに表示
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd";
+        deadlineTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    //toolbarのdoneボタン
+    @objc func clearBtn(){
+        deadlineTextField.text = nil
+        deadlineTextField.resignFirstResponder()
+    }
+    
+    //toolbarのdoneボタン
+    @objc func doneBtn(){
+        deadlineTextField.resignFirstResponder()
     }
     
     @IBAction func tapCloseImageView(_: UIGestureRecognizer) {
