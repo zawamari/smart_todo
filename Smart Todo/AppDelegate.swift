@@ -27,6 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let naviCon: UINavigationController = UINavigationController(rootViewController:viewController)
         window?.rootViewController = naviCon
         window?.makeKeyAndVisible()
+        
+        let config = Realm.Configuration(
+            schemaVersion: 2,
+            
+            //スキーマのバージョンが上記のものよりも低い/を開くときに自動的に呼び出されるブロックを設定する
+            migrationBlock: { migration, oldSchemaVersion in
+                //まだ何も移行していないので、oldSchemaVersion == 0
+                if (oldSchemaVersion < 1) {
+                    // Realmは新しいプロパティと削除されたプロパティを自動的に検出します
+                    //そして自動的にディスク上のスキーマを更新する
+                }})
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
         return true
     }
 

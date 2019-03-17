@@ -79,7 +79,7 @@ class TodoItem: Object {
     @objc dynamic var todoTitle = ""
     @objc dynamic var priority: Int = 3
     @objc dynamic var createdAt = Date()
-    @objc dynamic var deadlineDate: Data? = nil
+    @objc dynamic var deadlineDate: Date? = nil
     @objc dynamic var url: String = ""
     @objc dynamic var memo: String = ""
     @objc dynamic var doneFlg: Bool = false
