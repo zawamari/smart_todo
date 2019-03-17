@@ -18,15 +18,18 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var priorityView: UIView!
-    @IBOutlet weak var prioritySwitch: UISwitch!
-    @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var prioritySlider: UISlider!
+    @IBOutlet weak var priorityLevelLabel: UILabel!
     @IBOutlet weak var memoTextField: UITextField!
-    @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var deadlineView: UIView!
     @IBOutlet weak var deadlineDateLabel: UILabel!
     @IBOutlet weak var deadlineSwitch: UISwitch!
     @IBOutlet weak var closeImageView: UIImageView!
+    
+    let wakaba = UIColor(red: 167/255, green: 219/255, blue: 162/255, alpha: 1.0)
+    let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
+    let shinbashi = UIColor(red: 116/255, green: 169/255, blue: 214/255, alpha: 1.0)
     
     var categoryId: Int = 0
     
@@ -44,6 +47,7 @@ class TodoRegistrationPopupViewController: UIViewController {
         titleTextField.becomeFirstResponder()
         
         addGesture()
+        sliderView()
         initializedHiddenSetting()
     }
     
@@ -60,12 +64,10 @@ class TodoRegistrationPopupViewController: UIViewController {
     }
     
     func initializedHiddenSetting() {
-        detailLabel.isHidden = true
+        detailLabel.isHidden = false
         
         priorityView.isHidden = true
-        memoLabel.isHidden = true
         memoTextField.isHidden = true
-        urlLabel.isHidden = true
         urlTextField.isHidden = true
         deadlineView.isHidden = true
     }
@@ -78,6 +80,31 @@ class TodoRegistrationPopupViewController: UIViewController {
         detailLabel.addGestureRecognizer(detailTap)
     }
     
+    func sliderView() {
+        prioritySlider.minimumValue = 1
+        prioritySlider.maximumValue = 5
+        prioritySlider.tintColor = wakaba
+        priorityLabelSetting(level: 3)
+        prioritySlider.value = 3 // dataから取得する
+        prioritySlider.addTarget(self, action: #selector(sliderChange(sender: )), for: UIControl.Event.valueChanged)
+    }
+    
+    func priorityLabelSetting(level: Int) {
+        if level < 3 {
+            priorityLevelLabel.textColor = shinbashi
+        } else if level == 3 {
+            priorityLevelLabel.textColor = wakaba
+        } else {
+            priorityLevelLabel.textColor = koubai
+        }
+    }
+    
+    // スライダー動かした時に実行する処理
+    @objc func sliderChange(sender: UISlider){
+        priorityLabelSetting(level: Int(sender.value))
+        priorityLevelLabel.text = String(Int(sender.value))
+    }
+    
     @IBAction func tapCloseImageView(_: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -85,9 +112,7 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBAction func tapOpenDetail(_: UIGestureRecognizer) {
         UIView.animate(withDuration: 0.3) {
             self.priorityView.isHidden = false
-            self.memoLabel.isHidden = false
             self.memoTextField.isHidden = false
-            self.urlLabel.isHidden = false
             self.urlTextField.isHidden = false
             self.deadlineView.isHidden = false
             self.detailLabel.isHidden = true
