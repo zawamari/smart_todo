@@ -39,7 +39,7 @@ class TodoRegistrationPopupViewController: UIViewController {
 
         initialized()
         addGesture()
-        sliderView()
+        initializedSliderView()
         initializedHiddenSetting()
     }
     
@@ -71,14 +71,6 @@ class TodoRegistrationPopupViewController: UIViewController {
         urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         
-        deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
-    }
-    
-    func getToday(format:String = "yyyy/MM/dd") -> String {
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: now as Date)
     }
     
     func initializedHiddenSetting() {
@@ -89,22 +81,31 @@ class TodoRegistrationPopupViewController: UIViewController {
         urlTextField.isHidden = true
         deadlineView.isHidden = true
     }
-    
-    func addGesture() {
-        let closeImageViewTap = UITapGestureRecognizer(target: self, action: #selector(tapCloseImageView(_:)))
-        closeImageView.addGestureRecognizer(closeImageViewTap)
-        
-        let detailTap = UITapGestureRecognizer(target: self, action: #selector(tapOpenDetail(_:)))
-        detailLabel.addGestureRecognizer(detailTap)
-    }
-    
-    func sliderView() {
+
+    func initializedSliderView() {
         prioritySlider.minimumValue = 1
         prioritySlider.maximumValue = 5
         prioritySlider.tintColor = wakaba
         priorityLabelSetting(level: 3)
         prioritySlider.value = 3 // dataから取得する
         prioritySlider.addTarget(self, action: #selector(sliderChange(sender: )), for: UIControl.Event.valueChanged)
+    }
+
+    func addGesture() {
+        let closeImageViewTap = UITapGestureRecognizer(target: self, action: #selector(tapCloseImageView(_:)))
+        closeImageView.addGestureRecognizer(closeImageViewTap)
+        
+        let detailTap = UITapGestureRecognizer(target: self, action: #selector(tapOpenDetail(_:)))
+        detailLabel.addGestureRecognizer(detailTap)
+        
+        deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
+    }
+
+    func getToday(format:String = "yyyy/MM/dd") -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: now as Date)
     }
     
     func priorityLabelSetting(level: Int) {
@@ -158,7 +159,8 @@ class TodoRegistrationPopupViewController: UIViewController {
     @objc func doneBtn(){
         deadlineTextField.resignFirstResponder()
     }
-    
+
+    //modalを閉じる
     @IBAction func tapCloseImageView(_: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
