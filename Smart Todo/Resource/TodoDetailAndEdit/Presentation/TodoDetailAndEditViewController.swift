@@ -102,7 +102,8 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         
         updateLabel.layer.cornerRadius = 5.0
         updateLabel.layer.masksToBounds = true
-
+        let updateGesture = UITapGestureRecognizer(target: self, action: #selector(update))
+        updateLabel.addGestureRecognizer(updateGesture)
     }
     
     static func make() -> TodoDetailAndEditViewController {
@@ -163,5 +164,51 @@ private extension TodoDetailAndEditViewController {
     
     func deleteCategoryItem(at index: Int) {
 //        todoList = TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
+    }
+    
+    @objc private func update() {
+        
+        guard let title = todoTitleTextView.text else {
+            showAlert(desc: "title is nothing")
+            return
+        }
+        
+        if title.isEmpty {
+            showAlert(desc: "title is nothing")
+            return
+        }
+        
+        // todolistのセット 必須項目
+        let item = TodoItem()
+        item.todoTitle = title
+        item.categoryId = self.categoryId
+        item.id = todoDetail[0].id
+        // 任意項目
+        item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
+        item.deadlineDate = toDate(dateString: deadlineLabel.text)
+        item.memo = memoTextView.text ?? ""
+        item.url = urlTextView.text ?? ""
+        
+        // 登録
+        item.updateItem(beforeItem: item)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func showAlert(desc: String) {
+        let alert: UIAlertController = UIAlertController(title: "Error!", message: desc, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func toDate(dateString: String?)-> Date? {
+        guard let dateString = dateString else { return nil }
+        let dateFormater = DateFormatter()
+        dateFormater.timeZone = TimeZone.current
+        dateFormater.locale = Locale.current
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let date = dateFormater.date(from: dateString)
+        // http://tm-b.hatenablog.com/entry/2019/02/12/234518 9時間ずれる問題
+        return date
     }
 }

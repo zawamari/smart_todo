@@ -159,7 +159,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-0M-6Wt">
                                                 <rect key="frame" x="0.0" y="0.0" width="147.5" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-gg-Du9" userLabel="Delete Label">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-gg-Du9" userLabel="Delete Label">
                                                         <rect key="frame" x="20" y="0.0" width="107.5" height="40"/>
                                                         <color key="backgroundColor" red="0.89892001772335028" green="0.89892001772335028" blue="0.89892001772335028" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -181,7 +181,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4R-Cw-ILv">
                                                 <rect key="frame" x="177.5" y="0.0" width="147.5" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU5-zT-Dqh" userLabel="Update Label">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU5-zT-Dqh" userLabel="Update Label">
                                                         <rect key="frame" x="20" y="0.0" width="107.5" height="40"/>
                                                         <color key="backgroundColor" red="0.85571489514081456" green="0.8961373730964467" blue="0.85571781065004204" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
