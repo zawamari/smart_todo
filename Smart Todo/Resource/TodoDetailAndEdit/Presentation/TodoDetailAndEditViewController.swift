@@ -7,14 +7,34 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionable {
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var todoDetailView: UIView!
+    @IBOutlet weak var draggerImageView: UIImageView!
+    @IBOutlet weak var todoTitleView: UIView!
+    @IBOutlet weak var todoTitleTextView: UITextView!
+
+    @IBOutlet weak var priorityImageView: UIImageView!
+    @IBOutlet weak var priorityLevelLabel: UILabel!
+     @IBOutlet weak var deadlineImageView: UIImageView!
+    @IBOutlet weak var deadlineLabel: UILabel!
+
+    @IBOutlet weak var memoTextView: UITextView!
+    @IBOutlet weak var urlTextView: UITextView!
+    @IBOutlet weak var updateLabel: UILabel!
+    @IBOutlet weak var deleteLabel: UILabel!
     var percentThreshold: CGFloat = 0.3
     
     var interactor = OverCurrentTransitioningInteractor()
+    
+    private var realm: Realm!
+    var categoryId: Int = 0
+    var todoId = 0
+    private var todoDetail: Results<TodoItem>!
+    
+    let araigaki = UIColor(red: 223/255, green: 188/255, blue: 159/255, alpha: 1.0) //洗柿
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -32,17 +52,56 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        initRealm()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        initializedView()
+    }
+    
+    /// textfield以外をタップしたらキーボードを閉じる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        todoTitleTextView.resignFirstResponder()
+        urlTextView.resignFirstResponder()
+        memoTextView.resignFirstResponder()
     }
     
     private func setupViews() {
-        headerView.layer.cornerRadius = 12.0
-        headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        todoDetailView.layer.cornerRadius = 12.0
+        todoDetailView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         let headerGesture = UIPanGestureRecognizer(target: self, action: #selector(headerDidScroll(_:)))
-        headerView.addGestureRecognizer(headerGesture)
+        todoDetailView.addGestureRecognizer(headerGesture)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(backgroundDidTap))
         backView.addGestureRecognizer(gesture)
-        todoDetailView.addGestureRecognizer(gesture)
+
+    }
+    
+    private func initializedView() {
+        draggerImageView.image = UIImage.fontAwesomeIcon(name: .caretDown, style: .solid, textColor: .gray, size: CGSize(width: 60, height: 5))
+        todoTitleTextView.text = todoDetail[0].todoTitle
+        priorityLevelLabel.text = String(todoDetail[0].priority)
+        priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        if let date = todoDetail[0].deadlineDate {
+            deadlineLabel.text = formatter.string(from: date)
+
+        }
+        memoTextView.text = todoDetail[0].memo
+        memoTextView.layer.cornerRadius = 5.0
+        
+        urlTextView.text = todoDetail[0].url
+        urlTextView.layer.cornerRadius = 5.0
+        
+        deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        deleteLabel.layer.cornerRadius = 5.0
+        deleteLabel.layer.masksToBounds = true
+        deleteLabel.textColor = araigaki
+        
+        updateLabel.layer.cornerRadius = 5.0
+        updateLabel.layer.masksToBounds = true
 
     }
     
@@ -91,5 +150,18 @@ extension TodoDetailAndEditViewController: UIViewControllerTransitioningDelegate
         case .none, .shouldStart:
             return nil
         }
+    }
+}
+
+/// RealmSwift
+private extension TodoDetailAndEditViewController {
+    
+    func initRealm() {
+        realm = try! Realm()
+        todoDetail = TodoItem().todoItem(id: todoId)
+    }
+    
+    func deleteCategoryItem(at index: Int) {
+//        todoList = TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
     }
 }

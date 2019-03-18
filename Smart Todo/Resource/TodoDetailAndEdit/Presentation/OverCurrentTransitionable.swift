@@ -52,6 +52,5 @@ extension OverCurrentTransitionable {
         default:
             break
         }
-        print("Interactor State: \(interactor.state)")
     }
 }

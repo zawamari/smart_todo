@@ -71,7 +71,7 @@ class TodoListTableViewController: UITableViewController {
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .todo:
-            buttonDidTap()
+            buttonDidTap(index: indexPath.row)
         case .create:
             createNewTodo()
         }
@@ -107,8 +107,10 @@ class TodoListTableViewController: UITableViewController {
 }
 
 private extension TodoListTableViewController {
-    func buttonDidTap() {
+    func buttonDidTap(index: Int) {
         let vc = TodoDetailAndEditViewController.make()
+        vc.categoryId = todoList[index].categoryId
+        vc.todoId = todoList[index].id
         present(vc, animated: true, completion: nil)
     }
     

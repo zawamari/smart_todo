@@ -136,6 +136,11 @@ class TodoItem: Object {
         return realm.objects(TodoItem.self).filter("categoryId = %@", categoryId).sorted(byKeyPath: "createdAt", ascending: false)
     }
     
+    func todoItem(id: Int) -> Results<TodoItem> {
+        let realm = try! Realm()
+        return realm.objects(TodoItem.self).filter("id = %@", id)
+    }
+    
     /// todoItemの完了フラグを更新する
     public func changeDoneFlg(beforeItem: TodoItem, flg: Bool) {
         let realm = try! Realm()
