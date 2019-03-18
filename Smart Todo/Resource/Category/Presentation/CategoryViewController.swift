@@ -139,7 +139,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .category:
-            let vc = TodoListTableViewController()
+            let vc = TodoListTableViewController.make()
             vc.navigationTitle = categoryList?[indexPath.row].categoryTitle
             if let cid = categoryList?[indexPath.row].id {
                 vc.categoryId = cid

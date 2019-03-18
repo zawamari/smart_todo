@@ -18,7 +18,6 @@ final class TodoListTableViewData {
                 cellTypes.append(.todo)
             }
         }
-        cellTypes.append(.create)
     }
 }
 

@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         try! realm.write {
             let category = CategoryItem()
-            category.categoryTitle = "All"
+            category.categoryTitle = "All tasks"
             category.canDeleteFlg = true
             category.priority = 3
             

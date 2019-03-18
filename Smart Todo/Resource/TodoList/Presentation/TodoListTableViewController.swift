@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TodoListTableViewController: UITableViewController {
+class TodoListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var navigationTitle: String? = nil
     var categoryId: Int = 0
@@ -19,13 +19,16 @@ class TodoListTableViewController: UITableViewController {
     private var todoList: Results<TodoItem>!
     private var token: NotificationToken!
     
+    @IBOutlet weak var tableView: UITableView!
     private var tableViewData: TodoListTableViewData = TodoListTableViewData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         initRealm()
-
         // NavigationBar Setting
         self.title = navigationTitle
         
@@ -40,15 +43,15 @@ class TodoListTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData.rowCount(section: section)
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
@@ -67,7 +70,7 @@ class TodoListTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .todo:
@@ -77,11 +80,11 @@ class TodoListTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .todo:
@@ -93,10 +96,10 @@ class TodoListTableViewController: UITableViewController {
             break
         }
     }
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -105,6 +108,14 @@ class TodoListTableViewController: UITableViewController {
     }
 
 }
+
+extension TodoListTableViewController {
+    static func make() -> TodoListTableViewController {
+        let storyboard = UIStoryboard(name: "TodoList", bundle: nil)
+        return storyboard.instantiateInitialViewController() as! TodoListTableViewController
+    }
+}
+
 
 private extension TodoListTableViewController {
     func buttonDidTap(index: Int) {
@@ -159,6 +170,7 @@ private extension TodoListTableViewController {
     }
     
     func deleteCategoryItem(at index: Int) {
-        todoList = TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
+        // このcategoryIdは削除したいtodoのカテゴリ
+        todoList = TodoItem().deleteItem(categoryId: todoList[index].categoryId, todoId: todoList[index].id)
     }
 }
