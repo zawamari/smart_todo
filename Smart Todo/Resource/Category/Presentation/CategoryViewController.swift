@@ -106,7 +106,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if let cell = cell as? CategoryCollectionViewCell { //todo nest
                 if indexPath.row == 0 {
-                    cell.setupCell(name: "ALL", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
+                    cell.setupCell(name: "ALL tasks", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
                 } else {
                     if let title = categoryList?[indexPath.row].categoryTitle ,
                         let categoryId = categoryList?[indexPath.row].id {
