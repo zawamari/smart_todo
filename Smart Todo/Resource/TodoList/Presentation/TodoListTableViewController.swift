@@ -20,6 +20,10 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
     private var token: NotificationToken!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var addImageView: UIImageView!
+    @IBOutlet weak var sortImageView: UIImageView!
+    
     private var tableViewData: TodoListTableViewData = TodoListTableViewData()
 
     override func viewDidLoad() {
@@ -31,15 +35,21 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
         initRealm()
         // NavigationBar Setting
         self.title = navigationTitle
-        
-        let button: UIBarButtonItem = UIBarButtonItem(barButtonHiddenItem: .Back, target: self, action: #selector(back))
-        self.navigationItem.setLeftBarButtonItems([button], animated: true)
-        let createButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickCreateCategoryButton))
-        self.navigationItem.setRightBarButtonItems([createButton], animated: true)
-        
+
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
         tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
         tableView.separatorStyle = .none
+        
+        backImageView.image = UIImage.fontAwesomeIcon(name: .angleLeft, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        let back = UITapGestureRecognizer(target: self, action: #selector(back(_:)))
+        backImageView.addGestureRecognizer(back)
+        
+        
+        let add = UITapGestureRecognizer(target: self, action: #selector(clickCreateCategoryButton(_:)))
+        addImageView.addGestureRecognizer(add)
+        addImageView.image = UIImage.fontAwesomeIcon(name: .plusCircle, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        
+        sortImageView.image = UIImage.fontAwesomeIcon(name: .sortNumericDown, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
     }
 
     // MARK: - Table view data source
@@ -125,12 +135,12 @@ private extension TodoListTableViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    @objc func back(){
+    @objc func back(_: UIGestureRecognizer){
         self.navigationController?.popViewController(animated: true)
     }
     
     /// Create New todo item
-    @objc func clickCreateCategoryButton(){
+    @objc func clickCreateCategoryButton(_: UIGestureRecognizer){
         createNewTodo()
     }
     
