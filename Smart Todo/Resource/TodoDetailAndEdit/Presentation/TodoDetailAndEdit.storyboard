@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1A5-UD-7zz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Todo Detail And Edit View Controller-->
+        <scene sceneID="IbM-Vt-D9M">
+            <objects>
+                <viewController id="1A5-UD-7zz" customClass="TodoDetailAndEditViewController" customModule="Smart_Todo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4UB-7g-O8s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-24-9zN">
+                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="udx-Mp-lan"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLN-D2-NSZ" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="220" width="375" height="80"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHo-QB-uf6" userLabel="Dragger">
+                                        <rect key="frame" x="157.5" y="15" width="60" height="5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="Q35-WO-fch"/>
+                                            <constraint firstAttribute="width" constant="60" id="oOx-uk-wSh"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="todo title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atn-9G-cV8">
+                                        <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="atn-9G-cV8" secondAttribute="trailing" id="0Wi-Nc-BoP"/>
+                                    <constraint firstItem="IHo-QB-uf6" firstAttribute="top" secondItem="VLN-D2-NSZ" secondAttribute="top" constant="15" id="Cef-hQ-HxO"/>
+                                    <constraint firstItem="IHo-QB-uf6" firstAttribute="centerX" secondItem="VLN-D2-NSZ" secondAttribute="centerX" id="WLV-Pa-hCI"/>
+                                    <constraint firstAttribute="bottom" secondItem="atn-9G-cV8" secondAttribute="bottom" id="Y4J-X0-biS"/>
+                                    <constraint firstAttribute="height" constant="80" id="cXB-f7-brY"/>
+                                    <constraint firstItem="atn-9G-cV8" firstAttribute="top" secondItem="VLN-D2-NSZ" secondAttribute="top" constant="20" id="r3v-Xe-pqj"/>
+                                    <constraint firstItem="atn-9G-cV8" firstAttribute="leading" secondItem="VLN-D2-NSZ" secondAttribute="leading" id="txs-dc-cNT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-ph-ZcL">
+                                <rect key="frame" x="0.0" y="300" width="375" height="367"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VLN-D2-NSZ" firstAttribute="leading" secondItem="pxg-XO-qrd" secondAttribute="leading" id="HGc-LT-9wl"/>
+                            <constraint firstItem="pxg-XO-qrd" firstAttribute="trailing" secondItem="jp3-ph-ZcL" secondAttribute="trailing" id="Hs6-F2-27N"/>
+                            <constraint firstAttribute="bottom" secondItem="jp3-ph-ZcL" secondAttribute="bottom" id="HsJ-bX-psu"/>
+                            <constraint firstItem="cZg-24-9zN" firstAttribute="top" secondItem="pxg-XO-qrd" secondAttribute="top" id="Rxo-o5-GDU"/>
+                            <constraint firstItem="pxg-XO-qrd" firstAttribute="trailing" secondItem="cZg-24-9zN" secondAttribute="trailing" id="SJW-9a-oOq"/>
+                            <constraint firstItem="jp3-ph-ZcL" firstAttribute="top" secondItem="VLN-D2-NSZ" secondAttribute="bottom" id="StV-T3-O3p"/>
+                            <constraint firstItem="VLN-D2-NSZ" firstAttribute="top" secondItem="cZg-24-9zN" secondAttribute="bottom" id="qjU-Ar-KPa"/>
+                            <constraint firstItem="cZg-24-9zN" firstAttribute="leading" secondItem="pxg-XO-qrd" secondAttribute="leading" id="xMd-QB-hqj"/>
+                            <constraint firstItem="jp3-ph-ZcL" firstAttribute="leading" secondItem="pxg-XO-qrd" secondAttribute="leading" id="xa4-Hn-7c5"/>
+                            <constraint firstItem="pxg-XO-qrd" firstAttribute="trailing" secondItem="VLN-D2-NSZ" secondAttribute="trailing" id="xvd-xB-Xu5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pxg-XO-qrd"/>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="cZg-24-9zN" id="FFV-Ia-axD"/>
+                        <outlet property="headerView" destination="VLN-D2-NSZ" id="qYc-ny-WNj"/>
+                        <outlet property="todoDetailView" destination="jp3-ph-ZcL" id="s70-Vz-AuI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OdU-Uw-kJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="38"/>
+        </scene>
+    </scenes>
+</document>

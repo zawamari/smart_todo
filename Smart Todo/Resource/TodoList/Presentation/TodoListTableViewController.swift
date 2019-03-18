@@ -71,8 +71,7 @@ class TodoListTableViewController: UITableViewController {
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .todo:
-            // そのうち詳細モーダルを出したい
-            break
+            buttonDidTap()
         case .create:
             createNewTodo()
         }
@@ -108,6 +107,11 @@ class TodoListTableViewController: UITableViewController {
 }
 
 private extension TodoListTableViewController {
+    func buttonDidTap() {
+        let vc = TodoDetailAndEditViewController.make()
+        present(vc, animated: true, completion: nil)
+    }
+    
     @objc func back(){
         self.navigationController?.popViewController(animated: true)
     }
