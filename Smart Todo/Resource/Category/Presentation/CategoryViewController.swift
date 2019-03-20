@@ -106,7 +106,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if let cell = cell as? CategoryCollectionViewCell { //todo nest
                 if indexPath.row == 0 {
-                    cell.setupCell(name: "ALL", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
+                    cell.setupCell(name: "ALL tasks", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
                 } else {
                     if let title = categoryList?[indexPath.row].categoryTitle ,
                         let categoryId = categoryList?[indexPath.row].id {
@@ -139,7 +139,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
         let cellType = tableViewData.cellType(index: indexPath)
         switch cellType {
         case .category:
-            let vc = TodoListTableViewController()
+            let vc = TodoListTableViewController.make()
             vc.navigationTitle = categoryList?[indexPath.row].categoryTitle
             if let cid = categoryList?[indexPath.row].id {
                 vc.categoryId = cid
@@ -317,7 +317,7 @@ private extension CategoryViewController {
     }
     
     func addCategoryItem(title: String) {
-        categoryItem.register(title: title, priority: false)
+        categoryItem.register(title: title, priority: 3)
         allCategory()//苦肉の策　これがないと、カテゴリ追加しても反映されない
     }
     

@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 enum TodoListCellType: TableDataType {
-
     
     case todo
     case create
+    case none
     
     func cacheKey() -> String {
         switch self {
@@ -21,6 +21,8 @@ enum TodoListCellType: TableDataType {
             return "todoListItem"
         case .create:
             return "create"
+        case .none:
+            return "none"
         }
     }
     func estimatedHeight() -> CGFloat {
@@ -28,6 +30,8 @@ enum TodoListCellType: TableDataType {
         case .todo:
             return 44.0
         case .create:
+            return 44.0
+        case .none:
             return 44.0
         }
     }

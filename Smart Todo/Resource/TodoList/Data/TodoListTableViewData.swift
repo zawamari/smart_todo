@@ -14,11 +14,16 @@ final class TodoListTableViewData {
         cellTypes.removeAll()
         
         if let count = model {
+            if count == 0 {
+                cellTypes.append(.none)
+                return
+            }
             for _ in 0..<count {
                 cellTypes.append(.todo)
             }
+        } else {
+            
         }
-        cellTypes.append(.create)
     }
 }
 

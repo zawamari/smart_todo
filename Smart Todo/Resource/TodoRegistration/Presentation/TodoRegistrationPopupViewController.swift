@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TodoRegistrationPopupViewController: UIViewController {
+class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var outsideAreaView: UIView!
     @IBOutlet weak var registerStackView: UIStackView!
     @IBOutlet weak var modalBackgroundView: UIView!
@@ -19,30 +19,28 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var priorityView: UIView!
     @IBOutlet weak var prioritySwitch: UISwitch!
-    @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var memoTextField: UITextField!
-    @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var deadlineView: UIView!
-    @IBOutlet weak var deadlineDateLabel: UILabel!
-    @IBOutlet weak var deadlineSwitch: UISwitch!
+    @IBOutlet weak var deadlineTextField: UITextField!
     @IBOutlet weak var closeImageView: UIImageView!
     
+    let wakaba = UIColor(red: 167/255, green: 219/255, blue: 162/255, alpha: 1.0)
+    let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
+    let shinbashi = UIColor(red: 116/255, green: 169/255, blue: 214/255, alpha: 1.0)
+    
     var categoryId: Int = 0
+    var datePicker: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        modalBackgroundView.layer.cornerRadius = 6.0
-        modalBackgroundView.clipsToBounds = true
-        
-        createBackgroundLabel.layer.cornerRadius = 6.0
-        createBackgroundLabel.clipsToBounds = true
-        
-        // キーボード表示させる
-        titleTextField.becomeFirstResponder()
-        
+
+        self.titleTextField.delegate = self
+        self.memoTextField.delegate = self
+        self.urlTextField.delegate = self
+        self.deadlineTextField.delegate = self
+        initialized()
         addGesture()
         initializedHiddenSetting()
     }
@@ -57,27 +55,98 @@ class TodoRegistrationPopupViewController: UIViewController {
         titleTextField.resignFirstResponder()
         memoTextField.resignFirstResponder()
         urlTextField.resignFirstResponder()
+        deadlineTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleTextField.resignFirstResponder()
+        memoTextField.resignFirstResponder()
+        urlTextField.resignFirstResponder()
+        deadlineTextField.resignFirstResponder()
+        return true
+    }
+    
+    func initialized() {
+        modalBackgroundView.layer.cornerRadius = 6.0
+        modalBackgroundView.clipsToBounds = true
+        
+        createBackgroundLabel.layer.cornerRadius = 6.0
+        createBackgroundLabel.clipsToBounds = true
+        
+        // キーボード表示させる
+        titleTextField.becomeFirstResponder()
+        
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "todo title", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        memoTextField.attributedPlaceholder = NSAttributedString(string: "memo", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        prioritySwitch.isOn = false
     }
     
     func initializedHiddenSetting() {
-        detailLabel.isHidden = true
+        detailLabel.isHidden = false
         
         priorityView.isHidden = true
-        memoLabel.isHidden = true
         memoTextField.isHidden = true
-        urlLabel.isHidden = true
         urlTextField.isHidden = true
         deadlineView.isHidden = true
     }
-    
+
     func addGesture() {
         let closeImageViewTap = UITapGestureRecognizer(target: self, action: #selector(tapCloseImageView(_:)))
         closeImageView.addGestureRecognizer(closeImageViewTap)
         
         let detailTap = UITapGestureRecognizer(target: self, action: #selector(tapOpenDetail(_:)))
         detailLabel.addGestureRecognizer(detailTap)
+        
+        deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
+    }
+
+    func getToday(format:String = "yyyy/MM/dd") -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = Locale.current
+        return formatter.string(from: now as Date)
     }
     
+    //テキストフィールドが選択されたらdatepickerを表示
+    @IBAction func textFieldEditing(sender: UITextField) {
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePicker.Mode.date
+        datePickerView.timeZone = TimeZone.current
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
+        
+        //datepicker上のtoolbarのdoneボタン
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let clearlItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearBtn))
+        let toolBarBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtn))
+        toolBar.items = [clearlItem, toolBarBtn]
+        deadlineTextField.inputAccessoryView = toolBar
+    }
+    
+    //datepickerが選択されたらtextfieldに表示
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd";
+        deadlineTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    //toolbarのdoneボタン
+    @objc func clearBtn(){
+        deadlineTextField.text = nil
+        deadlineTextField.resignFirstResponder()
+    }
+    
+    //toolbarのdoneボタン
+    @objc func doneBtn(){
+        deadlineTextField.resignFirstResponder()
+    }
+
+    //modalを閉じる
     @IBAction func tapCloseImageView(_: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -85,10 +154,8 @@ class TodoRegistrationPopupViewController: UIViewController {
     @IBAction func tapOpenDetail(_: UIGestureRecognizer) {
         UIView.animate(withDuration: 0.3) {
             self.priorityView.isHidden = false
-            self.memoLabel.isHidden = false
             self.memoTextField.isHidden = false
-            self.urlLabel.isHidden = false
-            self.urlTextField.isHidden = false
+//            self.urlTextField.isHidden = true // Todo: URLは次のリリースの時にでも。。
             self.deadlineView.isHidden = false
             self.detailLabel.isHidden = true
             self.registerStackView.layoutIfNeeded()
@@ -129,18 +196,33 @@ extension TodoRegistrationPopupViewController {
         // titleから登録したい親カテゴリを抽出
         let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
         
-        // todolistのセット
-        let emp = TodoItem()
-        emp.todoTitle = title
-        emp.priority = true
-        emp.categoryId = self.categoryId
-        emp.id = emp.incrementId()
-        
+        // todolistのセット 必須項目
+        let item = TodoItem()
+        item.todoTitle = title
+        item.categoryId = self.categoryId
+        item.id = item.incrementId()
+        // 任意項目
+        item.priority = prioritySwitch.isOn
+        item.deadlineDate = toDate(dateString: deadlineTextField.text)
+        item.memo = memoTextField.text ?? ""
+//        item.url = urlTextField.text ?? ""
+
         // 登録
         try! realm.write {
-            category?.todo.append(emp)
+            category?.todo.append(item)
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func toDate(dateString: String?)-> Date? {
+        guard let dateString = dateString else { return nil }
+        let dateFormater = DateFormatter()
+        dateFormater.timeZone = TimeZone.current
+        dateFormater.locale = Locale.current
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let date = dateFormater.date(from: dateString)
+        // http://tm-b.hatenablog.com/entry/2019/02/12/234518 9時間ずれる問題
+        return date
     }
     
     private func validation() -> Bool? {
