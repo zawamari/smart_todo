@@ -77,7 +77,7 @@ class TodoItem: Object {
     @objc dynamic var id = 0
     @objc dynamic var categoryId = 0
     @objc dynamic var todoTitle = ""
-    @objc dynamic var priority: Int = 3
+    @objc dynamic var priority: Bool = false
     @objc dynamic var createdAt = Date()
     @objc dynamic var deadlineDate: Date? = nil
     @objc dynamic var url: String = ""

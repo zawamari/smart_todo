@@ -18,8 +18,7 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var priorityView: UIView!
-    @IBOutlet weak var prioritySlider: UISlider!
-    @IBOutlet weak var priorityLevelLabel: UILabel!
+    @IBOutlet weak var prioritySwitch: UISwitch!
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var deadlineView: UIView!
@@ -43,7 +42,6 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         self.deadlineTextField.delegate = self
         initialized()
         addGesture()
-        initializedSliderView()
         initializedHiddenSetting()
     }
     
@@ -82,7 +80,7 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         memoTextField.attributedPlaceholder = NSAttributedString(string: "memo", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        
+        prioritySwitch.isOn = false
     }
     
     func initializedHiddenSetting() {
@@ -92,15 +90,6 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         memoTextField.isHidden = true
         urlTextField.isHidden = true
         deadlineView.isHidden = true
-    }
-
-    func initializedSliderView() {
-        prioritySlider.minimumValue = 1
-        prioritySlider.maximumValue = 5
-        prioritySlider.tintColor = wakaba
-        priorityLabelSetting(level: 3)
-        prioritySlider.value = 3 // dataから取得する
-        prioritySlider.addTarget(self, action: #selector(sliderChange(sender: )), for: UIControl.Event.valueChanged)
     }
 
     func addGesture() {
@@ -119,22 +108,6 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         formatter.dateFormat = format
         formatter.locale = Locale.current
         return formatter.string(from: now as Date)
-    }
-    
-    func priorityLabelSetting(level: Int) {
-        if level < 3 {
-            priorityLevelLabel.textColor = shinbashi
-        } else if level == 3 {
-            priorityLevelLabel.textColor = wakaba
-        } else {
-            priorityLevelLabel.textColor = koubai
-        }
-    }
-    
-    // スライダー動かした時に実行する処理
-    @objc func sliderChange(sender: UISlider){
-        priorityLabelSetting(level: Int(sender.value))
-        priorityLevelLabel.text = String(Int(sender.value))
     }
     
     //テキストフィールドが選択されたらdatepickerを表示
@@ -229,7 +202,7 @@ extension TodoRegistrationPopupViewController {
         item.categoryId = self.categoryId
         item.id = item.incrementId()
         // 任意項目
-        item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
+        item.priority = prioritySwitch.isOn
         item.deadlineDate = toDate(dateString: deadlineTextField.text)
         item.memo = memoTextField.text ?? ""
 //        item.url = urlTextField.text ?? ""

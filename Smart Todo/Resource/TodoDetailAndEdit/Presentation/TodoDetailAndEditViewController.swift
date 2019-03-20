@@ -223,7 +223,7 @@ private extension TodoDetailAndEditViewController {
         item.categoryId = self.categoryId
         item.id = todoDetail[0].id
         // 任意項目
-        item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
+        item.priority = false
         item.deadlineDate = toDate(dateString: deadlineLabel.text)
         item.memo = memoTextView.text ?? ""
 //        item.url = urlTextView.text ?? ""

@@ -70,14 +70,11 @@ class TodoListTableViewCell: UITableViewCell {
         }
         // todo: 締め日が近ければ赤文字にする
         
-        if item.priority < 3 {
+        if item.priority {
             priorityImageView.isHidden = false
             priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: shinbashi, size: CGSize(width: 15, height: 15))
-        } else if item.priority == 3 {
-            priorityImageView.isHidden = true
         } else {
-            priorityImageView.isHidden = false
-            priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 15, height: 15))
+            priorityImageView.isHidden = true
         }
         
         memoImageView.isHidden = item.memo.isEmpty

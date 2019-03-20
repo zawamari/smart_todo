@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let config = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 3,
             
             //スキーマのバージョンが上記のものよりも低い/を開くときに自動的に呼び出されるブロックを設定する
             migrationBlock: { migration, oldSchemaVersion in

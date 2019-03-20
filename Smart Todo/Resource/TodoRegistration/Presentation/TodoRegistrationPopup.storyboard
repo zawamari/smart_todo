@@ -94,31 +94,21 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBH-ef-My7">
-                                                <rect key="frame" x="130.5" y="0.0" width="9.5" height="45"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QKQ-jc-CoZ">
-                                                <rect key="frame" x="153" y="7.5" width="104" height="31"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="gxE-2D-8Se"/>
-                                                </constraints>
-                                            </slider>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67M-sg-aE2">
+                                                <rect key="frame" x="206" y="7" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="changePrioritySwitch:" destination="Rea-1P-TZU" eventType="valueChanged" id="UQM-fg-sM5"/>
+                                                </connections>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="jBH-ef-My7" firstAttribute="top" secondItem="TKS-P9-DRR" secondAttribute="top" id="7hS-dn-L9v"/>
-                                            <constraint firstItem="QKQ-jc-CoZ" firstAttribute="leading" secondItem="jBH-ef-My7" secondAttribute="trailing" constant="15" id="9QJ-2t-NpW"/>
+                                            <constraint firstAttribute="trailing" secondItem="67M-sg-aE2" secondAttribute="trailing" id="8uS-jM-FJV"/>
                                             <constraint firstItem="NGy-Do-38m" firstAttribute="leading" secondItem="TKS-P9-DRR" secondAttribute="leading" id="BBg-yv-TfE"/>
-                                            <constraint firstAttribute="bottom" secondItem="jBH-ef-My7" secondAttribute="bottom" id="D8y-Px-Wnz"/>
                                             <constraint firstAttribute="bottom" secondItem="NGy-Do-38m" secondAttribute="bottom" id="ENC-aj-UBh"/>
-                                            <constraint firstAttribute="trailing" secondItem="QKQ-jc-CoZ" secondAttribute="trailing" id="KgD-Bp-u6W"/>
-                                            <constraint firstItem="jBH-ef-My7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NGy-Do-38m" secondAttribute="trailing" priority="999" constant="30" id="gFg-nM-C9O"/>
                                             <constraint firstAttribute="height" constant="45" id="kTq-MK-d18"/>
                                             <constraint firstItem="NGy-Do-38m" firstAttribute="top" secondItem="TKS-P9-DRR" secondAttribute="top" id="mVo-wf-LsR"/>
-                                            <constraint firstItem="QKQ-jc-CoZ" firstAttribute="centerY" secondItem="TKS-P9-DRR" secondAttribute="centerY" id="tri-Qm-LsX"/>
+                                            <constraint firstItem="67M-sg-aE2" firstAttribute="centerY" secondItem="NGy-Do-38m" secondAttribute="centerY" id="syd-M0-FcV"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zix-jD-4tM">
@@ -204,8 +194,7 @@
                         <outlet property="memoTextField" destination="602-N3-7vg" id="Tmt-GH-pzB"/>
                         <outlet property="modalBackgroundView" destination="SAt-hQ-jt5" id="Udq-Pt-eGR"/>
                         <outlet property="outsideAreaView" destination="WJ7-nm-0uB" id="FrX-So-fYX"/>
-                        <outlet property="priorityLevelLabel" destination="jBH-ef-My7" id="Rbe-Lz-45A"/>
-                        <outlet property="prioritySlider" destination="QKQ-jc-CoZ" id="6RF-Fs-0wE"/>
+                        <outlet property="prioritySwitch" destination="67M-sg-aE2" id="1k4-C2-7JA"/>
                         <outlet property="priorityView" destination="TKS-P9-DRR" id="bL4-c5-Hfi"/>
                         <outlet property="registerStackView" destination="rhc-3W-aZa" id="Nak-hU-DUe"/>
                         <outlet property="titleTextField" destination="91L-vS-EFG" id="kJj-XE-qZt"/>
