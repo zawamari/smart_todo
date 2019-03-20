@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TodoRegistrationPopupViewController: UIViewController {
+class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var outsideAreaView: UIView!
     @IBOutlet weak var registerStackView: UIStackView!
     @IBOutlet weak var modalBackgroundView: UIView!
@@ -37,6 +37,10 @@ class TodoRegistrationPopupViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
 
+        self.titleTextField.delegate = self
+        self.memoTextField.delegate = self
+        self.urlTextField.delegate = self
+        self.deadlineTextField.delegate = self
         initialized()
         addGesture()
         initializedSliderView()
@@ -54,6 +58,14 @@ class TodoRegistrationPopupViewController: UIViewController {
         memoTextField.resignFirstResponder()
         urlTextField.resignFirstResponder()
         deadlineTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleTextField.resignFirstResponder()
+        memoTextField.resignFirstResponder()
+        urlTextField.resignFirstResponder()
+        deadlineTextField.resignFirstResponder()
+        return true
     }
     
     func initialized() {
@@ -170,7 +182,7 @@ class TodoRegistrationPopupViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.priorityView.isHidden = false
             self.memoTextField.isHidden = false
-            self.urlTextField.isHidden = false
+//            self.urlTextField.isHidden = true // Todo: URLは次のリリースの時にでも。。
             self.deadlineView.isHidden = false
             self.detailLabel.isHidden = true
             self.registerStackView.layoutIfNeeded()
@@ -220,7 +232,7 @@ extension TodoRegistrationPopupViewController {
         item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
         item.deadlineDate = toDate(dateString: deadlineTextField.text)
         item.memo = memoTextField.text ?? ""
-        item.url = urlTextField.text ?? ""
+//        item.url = urlTextField.text ?? ""
 
         // 登録
         try! realm.write {
