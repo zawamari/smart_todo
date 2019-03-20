@@ -36,6 +36,8 @@
 		0C947616222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C947615222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift */; };
 		0C947618222ECA4A00461E94 /* TodoRegistrationPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C947617222ECA4A00461E94 /* TodoRegistrationPopup.storyboard */; };
 		0CAA01F1223A903700721F5E /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CAA01F0223A903700721F5E /* close.png */; };
+		0CB9F1E222427C5300A438CC /* TodoNoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9F1E022427C5300A438CC /* TodoNoneTableViewCell.swift */; };
+		0CB9F1E322427C5300A438CC /* TodoNoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB9F1E122427C5300A438CC /* TodoNoneTableViewCell.xib */; };
 		0CC42A6322315829002B27DC /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC42A6222315829002B27DC /* cross.png */; };
 		0CC42A6522315958002B27DC /* cross2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC42A6422315958002B27DC /* cross2.png */; };
 		0CDDE0F621ECC9CB002AFE68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDDE0F521ECC9CB002AFE68 /* AppDelegate.swift */; };
@@ -103,6 +105,8 @@
 		0C947615222ECA3C00461E94 /* TodoRegistrationPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRegistrationPopupViewController.swift; sourceTree = "<group>"; };
 		0C947617222ECA4A00461E94 /* TodoRegistrationPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoRegistrationPopup.storyboard; sourceTree = "<group>"; };
 		0CAA01F0223A903700721F5E /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		0CB9F1E022427C5300A438CC /* TodoNoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNoneTableViewCell.swift; sourceTree = "<group>"; };
+		0CB9F1E122427C5300A438CC /* TodoNoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoNoneTableViewCell.xib; sourceTree = "<group>"; };
 		0CC42A6222315829002B27DC /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		0CC42A6422315958002B27DC /* cross2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross2.png; sourceTree = "<group>"; };
 		0CDDE0F221ECC9CB002AFE68 /* Smart Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +247,8 @@
 				0C851A5E222D78C20095EBFF /* TodoListTableViewCell.xib */,
 				0C54A3CC223697FD00805627 /* CreateTableViewCell.swift */,
 				0C54A3CD223697FD00805627 /* CreateTableViewCell.xib */,
+				0CB9F1E022427C5300A438CC /* TodoNoneTableViewCell.swift */,
+				0CB9F1E122427C5300A438CC /* TodoNoneTableViewCell.xib */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -539,6 +545,7 @@
 				0CDDE13B21ECE80F002AFE68 /* Category.storyboard in Resources */,
 				0C63C6A22234E195002C21A2 /* CategoryCreatePopup.storyboard in Resources */,
 				0CC42A6522315958002B27DC /* cross2.png in Resources */,
+				0CB9F1E322427C5300A438CC /* TodoNoneTableViewCell.xib in Resources */,
 				0CDDE13721ECDB3D002AFE68 /* CategoryCollectionViewCell.xib in Resources */,
 				0CFCBB4022380AAF00DC83A6 /* appIcon.jpg in Resources */,
 				0C851A67222D81710095EBFF /* done.png in Resources */,
@@ -679,6 +686,7 @@
 				0C54A3D72237742400805627 /* TableDataType.swift in Sources */,
 				0CDDE13621ECDB3D002AFE68 /* CategoryCollectionViewCell.swift in Sources */,
 				0C54A3CE223697FD00805627 /* CreateTableViewCell.swift in Sources */,
+				0CB9F1E222427C5300A438CC /* TodoNoneTableViewCell.swift in Sources */,
 				0C54A3D9223774BF00805627 /* TableDataSource.swift in Sources */,
 				0C32486021FCA57F00D26EDC /* TodoListTableViewController.swift in Sources */,
 				0C54A3D32237735000805627 /* CategoryCollectionTableViewData.swift in Sources */,

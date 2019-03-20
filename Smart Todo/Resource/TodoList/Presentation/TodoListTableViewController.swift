@@ -40,6 +40,7 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
         tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
+        tableView.register(UINib(nibName: "TodoNoneTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoNoneTableViewCell")
         tableView.separatorStyle = .none
         
         backImageView.image = UIImage.fontAwesomeIcon(name: .angleLeft, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
@@ -79,6 +80,9 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
             cell.selectionStyle = .none
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
             return cell
+        case .none:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoNoneTableViewCell", for: indexPath) as! TodoNoneTableViewCell
+            return cell
         }
     }
     
@@ -87,7 +91,7 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
         switch cellType {
         case .todo:
             buttonDidTap(index: indexPath.row)
-        case .create:
+        case .create, .none:
             createNewTodo()
         }
     }
@@ -104,7 +108,7 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
                 deleteCategoryItem(at: indexPath.row)
   //            tableView.deleteRows(at: [indexPath], with: .fade)//fade かけたいけどクラッシュする
             }
-        case .create:
+        case .create, .none:
             break
         }
     }
