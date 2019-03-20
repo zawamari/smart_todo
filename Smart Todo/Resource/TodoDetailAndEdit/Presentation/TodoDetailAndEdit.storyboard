@@ -19,11 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-24-9zN">
-                                <rect key="frame" x="0.0" y="20" width="375" height="182"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="312"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-ph-ZcL">
-                                <rect key="frame" x="0.0" y="202" width="375" height="465"/>
+                                <rect key="frame" x="0.0" y="332" width="375" height="335"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHo-QB-uf6" userLabel="Dragger">
                                         <rect key="frame" x="157.5" y="10" width="60" height="5"/>
@@ -136,25 +136,16 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="memo" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7Bb-44-3cy">
-                                        <rect key="frame" x="25" y="185" width="325" height="100"/>
+                                        <rect key="frame" x="25" y="185" width="325" height="50"/>
                                         <color key="backgroundColor" red="0.98007839918136597" green="0.99345093965530396" blue="0.9726901650428772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="GdT-D6-Al5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="https;//yahoo.co.jp" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wvu-zl-7PX" userLabel="Url Text View">
-                                        <rect key="frame" x="25" y="315" width="325" height="40"/>
-                                        <color key="backgroundColor" red="0.9879029393196106" green="0.98881548643112183" blue="0.99567431211471558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="HWd-Sc-Vbo"/>
+                                            <constraint firstAttribute="height" constant="50" id="GdT-D6-Al5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-eG-dDK">
-                                        <rect key="frame" x="25" y="375" width="325" height="40"/>
+                                        <rect key="frame" x="25" y="245" width="325" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-0M-6Wt">
                                                 <rect key="frame" x="0.0" y="0.0" width="147.5" height="40"/>
@@ -205,21 +196,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Wvu-zl-7PX" firstAttribute="top" secondItem="7Bb-44-3cy" secondAttribute="bottom" constant="30" id="2SL-Zd-kIW"/>
                                     <constraint firstAttribute="bottom" secondItem="o2h-eG-dDK" secondAttribute="bottom" constant="50" id="5WH-Cq-3OK"/>
                                     <constraint firstAttribute="trailing" secondItem="o2h-eG-dDK" secondAttribute="trailing" constant="25" id="6SI-fr-wmQ"/>
                                     <constraint firstItem="o2h-eG-dDK" firstAttribute="leading" secondItem="jp3-ph-ZcL" secondAttribute="leading" constant="25" id="F7U-uq-nZL"/>
                                     <constraint firstAttribute="trailing" secondItem="7Bb-44-3cy" secondAttribute="trailing" constant="25" id="Jta-ch-eJU"/>
-                                    <constraint firstItem="Wvu-zl-7PX" firstAttribute="bottom" secondItem="o2h-eG-dDK" secondAttribute="top" constant="-20" id="KVz-Gn-eay"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wvu-zl-7PX" secondAttribute="trailing" constant="25" id="LIi-U5-LdA"/>
                                     <constraint firstItem="IHo-QB-uf6" firstAttribute="top" secondItem="jp3-ph-ZcL" secondAttribute="top" constant="10" id="MQi-uI-XD1"/>
                                     <constraint firstItem="J2F-i2-AnH" firstAttribute="top" secondItem="7FK-v0-SDV" secondAttribute="bottom" id="RyR-nb-Jnl"/>
                                     <constraint firstItem="7Bb-44-3cy" firstAttribute="leading" secondItem="jp3-ph-ZcL" secondAttribute="leading" constant="25" id="S0p-mU-jqP"/>
                                     <constraint firstItem="7Bb-44-3cy" firstAttribute="top" secondItem="J2F-i2-AnH" secondAttribute="bottom" id="T8m-yi-J4d"/>
-                                    <constraint firstItem="Wvu-zl-7PX" firstAttribute="leading" secondItem="jp3-ph-ZcL" secondAttribute="leading" constant="25" id="VS5-lH-Nx6"/>
                                     <constraint firstAttribute="trailing" secondItem="7FK-v0-SDV" secondAttribute="trailing" constant="25" id="cTn-DL-GgO"/>
                                     <constraint firstItem="7FK-v0-SDV" firstAttribute="top" secondItem="IHo-QB-uf6" secondAttribute="bottom" constant="20" id="fAW-Ui-aYj"/>
                                     <constraint firstItem="J2F-i2-AnH" firstAttribute="leading" secondItem="jp3-ph-ZcL" secondAttribute="leading" constant="20" id="lxn-1A-Slf"/>
+                                    <constraint firstItem="o2h-eG-dDK" firstAttribute="top" secondItem="7Bb-44-3cy" secondAttribute="bottom" constant="10" id="q4O-u1-8ov"/>
                                     <constraint firstItem="7FK-v0-SDV" firstAttribute="leading" secondItem="jp3-ph-ZcL" secondAttribute="leading" constant="25" id="qrJ-4C-U7h"/>
                                     <constraint firstItem="IHo-QB-uf6" firstAttribute="centerX" secondItem="jp3-ph-ZcL" secondAttribute="centerX" id="w59-Ou-O6N"/>
                                     <constraint firstAttribute="trailing" secondItem="J2F-i2-AnH" secondAttribute="trailing" constant="20" id="ylE-Y9-Uba"/>
@@ -239,6 +227,7 @@
                         <viewLayoutGuide key="safeArea" id="pxg-XO-qrd"/>
                     </view>
                     <connections>
+                        <outlet property="ViewBottom" destination="5WH-Cq-3OK" id="aIV-dO-f6O"/>
                         <outlet property="backView" destination="cZg-24-9zN" id="FFV-Ia-axD"/>
                         <outlet property="deadlineImageView" destination="cvF-MR-Vc6" id="LNx-uy-7xV"/>
                         <outlet property="deadlineLabel" destination="cX5-Im-oeQ" id="xbB-fm-Fjb"/>
@@ -251,7 +240,6 @@
                         <outlet property="todoTitleTextView" destination="uk5-Qr-v6l" id="D7Q-pW-QQs"/>
                         <outlet property="todoTitleView" destination="7FK-v0-SDV" id="x5t-IJ-6im"/>
                         <outlet property="updateLabel" destination="nU5-zT-Dqh" id="mII-5Z-Qkl"/>
-                        <outlet property="urlTextView" destination="Wvu-zl-7PX" id="kB4-iO-hq5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdU-Uw-kJs" userLabel="First Responder" sceneMemberID="firstResponder"/>

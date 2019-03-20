@@ -127,10 +127,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLX-En-tOl">
-                        <rect key="frame" x="270" y="0.0" width="50" height="116"/>
+                        <rect key="frame" x="250" y="0.0" width="70" height="116"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="GQq-id-L8L"/>
+                            <constraint firstAttribute="width" constant="70" id="GQq-id-L8L"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFE-7p-S0q" userLabel="Border View">

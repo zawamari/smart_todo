@@ -22,12 +22,16 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     @IBOutlet weak var deadlineLabel: UILabel!
 
     @IBOutlet weak var memoTextView: UITextView!
-    @IBOutlet weak var urlTextView: UITextView!
+//    @IBOutlet weak var urlTextView: UITextView!
     @IBOutlet weak var updateLabel: UILabel!
     @IBOutlet weak var deleteLabel: UILabel!
     var percentThreshold: CGFloat = 0.3
     
+    @IBOutlet weak var ViewBottom: NSLayoutConstraint!
     var interactor = OverCurrentTransitioningInteractor()
+    
+    // keyboard監視用
+    var isObserving = false
     
     private var realm: Realm!
     var categoryId: Int = 0
@@ -58,13 +62,48 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         initializedView()
+        registObserver()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        // Viewの表示時にキーボード表示・非表示時を監視していたObserverを解放する
+        super.viewWillDisappear(animated)
+        if isObserving {
+            let notification = NotificationCenter.default
+            notification.removeObserver(self)
+            notification.removeObserver(self
+                , name: UIResponder.keyboardWillShowNotification, object: nil)
+            notification.removeObserver(self
+                , name: UIResponder.keyboardWillHideNotification, object: nil)
+            isObserving = false
+        }
     }
     
     /// textfield以外をタップしたらキーボードを閉じる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         todoTitleTextView.resignFirstResponder()
-        urlTextView.resignFirstResponder()
+//        urlTextView.resignFirstResponder()
         memoTextView.resignFirstResponder()
+    }
+    
+    private func registObserver() {
+        if !isObserving {
+            let notification = NotificationCenter.default
+            notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            notification.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+            isObserving = true
+        }
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification?) {
+        // キーボード表示時の動作をここに記述する
+        ViewBottom.constant = 350
+        self.view.layoutIfNeeded()
+    }
+    @objc func keyboardWillHide(notification: NSNotification?) {
+        // キーボード消滅時の動作をここに記述する
+        ViewBottom.constant = 50
+        self.view.layoutIfNeeded()
     }
     
     private func setupViews() {
@@ -92,8 +131,8 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         memoTextView.text = todoDetail[0].memo
         memoTextView.layer.cornerRadius = 5.0
         
-        urlTextView.text = todoDetail[0].url
-        urlTextView.layer.cornerRadius = 5.0
+//        urlTextView.text = todoDetail[0].url
+//        urlTextView.layer.cornerRadius = 5.0
         
         deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
         deleteLabel.layer.cornerRadius = 5.0
@@ -187,7 +226,7 @@ private extension TodoDetailAndEditViewController {
         item.priority = Int(priorityLevelLabel.text ?? "3") ?? 3
         item.deadlineDate = toDate(dateString: deadlineLabel.text)
         item.memo = memoTextView.text ?? ""
-        item.url = urlTextView.text ?? ""
+//        item.url = urlTextView.text ?? ""
         
         // 登録
         item.updateItem(beforeItem: item)
