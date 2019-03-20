@@ -35,6 +35,8 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
         initRealm()
         // NavigationBar Setting
         self.title = navigationTitle
+        let button: UIBarButtonItem = UIBarButtonItem(barButtonHiddenItem: .Back, target: self, action: #selector(backBtn))
+        self.navigationItem.setLeftBarButtonItems([button], animated: true)
 
         tableView.register(UINib(nibName: "TodoListTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoListTableViewCell")
         tableView.register(UINib(nibName: "CreateTableViewCell", bundle: nil), forCellReuseIdentifier: "CreateTableViewCell")
@@ -133,6 +135,10 @@ private extension TodoListTableViewController {
         vc.categoryId = todoList[index].categoryId
         vc.todoId = todoList[index].id
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func backBtn(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func back(_: UIGestureRecognizer){
