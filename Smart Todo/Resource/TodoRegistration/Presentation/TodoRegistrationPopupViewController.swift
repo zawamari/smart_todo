@@ -100,6 +100,9 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         detailLabel.addGestureRecognizer(detailTap)
         
         deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
+        
+        prioritySwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+        
     }
 
     func getToday(format:String = "yyyy/MM/dd") -> String {
@@ -110,6 +113,12 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         return formatter.string(from: now as Date)
     }
     
+    //swiが押された時の処理の中身
+    @objc func switchStateDidChange(_ sender:UISwitch){
+        if sender.isOn {
+        } else {
+        }
+    }
     //テキストフィールドが選択されたらdatepickerを表示
     @IBAction func textFieldEditing(sender: UITextField) {
         

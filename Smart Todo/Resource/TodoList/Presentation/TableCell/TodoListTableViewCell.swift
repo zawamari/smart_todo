@@ -72,7 +72,7 @@ class TodoListTableViewCell: UITableViewCell {
         
         if item.priority {
             priorityImageView.isHidden = false
-            priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: shinbashi, size: CGSize(width: 15, height: 15))
+            priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 15, height: 15))
         } else {
             priorityImageView.isHidden = true
         }

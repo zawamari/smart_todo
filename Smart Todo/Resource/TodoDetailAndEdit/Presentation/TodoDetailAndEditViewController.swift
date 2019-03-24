@@ -17,10 +17,12 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     @IBOutlet weak var todoTitleTextView: UITextView!
 
     @IBOutlet weak var priorityImageView: UIImageView!
-    @IBOutlet weak var priorityLevelLabel: UILabel!
-     @IBOutlet weak var deadlineImageView: UIImageView!
-    @IBOutlet weak var deadlineLabel: UILabel!
+    @IBOutlet weak var prioritySwitch: UISwitch!
+    @IBOutlet weak var deadlineView: UIView!
+    @IBOutlet weak var deadlineImageView: UIImageView!
+    @IBOutlet weak var deadlineTextField: UITextField!
 
+    @IBOutlet weak var memoImageView: UIImageView!
     @IBOutlet weak var memoTextView: UITextView!
 //    @IBOutlet weak var urlTextView: UITextView!
     @IBOutlet weak var updateLabel: UILabel!
@@ -39,6 +41,8 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     private var todoDetail: Results<TodoItem>!
     
     let araigaki = UIColor(red: 223/255, green: 188/255, blue: 159/255, alpha: 1.0) //洗柿
+    let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
+
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -120,20 +124,24 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     private func initializedView() {
         draggerImageView.image = UIImage.fontAwesomeIcon(name: .caretDown, style: .solid, textColor: .gray, size: CGSize(width: 60, height: 5))
         todoTitleTextView.text = todoDetail[0].todoTitle
-        priorityLevelLabel.text = String(todoDetail[0].priority)
-        priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        prioritySwitch.isOn = todoDetail[0].priority
+        prioritySwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+
+        priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 30, height: 30))
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         if let date = todoDetail[0].deadlineDate {
-            deadlineLabel.text = formatter.string(from: date)
+            deadlineTextField.text = formatter.string(from: date)
 
         }
         memoTextView.text = todoDetail[0].memo
         memoTextView.layer.cornerRadius = 5.0
+        memoImageView.image = UIImage.fontAwesomeIcon(name: .pencilAlt, style: .solid, textColor: .gray, size: CGSize(width: 20, height: 20))
         
 //        urlTextView.text = todoDetail[0].url
 //        urlTextView.layer.cornerRadius = 5.0
         
+        deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
         deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
         deleteLabel.layer.cornerRadius = 5.0
         deleteLabel.layer.masksToBounds = true
@@ -160,6 +168,13 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         /// コールされたと同時にインタラクション開始する。
         interactor.updateStateShouldStartIfNeeded()
         handleTransitionGesture(sender)
+    }
+    
+    //swiが押された時の処理の中身
+    @objc func switchStateDidChange(_ sender:UISwitch){
+        if sender.isOn {
+        } else {
+        }
     }
 }
 
@@ -223,14 +238,51 @@ private extension TodoDetailAndEditViewController {
         item.categoryId = self.categoryId
         item.id = todoDetail[0].id
         // 任意項目
-        item.priority = false
-        item.deadlineDate = toDate(dateString: deadlineLabel.text)
+        item.priority = prioritySwitch.isOn
+        print(deadlineTextField.text)
+        item.deadlineDate = toDate(dateString: deadlineTextField.text)
         item.memo = memoTextView.text ?? ""
 //        item.url = urlTextView.text ?? ""
         
         // 登録
         item.updateItem(beforeItem: item)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    //テキストフィールドが選択されたらdatepickerを表示
+    @IBAction func textFieldEditing(sender: UITextField) {
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePicker.Mode.date
+        datePickerView.timeZone = TimeZone.current
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
+        
+        //datepicker上のtoolbarのdoneボタン
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let clearlItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearBtn))
+        let toolBarBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtn))
+        toolBar.items = [clearlItem, toolBarBtn]
+        deadlineTextField.inputAccessoryView = toolBar
+    }
+    
+    //datepickerが選択されたらtextfieldに表示
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd";
+        deadlineTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    //toolbarのdoneボタン
+    @objc func clearBtn(){
+        deadlineTextField.text = nil
+        deadlineTextField.resignFirstResponder()
+    }
+
+    //toolbarのdoneボタン
+    @objc func doneBtn(){
+        deadlineTextField.resignFirstResponder()
     }
     
     private func showAlert(desc: String) {
