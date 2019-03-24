@@ -96,9 +96,6 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67M-sg-aE2">
                                                 <rect key="frame" x="206" y="7" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="changePrioritySwitch:" destination="Rea-1P-TZU" eventType="valueChanged" id="UQM-fg-sM5"/>
-                                                </connections>
                                             </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
