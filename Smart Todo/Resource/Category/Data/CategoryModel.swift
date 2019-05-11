@@ -152,6 +152,7 @@ class TodoItem: Object {
         item.todoTitle = beforeItem.todoTitle
         item.priority = beforeItem.priority
         item.createdAt = beforeItem.createdAt
+        item.deadlineDate = beforeItem.deadlineDate
         item.url = beforeItem.url
         item.memo = beforeItem.memo
         
