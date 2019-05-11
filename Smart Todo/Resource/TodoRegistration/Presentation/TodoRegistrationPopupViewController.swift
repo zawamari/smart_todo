@@ -13,18 +13,29 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var outsideAreaView: UIView!
     @IBOutlet weak var registerStackView: UIStackView!
     @IBOutlet weak var modalBackgroundView: UIView!
+
     @IBOutlet weak var createBackgroundLabel: UILabel!
     @IBOutlet weak var createButton: UIButton!
+
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailLabel: UILabel!
+
     @IBOutlet weak var priorityView: UIView!
+    @IBOutlet weak var priorityImageView: UIImageView!
     @IBOutlet weak var prioritySwitch: UISwitch!
-    @IBOutlet weak var memoTextField: UITextField!
+
     @IBOutlet weak var urlTextField: UITextField!
+
     @IBOutlet weak var deadlineView: UIView!
+    @IBOutlet weak var deadlineImageView: UIImageView!
     @IBOutlet weak var deadlineTextField: UITextField!
+
+    @IBOutlet weak var memoView: UIView!
+    @IBOutlet weak var memoImageView: UIImageView!
+    @IBOutlet weak var memoTextField: UITextField!
+
     @IBOutlet weak var closeImageView: UIImageView!
-    
+
     let wakaba = UIColor(red: 167/255, green: 219/255, blue: 162/255, alpha: 1.0)
     let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
     let shinbashi = UIColor(red: 116/255, green: 169/255, blue: 214/255, alpha: 1.0)
@@ -81,15 +92,20 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         prioritySwitch.isOn = false
+        
+        priorityImageView.image =  UIImage.fontAwesomeIcon(name: .star, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
+        deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
+        memoImageView.image =  UIImage.fontAwesomeIcon(name: .pen, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
     }
     
     func initializedHiddenSetting() {
         detailLabel.isHidden = false
         
         priorityView.isHidden = true
-        memoTextField.isHidden = true
         urlTextField.isHidden = true
         deadlineView.isHidden = true
+        memoView.isHidden = true
+        memoTextField.isHidden = true
     }
 
     func addGesture() {
@@ -167,6 +183,7 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
 //            self.urlTextField.isHidden = true // Todo: URLは次のリリースの時にでも。。
             self.deadlineView.isHidden = false
             self.detailLabel.isHidden = true
+            self.memoView.isHidden = false
             self.registerStackView.layoutIfNeeded()
         }
     }
