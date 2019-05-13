@@ -43,6 +43,9 @@ class CategoryViewController: UIViewController {
         // Comment Setting
         testLabel.text = "cleanComment".localized
         
+        let settingImage = UIImage.fontAwesomeIcon(name: .cog, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
+        let settingButtonItem = UIBarButtonItem(image: settingImage, style: .plain, target: self, action: #selector(didTapSetting))
+        self.navigationItem.leftBarButtonItem = settingButtonItem
         
         // CollectionView Setting
         categorycollectionView.dataSource = self
@@ -161,8 +164,16 @@ extension CategoryViewController {
 
 private extension CategoryViewController {
     /// Create New Category Action
-    @objc func clickCreateCategoryButton(){
+    @objc func clickCreateCategoryButton() {
         newCategory()
+    }
+    
+    @objc func didTapSetting() {
+        print("setting page ")
+        let vc = SettingViewController.make()
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
+        self.navigationController?.popToViewController(vc, animated: true)
     }
     
     private func newCategory() {
