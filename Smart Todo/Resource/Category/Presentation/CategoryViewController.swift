@@ -37,11 +37,12 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         
         // NavigationBar Setting
-        self.title = "Category"
+        self.title = "category".localized
 
         self.navigationController?.navigationBar.tintColor = .black
         // Comment Setting
-        testLabel.text = "Let's clean up the task"
+        testLabel.text = "cleanComment".localized
+        
         
         // CollectionView Setting
         categorycollectionView.dataSource = self
@@ -106,7 +107,7 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if let cell = cell as? CategoryCollectionViewCell { //todo nest
                 if indexPath.row == 0 {
-                    cell.setupCell(name: "ALL tasks", tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
+                    cell.setupCell(name: "allItem".localized, tasks: allCategoryItemCount(), doneTasks: allCategoryDoneItemCount() )
                 } else {
                     if let title = categoryList?[indexPath.row].categoryTitle ,
                         let categoryId = categoryList?[indexPath.row].id {
@@ -173,23 +174,21 @@ private extension CategoryViewController {
         //        nav.modalPresentationStyle = .overFullScreen
         //        self.present(nav, animated: true, completion: nil)
         
-        let alert: UIAlertController = UIAlertController(title: "Create category", message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let alert: UIAlertController = UIAlertController(title: "createCategory".localized, message: nil, preferredStyle:  UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: { (textField:UITextField) -> Void in
-            textField.placeholder = "new category name"
+            textField.placeholder = "newCategoryName".localized
             })
 
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("OK")
             if let t = alert.textFields![0].text, !t.isEmpty {
                 self.addCategoryItem(title: t)
             }
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("Cancel")
         })
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)
@@ -226,15 +225,15 @@ private extension CategoryViewController {
             if index.row == 0 { return } // ALLは操作できない
             let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
             
-            let action1 = UIAlertAction(title: "EDIT", style: UIAlertAction.Style.default, handler: {
+            let action1 = UIAlertAction(title: "edit".localized, style: UIAlertAction.Style.default, handler: {
                 (action: UIAlertAction!) in
                 self.categoryEdit(index: index.row)
             })
-            let action2 = UIAlertAction(title: "DELETE", style: UIAlertAction.Style.destructive, handler: {
+            let action2 = UIAlertAction(title: "delete".localized, style: UIAlertAction.Style.destructive, handler: {
                 (action: UIAlertAction!) -> Void in
                 self.categoryDelete(index: index.row)
             })
-            let action3 = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel, handler: {
+            let action3 = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler: {
                 (action: UIAlertAction!) in
             })
             
@@ -254,19 +253,19 @@ private extension CategoryViewController {
     }
     
     func showEditAlert(id: Int, title: String, beforeItem: CategoryItem) {
-        let alert: UIAlertController = UIAlertController(title: "Edit category", message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let alert: UIAlertController = UIAlertController(title: "editCategory".localized, message: nil, preferredStyle:  UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: { (textField:UITextField) -> Void in
             textField.text = title
         })
         
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             if let t = alert.textFields![0].text, !t.isEmpty {
                 self.categoryItem.edit(id: id, title: t, beforeItem: beforeItem)
             }
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
         })
@@ -286,14 +285,14 @@ private extension CategoryViewController {
     }
 
     func showAttentionAlert(index: Int) {
-        let alert: UIAlertController = UIAlertController(title: "Are you allright?", message: "This category have some items.", preferredStyle:  UIAlertController.Style.alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+        let alert: UIAlertController = UIAlertController(title: "areYouAllright".localized, message: "categoryDeleteAlertMessage".localized, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             TodoItem().deleteItemInCategory(categoryId: self.categoryList[index].id)
             self.deleteCategoryItem(at: index)
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
         })

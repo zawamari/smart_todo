@@ -1,0 +1,13 @@
+"category"="カテゴリー";
+"cleanComment"="タスクを片付けましょう！";
+"allItem"="全てのアイテム";
+"createCategory"="カテゴリー作成";
+"newCategoryName"="カテゴリー名";
+"ok"="OK";
+"cancel"="キャンセル";
+"edit"="編集";
+"delete"="削除";
+"editCategory"="カテゴリー名編集";
+"areYouAllright"="本当に消してもいいですか?";
+"categoryDeleteAlertMessage"="カテゴリーにはTodoアイテムが残っています。";
+

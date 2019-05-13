@@ -1,0 +1,12 @@
+"category"="범주";
+"cleanComment"="그 일을 정리하자.";
+"allItem"="모든 아이템";
+"createCategory"="카테고리 만들기";
+"newCategoryName"="카테고리 이름";
+"ok"="예";
+"cancel"="아니오";
+"edit"="편집";
+"delete"="삭제";
+"editCategory"="카테고리 이름 편집";
+"areYouAllright"="정말 좋은가요?";
+"categoryDeleteAlertMessage"="카테고리는 Todo 항목이 남아 있습니다.";
