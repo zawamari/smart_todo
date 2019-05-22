@@ -35,6 +35,12 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var memoTextField: UITextField!
 
     @IBOutlet weak var closeImageView: UIImageView!
+    
+    @IBOutlet weak var createTodoItemLabel: UILabel!
+    @IBOutlet weak var priorityLabel: UILabel!
+    @IBOutlet weak var deadlineLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
+    
 
     let wakaba = UIColor(red: 167/255, green: 219/255, blue: 162/255, alpha: 1.0)
     let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
@@ -87,15 +93,22 @@ class TodoRegistrationPopupViewController: UIViewController, UITextFieldDelegate
         // キーボード表示させる
         titleTextField.becomeFirstResponder()
         
-        titleTextField.attributedPlaceholder = NSAttributedString(string: "todo title", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        memoTextField.attributedPlaceholder = NSAttributedString(string: "memo", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        createTodoItemLabel.text = "registTodoItem".localized
+
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "todoTitle".localized, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        memoTextField.attributedPlaceholder = NSAttributedString(string: "memo".localized, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        memoLabel.text = "memo".localized
         urlTextField.attributedPlaceholder = NSAttributedString(string: "https://xxxx.co", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         deadlineTextField.attributedPlaceholder = NSAttributedString(string: getToday(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        deadlineLabel.text = "deadline".localized
         prioritySwitch.isOn = false
-        
+        priorityLabel.text = "priority".localized
         priorityImageView.image =  UIImage.fontAwesomeIcon(name: .star, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
         deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
         memoImageView.image =  UIImage.fontAwesomeIcon(name: .pen, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
+        detailLabel.text = "detail".localized
+
+        createButton.setTitle("regist".localized, for: .normal)
     }
     
     func initializedHiddenSetting() {
@@ -208,12 +221,12 @@ extension TodoRegistrationPopupViewController {
         }
         
         guard let title = titleTextField.text else {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
         if title.isEmpty {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
@@ -259,8 +272,8 @@ extension TodoRegistrationPopupViewController {
 
 extension TodoRegistrationPopupViewController {
     private func showAlert(desc: String) {
-        let alert: UIAlertController = UIAlertController(title: "Error!", message: desc, preferredStyle:  UIAlertController.Style.alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        let alert: UIAlertController = UIAlertController(title: "error".localized, message: desc, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default)
         alert.addAction(defaultAction)
         present(alert, animated: true, completion: nil)
     }

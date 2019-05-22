@@ -11,3 +11,24 @@
 "areYouAllright"="本当に消してもいいですか?";
 "categoryDeleteAlertMessage"="カテゴリーにはTodoアイテムが残っています。";
 
+"Setting"="設定";
+"Language"="言語";
+"LanguageMessage"="選択後、アプリを再起動すると反映されます。";
+"English"="英語";
+"Japanese"="日本語";
+"Korean"="韓国語";
+"Chinese"="中国語";
+"Share"="友達に教える";
+"Review"="レビューを書く";
+"Contact"="お問い合わせ";
+
+"registTodoItem"="Todoアイテム登録";
+"todoTitle"="Todoタイトル";
+"priority"="優先度";
+"deadline"="期日";
+"memo"="メモ";
+"regist"="登録";
+"itemIsNothing"="Todoアイテムはありません";
+"titleIsNothing"="タイトルが未入力です";
+"error"="エラー";
+"detail"="詳細";

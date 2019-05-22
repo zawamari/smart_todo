@@ -10,3 +10,25 @@
 "editCategory"="카테고리 이름 편집";
 "areYouAllright"="정말 좋은가요?";
 "categoryDeleteAlertMessage"="카테고리는 Todo 항목이 남아 있습니다.";
+
+"Setting"="설정";
+"Language"="언어";
+"LanguageMessage"="응용 프로그램을 다시 시작하십시오";
+"English"="영어";
+"Japanese"="일본어";
+"Korean"="한국";
+"Chinese"="중국";
+"Share"="친구에게";
+"Review"="리뷰 쓰기";
+"Contact"="문의";
+
+"registTodoItem"="Todo 상품 등록";
+"todoTitle"="Todo 제목";
+"priority"="우선 순위";
+"deadline"="기일";
+"memo"="메모";
+"regist"="등록";
+"itemIsNothing"="Todo 항목이 없습니다";
+"titleIsNothing"="제목이 비어 있습니다";
+"error"="오류";
+"detail"="자세한";

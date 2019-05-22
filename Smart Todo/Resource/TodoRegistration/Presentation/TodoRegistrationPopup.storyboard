@@ -231,16 +231,20 @@
                         <outlet property="closeImageView" destination="faX-Wg-3vF" id="YVy-lg-oub"/>
                         <outlet property="createBackgroundLabel" destination="jQP-VF-HUJ" id="DLC-Tt-nUd"/>
                         <outlet property="createButton" destination="1ea-oi-hCE" id="IKx-zI-D88"/>
+                        <outlet property="createTodoItemLabel" destination="15t-1Z-3gQ" id="9r4-vi-rjZ"/>
                         <outlet property="deadlineImageView" destination="DUy-dI-llY" id="5RW-gt-yrg"/>
+                        <outlet property="deadlineLabel" destination="kaB-hw-rjK" id="m9v-sS-g8N"/>
                         <outlet property="deadlineTextField" destination="sB8-6y-iTt" id="tLq-pn-0UD"/>
                         <outlet property="deadlineView" destination="zix-jD-4tM" id="zbm-YW-Pi2"/>
-                        <outlet property="detailLabel" destination="I3e-Vd-ZBw" id="txZ-bj-FGO"/>
+                        <outlet property="detailLabel" destination="I3e-Vd-ZBw" id="mfz-GU-RWi"/>
                         <outlet property="memoImageView" destination="8rO-Vk-M1p" id="ifj-SU-zQh"/>
+                        <outlet property="memoLabel" destination="6RN-WM-yZ2" id="CGS-dn-pvp"/>
                         <outlet property="memoTextField" destination="602-N3-7vg" id="Tmt-GH-pzB"/>
                         <outlet property="memoView" destination="ksE-wd-Wqz" id="BPR-ck-T0j"/>
                         <outlet property="modalBackgroundView" destination="SAt-hQ-jt5" id="Udq-Pt-eGR"/>
                         <outlet property="outsideAreaView" destination="WJ7-nm-0uB" id="FrX-So-fYX"/>
                         <outlet property="priorityImageView" destination="UUN-0g-utP" id="O7L-P7-1Tw"/>
+                        <outlet property="priorityLabel" destination="NGy-Do-38m" id="2j9-ot-LVc"/>
                         <outlet property="prioritySwitch" destination="67M-sg-aE2" id="1k4-C2-7JA"/>
                         <outlet property="priorityView" destination="TKS-P9-DRR" id="bL4-c5-Hfi"/>
                         <outlet property="registerStackView" destination="rhc-3W-aZa" id="Nak-hU-DUe"/>

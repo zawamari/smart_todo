@@ -1,8 +1,11 @@
 import Foundation
 
 public extension String {
+    
     var localized: String {
-        return NSLocalizedString(self, tableName: "English", comment: self) // Englishは仮置き。UserDefaultsから取得する
+        let userDefault = UserDefaults.standard
+        let language = userDefault.string(forKey: "language")
+        return NSLocalizedString(self, tableName: language, comment: self)
     }
     
     func localized(withTableName tableName: String? = nil, bundle: Bundle = Bundle.main, value: String = "") -> String {

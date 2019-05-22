@@ -4,13 +4,13 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     
-    let contents = [0:"laungage", 1:"share", 2:"review", 3: "お問い合わせ" ]
+    let contents = [0:"Language".localized, 1:"Share".localized, 2:"Review".localized, 3: "Contact".localized ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // NavigationBar Setting
-        self.title = "Setting"
+        self.title = "Setting".localized
         
         self.navigationController?.navigationBar.tintColor = .black
         
@@ -36,7 +36,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            print("0")
+            showLanguageSettingAlert()
         case 1:
             print("1")
         default:
@@ -50,5 +50,48 @@ extension SettingViewController {
         let sb = UIStoryboard(name: "Setting", bundle: nil)
         let vc = sb.instantiateInitialViewController() as! SettingViewController
         return vc
+    }
+    
+    func showLanguageSettingAlert() {
+        let alert = UIAlertController(title: "Language".localized, message: "LanguageMessage".localized, preferredStyle:  UIAlertController.Style.actionSheet)
+        
+        // Defaultボタン
+        let defaultAction_1: UIAlertAction = UIAlertAction(title: "English".localized, style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.registerLanguage(language: "English")
+        })
+        let defaultAction_2 = UIAlertAction(title: "Japanese".localized, style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.registerLanguage(language: "Japanese")
+        })
+        
+        let defaultAction_3 = UIAlertAction(title: "Korean".localized, style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.registerLanguage(language: "Korean")
+        })
+        
+        let defaultAction_4 = UIAlertAction(title: "Chinese".localized, style: UIAlertAction.Style.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.registerLanguage(language: "Chinese")
+        })
+
+        // Cancelボタン
+        let cancelAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
+            (action: UIAlertAction!) -> Void in
+        })
+        
+        alert.addAction(defaultAction_1)
+        alert.addAction(defaultAction_2)
+        alert.addAction(defaultAction_3)
+        alert.addAction(defaultAction_4)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func registerLanguage(language: String) {
+        let userDefault = UserDefaults.standard
+        
+        userDefault.set(language, forKey: "language")
     }
 }
