@@ -33,3 +33,6 @@
 "error"="Error";
 "detail"="Detail";
 
+"detailTodoItem"="Detail Todo item";
+"update"="Update";
+"openDetail"="+detail setting";

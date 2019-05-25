@@ -157,13 +157,17 @@ private extension TodoListTableViewController {
     }
     
     func createNewTodo() {
-        let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
-        todoRegistrationPopupViewController.categoryId = self.categoryId
-
-        let nav = UINavigationController(rootViewController: todoRegistrationPopupViewController)
-        nav.modalTransitionStyle = .crossDissolve
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+//        let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
+//        todoRegistrationPopupViewController.categoryId = self.categoryId
+//
+//        let nav = UINavigationController(rootViewController: todoRegistrationPopupViewController)
+//        nav.modalTransitionStyle = .crossDissolve
+//        nav.modalPresentationStyle = .overFullScreen
+//        self.present(nav, animated: true, completion: nil)
+        let vc = TodoDetailAndEditViewController.makeForRegister()
+        vc.categoryId = categoryId
+        vc.isRegisterationFlg = true
+        present(vc, animated: true, completion: nil)
 
     }
 }

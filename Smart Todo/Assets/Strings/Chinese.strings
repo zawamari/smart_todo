@@ -32,3 +32,7 @@
 "itemIsNothing"="没有物品";
 "error"="错误";
 "detail"="更多细节";
+
+"detailTodoItem"="Todo项目细节";
+"update"="更新";
+"openDetail"="+细节设置";

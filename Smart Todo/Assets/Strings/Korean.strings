@@ -32,3 +32,7 @@
 "titleIsNothing"="제목이 비어 있습니다";
 "error"="오류";
 "detail"="자세한";
+
+"detailTodoItem"="Todo 상품 정보";
+"update"="업데이트";
+"openDetail"="+고급";
