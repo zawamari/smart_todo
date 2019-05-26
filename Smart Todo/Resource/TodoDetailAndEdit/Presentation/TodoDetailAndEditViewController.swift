@@ -219,6 +219,9 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         createLabel.layer.cornerRadius = 5.0
         createLabel.layer.masksToBounds = true
         
+        let deleteGesture = UITapGestureRecognizer(target: self, action: #selector(tapDelete))
+        deleteLabel.addGestureRecognizer(deleteGesture)
+        
         if !isRegisterationFlg {
             modalTitleLabel.text = "detailTodoItem".localized
 
@@ -307,8 +310,27 @@ private extension TodoDetailAndEditViewController {
         todoDetail = TodoItem().todoItem(id: todoId)
     }
     
-    func deleteCategoryItem(at index: Int) {
-//        todoList = TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
+    @objc func tapDelete() {
+        let alert: UIAlertController = UIAlertController(title: "areYouAllright".localized, message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            self.deleteTodo()
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func deleteTodo() {
+        let todoResult = TodoItem().deleteItem(categoryId: categoryId, todoId: todoId)
+        // returnでもらった値は使わない
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func create() {

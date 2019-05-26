@@ -224,14 +224,14 @@
                                             </textView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-eG-dDK">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-eG-dDK">
                                         <rect key="frame" x="25" y="365" width="285" height="45"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-0M-6Wt">
-                                                <rect key="frame" x="-40" y="0.0" width="40" height="40"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-0M-6Wt">
+                                                <rect key="frame" x="0.0" y="0.0" width="81.5" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-gg-Du9" userLabel="Delete Label">
-                                                        <rect key="frame" x="20" y="0.0" width="0.0" height="40"/>
+                                                        <rect key="frame" x="5" y="0.0" width="71.5" height="40"/>
                                                         <color key="backgroundColor" red="0.89892001772335028" green="0.89892001772335028" blue="0.89892001772335028" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="xm4-s8-Kyw"/>
@@ -244,16 +244,16 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="LVc-gg-Du9" secondAttribute="bottom" id="3um-og-mAD"/>
-                                                    <constraint firstItem="LVc-gg-Du9" firstAttribute="leading" secondItem="5hk-0M-6Wt" secondAttribute="leading" constant="20" id="QwQ-YF-n6u"/>
+                                                    <constraint firstItem="LVc-gg-Du9" firstAttribute="leading" secondItem="5hk-0M-6Wt" secondAttribute="leading" constant="5" id="QwQ-YF-n6u"/>
                                                     <constraint firstItem="LVc-gg-Du9" firstAttribute="top" secondItem="5hk-0M-6Wt" secondAttribute="top" id="dWN-bb-L8q"/>
-                                                    <constraint firstAttribute="trailing" secondItem="LVc-gg-Du9" secondAttribute="trailing" constant="20" id="vQ2-lW-Bpx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LVc-gg-Du9" secondAttribute="trailing" constant="5" id="vQ2-lW-Bpx"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6Y-qs-VQA" userLabel="Create View">
-                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="45"/>
+                                                <rect key="frame" x="101.5" y="0.0" width="82" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSY-gF-Z3v" userLabel="Create Label">
-                                                        <rect key="frame" x="20" y="0.0" width="87.5" height="45"/>
+                                                        <rect key="frame" x="5" y="0.0" width="72" height="45"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="kKR-se-eab"/>
@@ -265,17 +265,17 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="JSY-gF-Z3v" firstAttribute="leading" secondItem="T6Y-qs-VQA" secondAttribute="leading" constant="20" id="4xH-4b-JLK"/>
+                                                    <constraint firstItem="JSY-gF-Z3v" firstAttribute="leading" secondItem="T6Y-qs-VQA" secondAttribute="leading" constant="5" id="4xH-4b-JLK"/>
                                                     <constraint firstAttribute="bottom" secondItem="JSY-gF-Z3v" secondAttribute="bottom" id="RM0-UY-GaO"/>
-                                                    <constraint firstAttribute="trailing" secondItem="JSY-gF-Z3v" secondAttribute="trailing" constant="20" id="anN-BG-I03"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JSY-gF-Z3v" secondAttribute="trailing" constant="5" id="anN-BG-I03"/>
                                                     <constraint firstItem="JSY-gF-Z3v" firstAttribute="top" secondItem="T6Y-qs-VQA" secondAttribute="top" id="sPj-qy-Ung"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4R-Cw-ILv">
-                                                <rect key="frame" x="157.5" y="0.0" width="127.5" height="45"/>
+                                                <rect key="frame" x="203.5" y="0.0" width="81.5" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU5-zT-Dqh" userLabel="Update Label">
-                                                        <rect key="frame" x="20" y="0.0" width="87.5" height="45"/>
+                                                        <rect key="frame" x="5" y="0.0" width="71.5" height="45"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="H1f-T6-OAs"/>
@@ -287,10 +287,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="nU5-zT-Dqh" secondAttribute="trailing" constant="20" id="IFn-Gr-ots"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nU5-zT-Dqh" secondAttribute="trailing" constant="5" id="IFn-Gr-ots"/>
                                                     <constraint firstAttribute="bottom" secondItem="nU5-zT-Dqh" secondAttribute="bottom" id="bUZ-f4-cN9"/>
                                                     <constraint firstItem="nU5-zT-Dqh" firstAttribute="top" secondItem="J4R-Cw-ILv" secondAttribute="top" id="hpP-Xd-our"/>
-                                                    <constraint firstItem="nU5-zT-Dqh" firstAttribute="leading" secondItem="J4R-Cw-ILv" secondAttribute="leading" constant="20" id="uHP-7G-a1C"/>
+                                                    <constraint firstItem="nU5-zT-Dqh" firstAttribute="leading" secondItem="J4R-Cw-ILv" secondAttribute="leading" constant="5" id="uHP-7G-a1C"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
