@@ -36,3 +36,5 @@
 "detailTodoItem"="Todo项目细节";
 "update"="更新";
 "openDetail"="+细节设置";
+
+"doYouDeleteDoneTodo"="要删除所有已检查的待办事项吗？";

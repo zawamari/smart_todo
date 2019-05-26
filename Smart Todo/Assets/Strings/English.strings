@@ -36,3 +36,5 @@
 "detailTodoItem"="Detail Todo item";
 "update"="Update";
 "openDetail"="+detail setting";
+
+"ddoYouDeleteDoneTodo"="Do you delete done all todo item?";
