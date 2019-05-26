@@ -64,29 +64,23 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7FK-v0-SDV" userLabel="Title View">
                                         <rect key="frame" x="20" y="60" width="295" height="50"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SbX-qZ-ecJ">
-                                                <rect key="frame" x="0.0" y="12.5" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="XWN-Yq-PLz"/>
-                                                    <constraint firstAttribute="height" constant="25" id="pT4-ae-Ebg"/>
-                                                </constraints>
-                                            </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="todo item title" translatesAutoresizingMaskIntoConstraints="NO" id="uk5-Qr-v6l">
-                                                <rect key="frame" x="30" y="0.0" width="265" height="50"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uk5-Qr-v6l" customClass="PlaceHolderTextView" customModule="Smart_Todo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="todo item title"/>
+                                                </userDefinedRuntimeAttributes>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="uk5-Qr-v6l" firstAttribute="leading" secondItem="SbX-qZ-ecJ" secondAttribute="trailing" constant="5" id="8ez-Pg-UOC"/>
-                                            <constraint firstItem="SbX-qZ-ecJ" firstAttribute="leading" secondItem="7FK-v0-SDV" secondAttribute="leading" id="H1S-cB-kGA"/>
                                             <constraint firstAttribute="trailing" secondItem="uk5-Qr-v6l" secondAttribute="trailing" id="UTq-nq-8QK"/>
                                             <constraint firstAttribute="bottom" secondItem="uk5-Qr-v6l" secondAttribute="bottom" id="Wsh-eS-AKB"/>
+                                            <constraint firstItem="uk5-Qr-v6l" firstAttribute="leading" secondItem="7FK-v0-SDV" secondAttribute="leading" id="fdf-dm-bAy"/>
                                             <constraint firstAttribute="height" constant="50" id="ogH-wE-hJa"/>
                                             <constraint firstItem="uk5-Qr-v6l" firstAttribute="top" secondItem="7FK-v0-SDV" secondAttribute="top" id="x4m-W1-8i2"/>
-                                            <constraint firstItem="SbX-qZ-ecJ" firstAttribute="centerY" secondItem="7FK-v0-SDV" secondAttribute="centerY" id="yBW-hd-hcn"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="t2u-pN-ONH" userLabel="Detail Stack View">
@@ -213,7 +207,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="ria-zx-GMl"/>
                                                 </constraints>
                                             </view>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="memo" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7Bb-44-3cy">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7Bb-44-3cy" customClass="PlaceHolderTextView" customModule="Smart_Todo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="170" width="295" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -221,6 +215,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="memo"/>
+                                                </userDefinedRuntimeAttributes>
                                             </textView>
                                         </subviews>
                                     </stackView>
@@ -228,13 +225,13 @@
                                         <rect key="frame" x="25" y="365" width="285" height="45"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-0M-6Wt">
-                                                <rect key="frame" x="0.0" y="0.0" width="81.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="81.5" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-gg-Du9" userLabel="Delete Label">
-                                                        <rect key="frame" x="5" y="0.0" width="71.5" height="40"/>
+                                                        <rect key="frame" x="5" y="0.0" width="71.5" height="45"/>
                                                         <color key="backgroundColor" red="0.89892001772335028" green="0.89892001772335028" blue="0.89892001772335028" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="xm4-s8-Kyw"/>
+                                                            <constraint firstAttribute="height" constant="45" id="xm4-s8-Kyw"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -341,6 +338,7 @@
                         <outlet property="deleteView" destination="5hk-0M-6Wt" id="UeN-oY-MO4"/>
                         <outlet property="detailStackView" destination="t2u-pN-ONH" id="xca-ie-clB"/>
                         <outlet property="draggerImageView" destination="NiP-rK-Qsc" id="haQ-HB-pio"/>
+                        <outlet property="draggerView" destination="IHo-QB-uf6" id="9je-c5-T22"/>
                         <outlet property="memoImageView" destination="8NC-Wt-zAP" id="ikT-6M-ao9"/>
                         <outlet property="memoLabel" destination="Dot-z2-gy3" id="CER-VA-8y2"/>
                         <outlet property="memoTextView" destination="7Bb-44-3cy" id="GpU-HT-beX"/>
@@ -353,7 +351,6 @@
                         <outlet property="prioritySwitch" destination="UTD-9v-aks" id="fzv-Fk-7Ly"/>
                         <outlet property="priorityView" destination="feC-UB-XOE" id="Xzo-ZG-WzY"/>
                         <outlet property="todoDetailView" destination="jp3-ph-ZcL" id="s70-Vz-AuI"/>
-                        <outlet property="todoTitleImageView" destination="SbX-qZ-ecJ" id="ewh-EE-XSu"/>
                         <outlet property="todoTitleTextView" destination="uk5-Qr-v6l" id="D7Q-pW-QQs"/>
                         <outlet property="todoTitleView" destination="7FK-v0-SDV" id="x5t-IJ-6im"/>
                         <outlet property="updateLabel" destination="nU5-zT-Dqh" id="mII-5Z-Qkl"/>

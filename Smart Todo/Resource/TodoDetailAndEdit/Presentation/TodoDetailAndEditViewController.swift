@@ -13,10 +13,10 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var todoDetailView: UIView!
     @IBOutlet weak var draggerImageView: UIImageView!
-
+    @IBOutlet weak var draggerView: UIView!
+    
     @IBOutlet weak var modalTitleLabel: UILabel!
 
-    @IBOutlet weak var todoTitleImageView: UIImageView!
     @IBOutlet weak var todoTitleView: UIView!
     @IBOutlet weak var todoTitleTextView: UITextView!
 
@@ -173,11 +173,11 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     }
     
     private func initializedView() {
+        draggerView.layer.cornerRadius = 3.0
         draggerImageView.image = UIImage.fontAwesomeIcon(name: .caretDown, style: .solid, textColor: .gray, size: CGSize(width: 60, height: 5))
         
         modalTitleLabel.text = "registTodoItem".localized
         
-        todoTitleImageView.image = UIImage.fontAwesomeIcon(name: .dotCircle, style: .solid, textColor: .lightGray, size: CGSize(width: 25, height: 25))
         todoTitleTextView.layer.cornerRadius = 5.0
         todoTitleTextView.layer.borderWidth = 0.5
         todoTitleTextView.layer.borderColor = UIColor.lightGray.cgColor
@@ -189,6 +189,7 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
 
         priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 25, height: 25))
         priorityLabel.text = "priority".localized
+        prioritySwitch.isOn = false
 
         memoTextView.layer.cornerRadius = 5.0
         memoTextView.layer.borderWidth = 0.5
@@ -226,6 +227,7 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
             modalTitleLabel.text = "detailTodoItem".localized
 
             todoTitleTextView.text = todoDetail[0].todoTitle
+            
             prioritySwitch.isOn = todoDetail[0].priority
 
             let formatter = DateFormatter()
@@ -335,11 +337,11 @@ private extension TodoDetailAndEditViewController {
     
     @objc private func create() {
         guard let title = todoTitleTextView.text else {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         if title.isEmpty {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         let realm = try! Realm()
@@ -367,12 +369,12 @@ private extension TodoDetailAndEditViewController {
     @objc private func update() {
         
         guard let title = todoTitleTextView.text else {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
         if title.isEmpty {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
@@ -428,8 +430,8 @@ private extension TodoDetailAndEditViewController {
     }
     
     private func showAlert(desc: String) {
-        let alert: UIAlertController = UIAlertController(title: "Error!", message: desc, preferredStyle:  UIAlertController.Style.alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        let alert: UIAlertController = UIAlertController(title: "error".localized, message: desc, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default)
         alert.addAction(defaultAction)
         present(alert, animated: true, completion: nil)
     }
