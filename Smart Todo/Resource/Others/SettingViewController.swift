@@ -4,7 +4,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     
-    let contents = [0:"Language".localized, 1:"Share".localized, 2:"Review".localized, 3: "Contact".localized ]
+    let contents = [0:"Language".localized]//, 1:"Share".localized, 2:"Review".localized, 3: "Contact".localized ]
     
     override func viewDidLoad() {
         super.viewDidLoad()

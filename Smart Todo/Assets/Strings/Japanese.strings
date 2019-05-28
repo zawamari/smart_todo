@@ -14,10 +14,10 @@
 "Setting"="設定";
 "Language"="言語";
 "LanguageMessage"="選択後、アプリを再起動すると反映されます。";
-"English"="英語";
-"Japanese"="日本語";
-"Korean"="韓国語";
-"Chinese"="中国語";
+"English"="英語(English)";
+"Japanese"="日本語(Japanese)";
+"Korean"="韓国語(Korean)";
+"Chinese"="中国語(Chinese)";
 "Share"="友達に教える";
 "Review"="レビューを書く";
 "Contact"="お問い合わせ";

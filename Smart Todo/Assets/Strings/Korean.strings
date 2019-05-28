@@ -14,10 +14,10 @@
 "Setting"="설정";
 "Language"="언어";
 "LanguageMessage"="응용 프로그램을 다시 시작하십시오";
-"English"="영어";
-"Japanese"="일본어";
-"Korean"="한국";
-"Chinese"="중국";
+"English"="영어(English)";
+"Japanese"="일본어(Japanese)";
+"Korean"="한국(Korean)";
+"Chinese"="중국(Chinese)";
 "Share"="친구에게";
 "Review"="리뷰 쓰기";
 "Contact"="문의";

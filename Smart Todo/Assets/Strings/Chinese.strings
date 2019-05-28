@@ -14,10 +14,10 @@
 "Setting"="设置";
 "Language"="语言";
 "LanguageMessage"="请重新启动应用";
-"English"="英语";
-"Japanese"="日本";
-"Korean"="朝鲜的";
-"Chinese"="中国";
+"English"="英语(English)";
+"Japanese"="日本(Japanese)";
+"Korean"="朝鲜的(Korean)";
+"Chinese"="中国(Chinese)";
 "Share"="告诉朋友";
 "Review"="写评论";
 "Contact"="查询";
