@@ -169,7 +169,7 @@ private extension CategoryViewController {
     }
     
     @objc func didTapSetting() {
-        print("setting page ")
+//        print("setting page ")
         let vc = SettingViewController.make()
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true, completion: nil)

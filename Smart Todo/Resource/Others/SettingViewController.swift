@@ -37,10 +37,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch indexPath.row {
         case 0:
             showLanguageSettingAlert()
-        case 1:
-            print("1")
-        default:
-            print("default")
+        case 1: break
+        default: break
         }
     }
 }
