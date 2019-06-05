@@ -10,9 +10,10 @@ import UIKit
 
 class TodoNoneTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var itemIsNothingLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        itemIsNothingLabel.text = "itemIsNothing".localized
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

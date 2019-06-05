@@ -13,20 +13,40 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var todoDetailView: UIView!
     @IBOutlet weak var draggerImageView: UIImageView!
+    @IBOutlet weak var draggerView: UIView!
+    
+    @IBOutlet weak var modalTitleLabel: UILabel!
+
     @IBOutlet weak var todoTitleView: UIView!
     @IBOutlet weak var todoTitleTextView: UITextView!
 
+    @IBOutlet weak var openDetailView: UIView!
+    @IBOutlet weak var openDetailLabel: UILabel!
+    @IBOutlet weak var detailStackView: UIStackView!
+
+    @IBOutlet weak var priorityView: UIView!
     @IBOutlet weak var priorityImageView: UIImageView!
     @IBOutlet weak var prioritySwitch: UISwitch!
+    @IBOutlet weak var priorityLabel: UILabel!
+    
     @IBOutlet weak var deadlineView: UIView!
     @IBOutlet weak var deadlineImageView: UIImageView!
     @IBOutlet weak var deadlineTextField: UITextField!
-
+    @IBOutlet weak var deadlineLabel: UILabel!
+    
+    @IBOutlet weak var memoView: UIView!
     @IBOutlet weak var memoImageView: UIImageView!
     @IBOutlet weak var memoTextView: UITextView!
-//    @IBOutlet weak var urlTextView: UITextView!
-    @IBOutlet weak var updateLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
+    
+    @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var deleteLabel: UILabel!
+
+    @IBOutlet weak var createView: UIView!
+    @IBOutlet weak var createLabel: UILabel!
+
+    @IBOutlet weak var updateView: UIView!
+    @IBOutlet weak var updateLabel: UILabel!
     var percentThreshold: CGFloat = 0.3
     
     @IBOutlet weak var ViewBottom: NSLayoutConstraint!
@@ -38,11 +58,14 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     private var realm: Realm!
     var categoryId: Int = 0
     var todoId = 0
+
+    // 登録か更新か
+    var isRegisterationFlg = false
+
     private var todoDetail: Results<TodoItem>!
     
     let araigaki = UIColor(red: 223/255, green: 188/255, blue: 159/255, alpha: 1.0) //洗柿
     let koubai = UIColor(red: 235/255, green: 121/255, blue: 136/255, alpha: 1.0)
-
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -61,6 +84,7 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         super.viewDidLoad()
         setupViews()
         initRealm()
+        initializedHiddenSetting()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +110,6 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
     /// textfield以外をタップしたらキーボードを閉じる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         todoTitleTextView.resignFirstResponder()
-//        urlTextView.resignFirstResponder()
         memoTextView.resignFirstResponder()
     }
     
@@ -110,6 +133,31 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         self.view.layoutIfNeeded()
     }
     
+    @IBAction func tapOpenDetail(_: UIGestureRecognizer) {
+        UIView.animate(withDuration: 0.3) {
+            self.openDetailView.isHidden = true
+            
+            self.priorityView.isHidden = false
+            self.memoTextView.isHidden = false
+            self.deadlineView.isHidden = false
+            self.memoView.isHidden = false
+            self.detailStackView.layoutIfNeeded()
+        }
+    }
+    
+    private func initializedHiddenSetting() {
+        openDetailView.isHidden = !isRegisterationFlg
+        
+        priorityView.isHidden = isRegisterationFlg
+        memoTextView.isHidden = isRegisterationFlg
+        deadlineView.isHidden = isRegisterationFlg
+        memoView.isHidden = isRegisterationFlg
+        
+        deleteView.isHidden = isRegisterationFlg
+        createView.isHidden = !isRegisterationFlg
+        updateView.isHidden = isRegisterationFlg
+    }
+    
     private func setupViews() {
         todoDetailView.layer.cornerRadius = 12.0
         todoDetailView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -118,44 +166,89 @@ class TodoDetailAndEditViewController: UIViewController, OverCurrentTransitionab
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(backgroundDidTap))
         backView.addGestureRecognizer(gesture)
+        
+        let detailTap = UITapGestureRecognizer(target: self, action: #selector(tapOpenDetail(_:)))
+        openDetailView.addGestureRecognizer(detailTap)
 
     }
     
     private func initializedView() {
+        draggerView.layer.cornerRadius = 3.0
         draggerImageView.image = UIImage.fontAwesomeIcon(name: .caretDown, style: .solid, textColor: .gray, size: CGSize(width: 60, height: 5))
-        todoTitleTextView.text = todoDetail[0].todoTitle
-        prioritySwitch.isOn = todoDetail[0].priority
+        
+        modalTitleLabel.text = "registTodoItem".localized
+        
+        todoTitleTextView.layer.cornerRadius = 5.0
+        todoTitleTextView.layer.borderWidth = 0.5
+        todoTitleTextView.layer.borderColor = UIColor.lightGray.cgColor
+        todoTitleTextView.layer.masksToBounds = true
+        
+        openDetailLabel.text = "openDetail".localized
+        
         prioritySwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
 
-        priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 30, height: 30))
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        if let date = todoDetail[0].deadlineDate {
-            deadlineTextField.text = formatter.string(from: date)
+        priorityImageView.image = UIImage.fontAwesomeIcon(name: .exclamation, style: .solid, textColor: koubai, size: CGSize(width: 25, height: 25))
+        priorityLabel.text = "priority".localized
+        prioritySwitch.isOn = false
 
-        }
-        memoTextView.text = todoDetail[0].memo
         memoTextView.layer.cornerRadius = 5.0
-        memoImageView.image = UIImage.fontAwesomeIcon(name: .pencilAlt, style: .solid, textColor: .gray, size: CGSize(width: 20, height: 20))
+        memoTextView.layer.borderWidth = 0.5
+        memoTextView.layer.borderColor = UIColor.lightGray.cgColor
+        memoTextView.layer.masksToBounds = true
+        memoLabel.text = "memo".localized
         
-//        urlTextView.text = todoDetail[0].url
-//        urlTextView.layer.cornerRadius = 5.0
+        memoImageView.image = UIImage.fontAwesomeIcon(name: .pencilAlt, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
         
         deadlineTextField.addTarget(self, action: #selector(textFieldEditing(sender: )), for: UIControl.Event.allEvents)
-        deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        deadlineImageView.image = UIImage.fontAwesomeIcon(name: .calendarTimes, style: .solid, textColor: .gray, size: CGSize(width: 25, height: 25))
+        deadlineLabel.text = "deadline".localized
+
         deleteLabel.layer.cornerRadius = 5.0
         deleteLabel.layer.masksToBounds = true
         deleteLabel.textColor = araigaki
-        
+        deleteLabel.text = "delete".localized
+
         updateLabel.layer.cornerRadius = 5.0
         updateLabel.layer.masksToBounds = true
         let updateGesture = UITapGestureRecognizer(target: self, action: #selector(update))
         updateLabel.addGestureRecognizer(updateGesture)
+        updateLabel.text = "update".localized
+        
+        let createGesture = UITapGestureRecognizer(target: self, action: #selector(create))
+        createLabel.addGestureRecognizer(createGesture)
+        createLabel.text = "regist".localized
+        createLabel.layer.cornerRadius = 5.0
+        createLabel.layer.masksToBounds = true
+        
+        let deleteGesture = UITapGestureRecognizer(target: self, action: #selector(tapDelete))
+        deleteLabel.addGestureRecognizer(deleteGesture)
+        
+        if !isRegisterationFlg {
+            modalTitleLabel.text = "detailTodoItem".localized
+
+            todoTitleTextView.text = todoDetail[0].todoTitle
+            
+            prioritySwitch.isOn = todoDetail[0].priority
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            if let date = todoDetail[0].deadlineDate {
+                deadlineTextField.text = formatter.string(from: date)
+            }
+            memoTextView.text = todoDetail[0].memo
+        }
     }
     
     static func make() -> TodoDetailAndEditViewController {
         let sb = UIStoryboard(name: "TodoDetailAndEdit", bundle: nil)
         let vc = sb.instantiateInitialViewController() as! TodoDetailAndEditViewController
+        return vc
+    }
+    
+    static func makeForRegister() -> TodoDetailAndEditViewController {
+        let sb = UIStoryboard(name: "TodoDetailAndEdit", bundle: nil)
+        let vc = sb.instantiateInitialViewController() as! TodoDetailAndEditViewController
+        
         return vc
     }
     
@@ -212,23 +305,76 @@ extension TodoDetailAndEditViewController: UIViewControllerTransitioningDelegate
 private extension TodoDetailAndEditViewController {
     
     func initRealm() {
+        if todoId == 0 {
+            return
+        }
         realm = try! Realm()
         todoDetail = TodoItem().todoItem(id: todoId)
     }
     
-    func deleteCategoryItem(at index: Int) {
-//        todoList = TodoItem().deleteItem(categoryId: categoryId, todoId: todoList[index].id)
+    @objc func tapDelete() {
+        let alert: UIAlertController = UIAlertController(title: "areYouAllright".localized, message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            self.deleteTodo()
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func deleteTodo() {
+        let todoResult = TodoItem().deleteItem(categoryId: categoryId, todoId: todoId)
+        // returnでもらった値は使わない
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func create() {
+        guard let title = todoTitleTextView.text else {
+            showAlert(desc: "titleIsNothing".localized)
+            return
+        }
+        if title.isEmpty {
+            showAlert(desc: "titleIsNothing".localized)
+            return
+        }
+        let realm = try! Realm()
+        
+        // titleから登録したい親カテゴリを抽出
+        let category = realm.objects(CategoryItem.self).filter("id = %@", categoryId).first
+        
+        // todolistのセット 必須項目
+        let item = TodoItem()
+        item.todoTitle = title
+        item.categoryId = self.categoryId
+        item.id = item.incrementId()
+        // 任意項目
+        item.priority = prioritySwitch.isOn
+        item.deadlineDate = toDate(dateString: deadlineTextField.text)
+        item.memo = memoTextView.text ?? ""
+        
+        // 登録
+        try! realm.write {
+            category?.todo.append(item)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func update() {
         
         guard let title = todoTitleTextView.text else {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
         if title.isEmpty {
-            showAlert(desc: "title is nothing")
+            showAlert(desc: "titleIsNothing".localized)
             return
         }
         
@@ -239,10 +385,8 @@ private extension TodoDetailAndEditViewController {
         item.id = todoDetail[0].id
         // 任意項目
         item.priority = prioritySwitch.isOn
-        print(deadlineTextField.text)
         item.deadlineDate = toDate(dateString: deadlineTextField.text)
         item.memo = memoTextView.text ?? ""
-//        item.url = urlTextView.text ?? ""
         
         // 登録
         item.updateItem(beforeItem: item)
@@ -286,8 +430,8 @@ private extension TodoDetailAndEditViewController {
     }
     
     private func showAlert(desc: String) {
-        let alert: UIAlertController = UIAlertController(title: "Error!", message: desc, preferredStyle:  UIAlertController.Style.alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        let alert: UIAlertController = UIAlertController(title: "error".localized, message: desc, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default)
         alert.addAction(defaultAction)
         present(alert, animated: true, completion: nil)
     }

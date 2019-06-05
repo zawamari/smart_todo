@@ -1,0 +1,40 @@
+"category"="Category";
+"cleanComment"="Let's clean up the task";
+"allItem"="ALL items";
+"createCategory"="Create category";
+"newCategoryName"="new category name";
+"ok"="OK";
+"cancel"="Cancel";
+"edit"="Edit";
+"delete"="Delete";
+"editCategory"="Edit category";
+"areYouAllright"="Are you allright?";
+"categoryDeleteAlertMessage"="This category have some items.";
+
+"Setting"="Setting";
+"Language"="Language";
+"LanguageMessage"="please restarted the application";
+"English"="English";
+"Japanese"="Japanese";
+"Korean"="Korean";
+"Chinese"="Chinese";
+"Share"="Share";
+"Review"="Review";
+"Contact"="Contact us";
+
+"registTodoItem"="Regist todo item";
+"todoTitle"="Todo title";
+"priority"="Priority";
+"deadline"="Deatline";
+"memo"="Memo";
+"regist"="Regist";
+"itemIsNothing"="Item is nothing";
+"titleIsNothing"="Title is nothing";
+"error"="Error";
+"detail"="Detail";
+
+"detailTodoItem"="Detail Todo item";
+"update"="Update";
+"openDetail"="+detail setting";
+
+"ddoYouDeleteDoneTodo"="Do you delete done all todo item?";

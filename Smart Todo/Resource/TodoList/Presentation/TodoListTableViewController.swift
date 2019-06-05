@@ -28,6 +28,8 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,9 +45,11 @@ class TodoListTableViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.register(UINib(nibName: "TodoNoneTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoNoneTableViewCell")
         tableView.separatorStyle = .none
         
-        backImageView.image = UIImage.fontAwesomeIcon(name: .angleLeft, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
-        let back = UITapGestureRecognizer(target: self, action: #selector(back(_:)))
-        backImageView.addGestureRecognizer(back)
+        // TODO: backImageからallDeleteImageにする
+        // TODO: todoが１つ以上あれば表示する
+        backImageView.image = UIImage.fontAwesomeIcon(name: .trashAlt, style: .solid, textColor: .gray, size: CGSize(width: 30, height: 30))
+        let tapAllDelete = UITapGestureRecognizer(target: self, action: #selector(tapAllDelete(_:)))
+        backImageView.addGestureRecognizer(tapAllDelete)
         
         
         let add = UITapGestureRecognizer(target: self, action: #selector(clickCreateCategoryButton(_:)))
@@ -145,8 +149,20 @@ private extension TodoListTableViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func back(_: UIGestureRecognizer){
-        self.navigationController?.popViewController(animated: true)
+    @objc func tapAllDelete(_: UIGestureRecognizer){
+        let alert: UIAlertController = UIAlertController(title: "doYouDeleteDoneTodo".localized, message: nil, preferredStyle:  UIAlertController.Style.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            self.deleteAllDoneTodo()
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
     
     /// Create New todo item
@@ -155,13 +171,10 @@ private extension TodoListTableViewController {
     }
     
     func createNewTodo() {
-        let todoRegistrationPopupViewController = TodoRegistrationPopupViewController.make()
-        todoRegistrationPopupViewController.categoryId = self.categoryId
-
-        let nav = UINavigationController(rootViewController: todoRegistrationPopupViewController)
-        nav.modalTransitionStyle = .crossDissolve
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        let vc = TodoDetailAndEditViewController.makeForRegister()
+        vc.categoryId = categoryId
+        vc.isRegisterationFlg = true
+        present(vc, animated: true, completion: nil)
 
     }
 }
@@ -192,5 +205,17 @@ private extension TodoListTableViewController {
     func deleteCategoryItem(at index: Int) {
         // このcategoryIdは削除したいtodoのカテゴリ
         todoList = TodoItem().deleteItem(categoryId: todoList[index].categoryId, todoId: todoList[index].id)
+    }
+    
+    func deleteAllDoneTodo() {
+        realm = try! Realm()
+        
+        for todo in todoList {
+            if todo.doneFlg {
+                TodoItem().deleteItem(categoryId: todo.categoryId, todoId: todo.id)
+                // 戻り値は使わない
+            }
+        }
+        
     }
 }

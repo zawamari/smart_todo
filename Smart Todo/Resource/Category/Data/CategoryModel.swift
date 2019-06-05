@@ -34,7 +34,7 @@ class CategoryItem: Object {
     /// カテゴリを全て取得する
     func categories() -> Results<CategoryItem> {
         let realm = try! Realm()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+//        print(Realm.Configuration.defaultConfiguration.fileURL!)
         return realm.objects(CategoryItem.self).sorted(byKeyPath: "createdAt", ascending: true) // true-> 作成日古い順
     }
     
@@ -152,6 +152,7 @@ class TodoItem: Object {
         item.todoTitle = beforeItem.todoTitle
         item.priority = beforeItem.priority
         item.createdAt = beforeItem.createdAt
+        item.deadlineDate = beforeItem.deadlineDate
         item.url = beforeItem.url
         item.memo = beforeItem.memo
         

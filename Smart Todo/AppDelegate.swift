@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        sleep(1)
-        
         firstLunchSetting()
         lunchCountUp()
-        
+        localized()
+
+        sleep(1)
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         let viewController = CategoryViewController.make()
@@ -102,6 +103,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             category.priority = 3
             
             realm.add(category)
+        }
+    }
+    
+    private func localized() {
+        // UserDefaultsに設定がなければ、端末のlocalizeから取得して保存
+        
+        let userDefault = UserDefaults.standard
+        guard let _ = userDefault.string(forKey: "language") else {
+            let dict = ["language": "English"]
+            userDefault.register(defaults: dict)
+            return
         }
     }
 }
